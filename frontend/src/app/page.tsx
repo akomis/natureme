@@ -1,7 +1,7 @@
-import About from './sections/About';
-import Footer from './sections/Footer';
-import Header from './sections/Header';
-import Testimonials from './sections/Testimonials';
+import About from "./_sections/About";
+import Footer from "./_sections/Footer";
+import Header from "./_sections/Header";
+import Testimonials from "./_sections/Testimonials";
 
 export default async function Index() {
   return (
