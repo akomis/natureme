@@ -8,12 +8,12 @@ import { useProducts } from "medusa-react";
 import Screen from "@/components/Screen";
 
 export default function Catalogue() {
-  // const { products, isLoading } = useProducts();
-  // console.log(products);
+  const { products, isLoading } = useProducts();
+  console.log(products);
 
   return (
-    <Screen>
-      <div className="flex justify-between items-start self-center w-full">
+    <Screen className="items-start">
+      <div className="flex justify-between w-full">
         <PageHeader title={"Catalogue"} />
         <Cart items={fake_products} />
       </div>
