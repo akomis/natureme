@@ -1,4 +1,4 @@
-export const products = [
+export const fake_products = [
   {
     id: 0,
     imgUrl: "/about_2.webp",

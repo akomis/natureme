@@ -76,13 +76,13 @@ const Footer = async () => {
           </a>
         </div>
         <div className="flex flex-col justify-between gap-20">
-          <div className="flex flex-col items-end">
+          <div className="flex flex-col items-center lg:items-end">
             <h2 className="text-xl">Εμπιστευόμαστε τη φύση για</h2>
             <h2 className="font-bold text-3xl">τα πάντα.</h2>
           </div>
 
-          <div className="flex gap-2 items-start">
-            <h2 className="align-right">
+          <div className="flex flex-row-reverse lg:flex-row gap-2 items-start">
+            <h2 className="align-right text-right">
               Ασφαλείς συναλλαγές με SSL κρυπτογράφηση
             </h2>
             <Lock size={20} />
