@@ -14,7 +14,7 @@ export default function Catalogue() {
   return (
     <Screen className="items-start">
       <div className="flex justify-between w-full">
-        <PageHeader title={"Catalogue"} />
+        <PageHeader title={"Κατάλογος"} />
         <Cart items={fake_products} />
       </div>
       <ProductList header="Products" items={fake_products} price={15} />
