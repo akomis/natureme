@@ -3,6 +3,7 @@ import Image from "next/image";
 import { sanity } from "@/utils";
 import { Instagram, Lock, Mail, MapPin, Phone } from "lucide-react";
 import Link from "next/link";
+import Logo from "@/components/Logo";
 
 const LOGO_SIZE = 250;
 const ICON_SIZE = 100;
@@ -55,12 +56,7 @@ const Footer = async () => {
     <section className="flex flex-col h-screen justify-center items-center gap-32 md:gap-52 px-10 py-10 overflow-scroll max-w-7xl mx-auto">
       <Extras />
       <footer className="flex flex-col items-center gap-20 justify-center lg:flex-row md:justify-between w-full">
-        <SanityImage
-          image={globalAssets.logo}
-          width={LOGO_SIZE}
-          height={LOGO_SIZE}
-          alt="NatureMe Logo"
-        />
+        <Logo width={LOGO_SIZE} height={LOGO_SIZE} />
         <div className="flex flex-col gap-4 justify-center items-center lg:justify-between lg:items-start">
           <a className={infoLinkStyle} href={telephone.link}>
             <Phone size={30} />

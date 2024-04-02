@@ -1,5 +1,4 @@
-"use client";
-
+import Logo from "@/components/Logo";
 import { ArrowRightCircle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,13 +9,7 @@ const Header = () => {
   return (
     <section className="flex justify-center items-center min-h-[500px] h-screen max-h-screen">
       <div className="relative h-fit w-fit flex flex-col items-center md:items-center md:flex-row gap-10">
-        <Image
-          src={"/logo.png"}
-          width={LOGO_SIZE}
-          height={LOGO_SIZE}
-          alt="NatureMe Logo"
-          priority
-        />
+        <Logo width={LOGO_SIZE} height={LOGO_SIZE} priority />
         <div className=" flex flex-col items-center md:justify-between w-fit mt-5">
           <div className="flex flex-col gap-4">
             <p className="text-2xl">{"Εμπιστευόμαστε τη φύση για"}</p>

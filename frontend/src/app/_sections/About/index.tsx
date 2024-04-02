@@ -7,8 +7,8 @@ const About = async () => {
   const { about } = globalAssets;
 
   return (
-    <section className="flex flex-col-reverse lg:flex-row gap-4 h-screen justify-center items-center">
-      <div className="w-[100vw] grid grid-cols-1 gap-2">
+    <section className="flex flex-col-reverse lg:flex-row gap-4 h-screen justify-center items-center overflow-scroll">
+      <div className="min-w-[40vw] w-[100vw] grid grid-cols-1 gap-2">
         <div className="image-container max-h-56">
           <Image
             className="image"
