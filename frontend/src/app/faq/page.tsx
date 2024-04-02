@@ -1,9 +1,9 @@
+import { fetchFromSanity } from "@/utils";
 import AccordionItem from "./components/AccordionItem";
 import PageHeader from "@/components/PageHeader";
-import { sanity } from "@/utils";
 
 export default async function Faq() {
-  const faq = await sanity.fetch(`*[_type == "faq"]`);
+  const faq = await fetchFromSanity("faq");
 
   return (
     <div className="prose font-serif h-screen min-h-[1000px] mx-auto flex">

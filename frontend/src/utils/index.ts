@@ -9,6 +9,17 @@ export const sanity = createClient({
   useCdn: true,
 });
 
+export const fetchFromSanity = async (
+  entity?: string,
+  query?: string
+): Promise<any[]> => {
+  const requestData = {
+    entity,
+    query,
+  };
+  return await sanity.fetch(query ?? `*[_type == "${entity}"]`);
+};
+
 export const sendEmail = async (from: string, content: string) => {
   const data = JSON.stringify({ from, content });
 

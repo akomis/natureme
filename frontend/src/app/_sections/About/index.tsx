@@ -1,9 +1,9 @@
-import { sanity } from "@/utils";
+import { fetchFromSanity } from "@/utils";
 import { PortableText } from "next-sanity";
 import Image from "next/image";
 
 const About = async () => {
-  const globalAssets = (await sanity.fetch(`*[_type == "global"]`))[0];
+  const globalAssets = (await fetchFromSanity("global"))[0];
   const { about } = globalAssets;
 
   return (

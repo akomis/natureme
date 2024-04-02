@@ -1,6 +1,5 @@
-import SanityImage from "@/components/SanityImage";
 import Image from "next/image";
-import { sanity } from "@/utils";
+import { fetchFromSanity } from "@/utils";
 import { Instagram, Lock, Mail, MapPin, Phone } from "lucide-react";
 import Link from "next/link";
 import Logo from "@/components/Logo";
@@ -46,7 +45,7 @@ const Extras = () => {
 };
 
 const Footer = async () => {
-  const globalAssets = (await sanity.fetch(`*[_type == "global"]`))[0];
+  const globalAssets = (await fetchFromSanity("global"))[0];
   const { address, telephone, instagram, email } = globalAssets.info;
 
   const infoLinkStyle =
