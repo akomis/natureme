@@ -57,19 +57,39 @@ const Footer = async () => {
       <footer className="flex flex-col items-center gap-20 justify-center lg:flex-row md:justify-between w-full">
         <Logo width={LOGO_SIZE} height={LOGO_SIZE} />
         <div className="flex flex-col gap-4 justify-center items-center lg:justify-between lg:items-start">
-          <a className={infoLinkStyle} href={telephone.link}>
+          <a
+            className={infoLinkStyle}
+            href={telephone.link}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <Phone size={30} />
             <h2 className="text-lg">{telephone.text}</h2>
           </a>
-          <a className={infoLinkStyle} href={email.link}>
+          <a
+            className={infoLinkStyle}
+            href={email.link}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <Mail size={30} />
             <h2 className="text-lg">{email.text}</h2>
           </a>
-          <a className={infoLinkStyle} href={instagram.link}>
+          <a
+            className={infoLinkStyle}
+            href={instagram.link}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <Instagram size={30} />
             <h2 className="text-lg">{instagram.text}</h2>
           </a>
-          <a className={infoLinkStyle} href={address.link}>
+          <a
+            className={infoLinkStyle}
+            href={address.link}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <MapPin size={30} />
             <h2 className="text-lg">{address.text}</h2>
           </a>
