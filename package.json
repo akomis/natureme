@@ -7,6 +7,7 @@
   "scripts": {
     "dev": "yarn --cwd frontend dev",
     "build": "yarn --cwd frontend build",
+    "start": "yarn --cwd frontend start",
     "dev:sanity": "yarn --cwd backend/sanity dev",
     "deploy:sanity": "yarn --cwd backend/sanity deploy",
     "dev:medusa": "yarn --cwd backend/medusa dev",
