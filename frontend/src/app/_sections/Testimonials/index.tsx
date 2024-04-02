@@ -1,5 +1,5 @@
 import { TESTIMONIALS } from "./data";
-import { cn, getRandomPastelColor } from "@/utils";
+import { cn, fetchFromSanity, getRandomPastelColor } from "@/utils";
 
 type ReviewCardProps = {
   author: string;
@@ -38,16 +38,18 @@ const ReviewCard = ({ author, review, date }: ReviewCardProps) => {
   );
 };
 
-const Testimonials = () => {
+const Testimonials = async () => {
+  const testimonials = await fetchFromSanity("testimonial");
+
   return (
     <section className="flex flex-col gap-4 h-screen justify-center items-center w-fit">
       <h2 className="text-4xl font-bold">ΚΡΙΤΙΚΕΣ ΠΕΛΑΤΩΝ</h2>
       <div className="flex flex-wrap justify-center items-center gap-4 p-4 max-h-[80vh] overflow-scroll">
-        {TESTIMONIALS.map((testimonial) => (
+        {testimonials.map((testimonial) => (
           <ReviewCard
             key={testimonial.author}
             author={testimonial.author}
-            review={testimonial.review}
+            review={testimonial.text}
             date={testimonial.date}
           />
         ))}
