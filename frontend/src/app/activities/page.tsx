@@ -1,5 +1,6 @@
 import PageHeader from "@/components/PageHeader";
 import SanityImage from "@/components/SanityImage";
+import Screen from "@/components/Screen";
 import { fetchFromSanity } from "@/utils";
 import { PortableText } from "next-sanity";
 
@@ -13,7 +14,11 @@ const Carousel = ({ items }: any) => (
           className="carousel-item w-full"
         >
           <div className="image-container">
-            <SanityImage className="image" image={item} alt={"test"} />
+            <SanityImage
+              className="image"
+              image={item}
+              alt={"activity image"}
+            />
           </div>
         </div>
       ))}
@@ -34,7 +39,7 @@ export default async function Activities() {
   const activity = (await fetchFromSanity("activity"))[0];
 
   return (
-    <div className="prose mx-auto self-center font-serif flex flex-col h-screen min-h-fit justify-center items-start gap-4">
+    <Screen>
       <PageHeader title={"Δραστηριότητες"} />
       <Carousel items={activity.gallery.map((item: any) => item.asset)} />
       <div className="flex justify-between items-start gap-14">
@@ -43,6 +48,6 @@ export default async function Activities() {
       </div>
 
       <PortableText value={activity.text as any} />
-    </div>
+    </Screen>
   );
 }
