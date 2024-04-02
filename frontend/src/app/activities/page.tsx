@@ -5,7 +5,7 @@ import { fetchFromSanity } from "@/utils";
 import { PortableText } from "next-sanity";
 
 const Carousel = ({ items }: any) => (
-  <div className="flex flex-col gap-2 rounded-lg">
+  <div className="flex flex-col gap-2 rounded-lg w-full">
     <div className="carousel max-h-[300px] gap-4 w-full rounded-lg overflow-hidden">
       {items.map((item: any, index: number) => (
         <div
@@ -42,8 +42,8 @@ export default async function Activities() {
     <Screen>
       <PageHeader title={"Δραστηριότητες"} />
       <Carousel items={activity.gallery.map((item: any) => item.asset)} />
-      <div className="flex justify-between items-start gap-14">
-        <h3>{activity.title}</h3>
+      <div className="flex w-full justify-between items-start gap-14">
+        <h2>{activity.title}</h2>
         <p>{activity.date}</p>
       </div>
 

@@ -6,7 +6,7 @@ type Props = {
 
 const Screen = ({ children }: Props) => {
   return (
-    <div className="prose flex flex-col font-serif h-screen min-h-[1000px] justify-center mx-auto">
+    <div className="prose min-w-[90vw] lg:min-w-[50vw] flex flex-col font-serif h-screen min-h-[1000px] justify-center items-center mx-auto">
       {children}
     </div>
   );
