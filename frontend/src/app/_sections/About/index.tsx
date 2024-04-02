@@ -33,7 +33,7 @@ const About = async () => {
         </div>
       </div>
       <div>
-        <h2 className="text-4xl font-bold">ΠΙΟΙ ΕΙΜΑΣΤΕ</h2>
+        <h2 className="text-4xl font-bold">Πιοι Είμαστε</h2>
         <div className="flex flex-col gap-4 text-xl">
           <PortableText value={about as any} />
         </div>
