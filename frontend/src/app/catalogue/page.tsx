@@ -7,9 +7,8 @@ import ProductList from "./components/ProductList";
 import { useProducts } from "medusa-react";
 
 export default function Catalogue() {
-  const { products, isLoading } = useProducts();
-
-  console.log(products);
+  // const { products, isLoading } = useProducts();
+  // console.log(products);
 
   return (
     <div className="prose flex flex-col font-serif h-screen min-h-[1000px] justify-center mx-auto">

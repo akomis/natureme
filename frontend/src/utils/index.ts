@@ -13,10 +13,6 @@ export const fetchFromSanity = async (
   entity?: string,
   query?: string
 ): Promise<any[]> => {
-  const requestData = {
-    entity,
-    query,
-  };
   return await sanity.fetch(query ?? `*[_type == "${entity}"]`);
 };
 
