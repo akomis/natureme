@@ -1,5 +1,4 @@
-import { Resend } from 'resend';
-import { ContactEmail } from '@/apps/shop/emails';
+import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -8,12 +7,12 @@ export async function POST(request: Request) {
 
   try {
     const { data, error } = await resend.emails.send({
-      from: 'mail@natureme.com',
-      to: ['akomis@protonmail.com'],
-      subject: 'New email',
-      html: '<p>tesdt</p>',
+      from: "mail@natureme.com",
+      to: ["akomis@protonmail.com"],
+      subject: "New email",
+      html: "<p>tesdt</p>",
     });
-    console.log('error: ', error);
+    console.log("error: ", error);
     if (error) {
       throw new Error();
     }
