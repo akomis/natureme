@@ -2,7 +2,7 @@ import { defineType, defineField, defineArrayMember } from 'sanity'
 
 const InfoFields = [
   defineField({ title: 'Text', name: 'text', type: 'string' }),
-  defineField({ title: 'URL', name: 'url', type: 'url' }),
+  defineField({ title: 'Link', name: 'link', type: 'string' }),
 ]
 
 export default defineType({
@@ -11,8 +11,12 @@ export default defineType({
   type: 'document',
   fields: [
     defineField({ title: 'Logo', name: 'logo', type: 'image' }),
-    defineField({ title: 'About', name: 'about', type: 'text' }),
-    defineField({ title: 'Slogan', name: 'slogan', type: 'text' }),
+    defineField({
+      title: 'About',
+      name: 'about',
+      type: 'array',
+      of: [defineArrayMember({ type: 'block' })],
+    }),
     defineField({
       title: 'Info',
       name: 'info',

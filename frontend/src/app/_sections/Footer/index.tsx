@@ -1,5 +1,7 @@
-import { Instagram, Lock, Mail, MapPin, Phone } from "lucide-react";
+import SanityImage from "@/components/SanityImage";
 import Image from "next/image";
+import { sanity } from "@/utils";
+import { Instagram, Lock, Mail, MapPin, Phone } from "lucide-react";
 import Link from "next/link";
 
 const LOGO_SIZE = 250;
@@ -42,7 +44,10 @@ const Extras = () => {
   );
 };
 
-const Footer = () => {
+const Footer = async () => {
+  const globalAssets = (await sanity.fetch(`*[_type == "global"]`))[0];
+  const { address, telephone, instagram, email } = globalAssets.info;
+
   const infoLinkStyle =
     "flex gap-4 justify-center items-center hover:scale-110 hover:z-10 transition-all";
 
@@ -50,31 +55,28 @@ const Footer = () => {
     <section className="flex flex-col h-screen justify-center items-center gap-32 md:gap-52 px-10 py-10 overflow-scroll max-w-7xl mx-auto">
       <Extras />
       <footer className="flex flex-col items-center gap-20 justify-center lg:flex-row md:justify-between w-full">
-        <Image
-          src={"/logo.png"}
+        <SanityImage
+          image={globalAssets.logo}
           width={LOGO_SIZE}
           height={LOGO_SIZE}
           alt="NatureMe Logo"
         />
         <div className="flex flex-col gap-4 justify-center items-center lg:justify-between lg:items-start">
-          <a className={infoLinkStyle} href="tel:+35799999999">
+          <a className={infoLinkStyle} href={telephone.link}>
             <Phone size={30} />
-            <h2 className="text-lg">99999999</h2>
+            <h2 className="text-lg">{telephone.text}</h2>
           </a>
-          <a className={infoLinkStyle} href="mailto:nature@me.com">
+          <a className={infoLinkStyle} href={email.link}>
             <Mail size={30} />
-            <h2 className="text-lg">nature@me.com</h2>
+            <h2 className="text-lg">{email.text}</h2>
           </a>
-          <a
-            className={infoLinkStyle}
-            href="https://www.instagram.com/natureme.handmade.cosmetics/"
-          >
+          <a className={infoLinkStyle} href={instagram.link}>
             <Instagram size={30} />
-            <h2 className="text-lg">@natureme.handmade.cosmetics</h2>
+            <h2 className="text-lg">{instagram.text}</h2>
           </a>
-          <a className={infoLinkStyle} href="">
+          <a className={infoLinkStyle} href={address.link}>
             <MapPin size={30} />
-            <h2 className="text-lg">Κουλλού, Λύμπια, Λευκωσία</h2>
+            <h2 className="text-lg">{address.text}</h2>
           </a>
         </div>
         <div className="flex flex-col justify-between gap-20">
