@@ -52,6 +52,10 @@ const plugins = [
       },
     },
   },
+  {
+    resolve: `@medusajs/file-local`,
+    options: {},
+  },
   // {
   //   resolve: `medusa-plugin-resend`,
   //   options: {

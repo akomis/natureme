@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+const { withStoreConfig } = require("./store-config");
+
+constnextConfig = {
   images: {
     remotePatterns: [
       {
@@ -8,8 +10,12 @@ const nextConfig = {
         port: "",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "https://backend-production-42f2.up.railway.app",
+      },
     ],
   },
 };
 
-export default nextConfig;
+export default withStoreConfig(nextConfig);
