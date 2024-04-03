@@ -1,5 +1,4 @@
 /** @type {import('next').NextConfig} */
-const { withStoreConfig } = require("./store-config");
 
 constnextConfig = {
   images: {
@@ -18,4 +17,4 @@ constnextConfig = {
   },
 };
 
-export default withStoreConfig(nextConfig);
+export default nextConfig;
