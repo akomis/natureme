@@ -101,7 +101,7 @@ const Footer = async () => {
           </div>
 
           <div className="flex flex-row-reverse lg:flex-row gap-2 items-start">
-            <h2 className="align-right text-right">
+            <h2 className="align-right text-right font-sans">
               Transactions secured with SSL
             </h2>
             <Lock size={20} />
