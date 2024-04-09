@@ -6,7 +6,7 @@ import Screen from "@/components/Screen";
 export default async function Contact() {
   return (
     <Screen>
-      <PageHeader title={"Επικοινωνία"} />
+      <PageHeader title={"Contact"} />
       <ContactForm />
     </Screen>
   );

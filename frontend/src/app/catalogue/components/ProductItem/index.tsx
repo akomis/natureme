@@ -60,8 +60,8 @@ const ProductItem = ({
           <Image src={imgUrl} alt={title} height={200} width={200} />
         </figure>
         <div className="card-body">
-          <div>
-            <div className="card-title">{title}</div>
+          <div className="text-center">
+            <div className="text-xl font-bold">{title}</div>
             <p>{description_short}</p>
           </div>
         </div>
@@ -69,7 +69,7 @@ const ProductItem = ({
 
       <dialog id={elementId} className="modal">
         <div className="modal-box w-11/12 max-w-4xl">
-          <div className="flex flex-row gap-4 items-baseline align-middle">
+          <div className="flex flex-row gap-4  items-baseline align-middle">
             <div className="modal-action">
               <form method="dialog">
                 {/* if there is a button in form, it will close the modal */}
@@ -97,8 +97,8 @@ const ProductItem = ({
           <div className="modal-footer flex flex-col-reverse md:flex-row gap-4 justify-between items-center mt-24">
             <div className="flex justify-center">
               <p className="font-sans text-sm text-center md:text-left">
-                Για διευκρινίσεις σχετικά με τα προιόντα και τις παραγγελίες
-                δείτε <Link href="/faq">Συχνές Ερωτήσεις & Απαντήσεις</Link>
+                For details regarding ordering and products refer to the{" "}
+                <Link href="/faq">FAQ</Link>
               </p>
             </div>
             <NumberPicker value={amount} setValue={setAmount} />

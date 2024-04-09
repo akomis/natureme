@@ -20,7 +20,7 @@ const Extras = () => {
           height={ICON_SIZE}
           alt="Συχνές Ερωτήσεις"
         />
-        <h2 className="font-bold">Συχνές Ερωτήσεις</h2>
+        <h2 className="font-bold">FAQ</h2>
       </Link>
       <a href="/activities" className={pageLinkStyle}>
         <Image
@@ -29,7 +29,7 @@ const Extras = () => {
           height={ICON_SIZE}
           alt="Δραστηριότητες"
         />
-        <h2 className="font-bold">Δραστηριότητες</h2>
+        <h2 className="font-bold">Activities</h2>
       </a>
       <Link href="/contact" className={pageLinkStyle}>
         <Image
@@ -38,7 +38,7 @@ const Extras = () => {
           height={ICON_SIZE}
           alt="Επικοινωνία"
         />
-        <h2 className="font-bold">Επικοινωνία</h2>
+        <h2 className="font-bold">Contact</h2>
       </Link>
     </div>
   );
@@ -96,13 +96,13 @@ const Footer = async () => {
         </div>
         <div className="flex flex-col justify-between gap-20">
           <div className="flex flex-col items-center lg:items-end">
-            <h2 className="text-xl">Εμπιστευόμαστε τη φύση για</h2>
-            <h2 className="font-bold text-3xl">τα πάντα.</h2>
+            <h2 className="text-xl">We trust nature</h2>
+            <h2 className="font-bold text-3xl">for everything.</h2>
           </div>
 
           <div className="flex flex-row-reverse lg:flex-row gap-2 items-start">
             <h2 className="align-right text-right">
-              Ασφαλείς συναλλαγές με SSL κρυπτογράφηση
+              Transactions secured with SSL
             </h2>
             <Lock size={20} />
           </div>
