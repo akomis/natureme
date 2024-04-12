@@ -30,7 +30,7 @@ const Header = () => {
       >
         <Link href="/catalogue">
           <button className="hover:cursor-pointer flex items-center gap-2 bg-primary hover:bg-secondary transition-all duration-300 px-4 py-2 rounded-2xl hover:z-10 hover:shadow-lg hover:scale-110">
-            <div className="font-bold text-xl">Κατάλογος</div>
+            <div className="font-bold text-xl">Catalogue</div>
             <ArrowRightCircle />
           </button>
         </Link>

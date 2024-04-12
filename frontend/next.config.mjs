@@ -11,7 +11,7 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: "https://backend-production-42f2.up.railway.app",
+        hostname: process.env.NEXT_PUBLIC_MEDUSA_URL,
       },
     ],
   },

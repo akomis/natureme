@@ -16,8 +16,12 @@ export const fetchFromSanity = async (
   return await sanity.fetch(query ?? `*[_type == "${entity}"]`);
 };
 
-export const sendEmail = async (from: string, content: string) => {
-  const data = JSON.stringify({ from, content });
+export const sendEmail = async (
+  to: string,
+  subject: string,
+  content: string
+) => {
+  const data = JSON.stringify({ to, subject, content });
 
   try {
     const response = await fetch("/api/sendmail", {
