@@ -4,12 +4,12 @@ import { Resend } from "resend";
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: Request) {
-  const { from, subject, content } = await request.json();
+  const { to, subject, content } = await request.json();
 
   try {
     const { data, error } = await resend.emails.send({
-      from,
-      to: "akomis@pm.me",
+      from: "mail@natureme.life",
+      to,
       subject,
       text: content,
     });
