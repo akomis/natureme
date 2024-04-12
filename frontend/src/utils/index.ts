@@ -17,11 +17,11 @@ export const fetchFromSanity = async (
 };
 
 export const sendEmail = async (
-  to: string,
+  from: string,
   subject: string,
   content: string
 ) => {
-  const data = JSON.stringify({ to, subject, content });
+  const data = JSON.stringify({ from, subject, content });
 
   try {
     const response = await fetch("/api/sendmail", {
