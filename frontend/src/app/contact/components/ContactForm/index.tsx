@@ -14,7 +14,7 @@ const ContactForm = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (formRef.current?.checkValidity()) {
-      await sendEmail("akomis@pm.me", `Message from ${email}`, message);
+      await sendEmail(email, `Message from ${email}`, message);
       formRef.current.reset();
     } else {
       alert("Please fill in all required fields.");
