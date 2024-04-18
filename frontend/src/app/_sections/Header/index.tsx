@@ -63,8 +63,6 @@ const Header = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      console.log(slideIndex);
-
       slideIndex < SLIDESHOW.length - 1
         ? setSlideIndex(slideIndex + 1)
         : setSlideIndex(0);
@@ -75,8 +73,13 @@ const Header = () => {
     <section className="flex justify-center items-center min-h-[500px] h-screen max-h-screen">
       <div className="h-[50vh] w-[600px]">
         <div className="flex flex-1 justify-between">
-          <div className="image-container max-w-[250px]">
-            <Logo height={200} width={200} className="image" priority />
+          <div className={`image-container max-w-[${LOGO_SIZE}px]`}>
+            <Logo
+              height={LOGO_SIZE}
+              width={LOGO_SIZE}
+              className="image"
+              priority
+            />
           </div>
 
           <div className="flex flex-col items-center justify-center my-5 whitespace-nowrap w-full ml-4">
@@ -97,9 +100,9 @@ const Header = () => {
         className={"fixed bottom-10 left-1/2 transform -translate-x-1/2 z-10"}
       >
         <Link href="/catalogue">
-          <button className="hover:cursor-pointer flex items-center gap-2 bg-primary hover:bg-secondary transition-all duration-300 px-4 py-2 rounded-2xl hover:z-10 hover:shadow-lg hover:scale-110">
-            <div className="font-bold text-xl">Catalogue</div>
-            <ArrowRightCircle />
+          <button className="group hover:text-[#8D39AD] transition-all hover:cursor-pointer flex items-center gap-2 bg-primary hover:bg-secondary duration-300 px-4 py-2 rounded-2xl hover:z-10 hover:shadow-lg hover:scale-110">
+            <p className="font-bold text-2xl">Catalogue</p>
+            <ArrowRightCircle className="font-bold text-2xl group-hover:scale-125 transition-all duration-700" />
           </button>
         </Link>
       </div>
