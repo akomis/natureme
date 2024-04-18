@@ -1,13 +1,10 @@
-import { fetchFromSanity } from "@/utils";
-import SanityImage from "../SanityImage";
+"use client";
 import Image from "next/image";
 
 type Props = Omit<React.ComponentPropsWithRef<typeof Image>, "src" | "alt">;
 
-const Logo = async (props: Props) => {
-  const { logo } = (await fetchFromSanity("global"))[0];
-
-  return <SanityImage {...props} image={logo} alt="NatureMe Logo" />;
+const Logo = (props: Props) => {
+  return <Image {...props} src={"/logo.png"} alt="NatureMe Logo" />;
 };
 
 export default Logo;

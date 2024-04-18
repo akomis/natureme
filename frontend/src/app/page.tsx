@@ -3,7 +3,7 @@ import Footer from "./_sections/Footer";
 import Header from "./_sections/Header";
 import Testimonials from "./_sections/Testimonials";
 
-export default async function Index() {
+export default function Index() {
   return (
     <div className="font-serif scroller">
       <Header />
