@@ -8,7 +8,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-const LOGO_SIZE = 250;
+const LOGO_SIZE = 300;
 
 const SLIDESHOW = [
   { slogan: "our body", imageUrl: "/header/soaps.png" },
@@ -71,19 +71,13 @@ const Header = () => {
 
   return (
     <section className="flex justify-center items-center min-h-[500px] h-screen max-h-screen">
-      <div className="h-[50vh] w-[600px]">
-        <div className="flex flex-1 justify-between">
-          <div className={`image-container max-w-[${LOGO_SIZE}px]`}>
-            <Logo
-              height={LOGO_SIZE}
-              width={LOGO_SIZE}
-              className="image"
-              priority
-            />
+      <div className="h-[50vh] w-[670px]">
+        <div className="flex flex-1 items-center justify-center">
+          <div>
+            <Logo height={LOGO_SIZE} width={LOGO_SIZE} priority />
           </div>
-
-          <div className="flex flex-col items-center justify-center my-5 whitespace-nowrap w-full ml-4">
-            <div className="w-full">
+          <div className="flex flex-col flex-grow items-start justify-center  whitespace-nowrap ml-4">
+            <div>
               <p className="text-2xl flex flex-1">{"We trust nature for"}</p>
               <AnimatedText
                 key={slideIndex}
