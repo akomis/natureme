@@ -11,7 +11,7 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: process.env.NEXT_PUBLIC_MEDUSA_URL,
+        hostname: process.env.RAILWAY_PUBLIC_DOMAIN,
       },
     ],
   },

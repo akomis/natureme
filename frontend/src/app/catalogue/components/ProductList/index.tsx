@@ -4,9 +4,11 @@ import ProductItem from "../ProductItem";
 type Props = {
   header: string;
   variants: any[];
+  description: string;
+  images: string[];
 };
 
-const ProductList = ({ header, variants: items }: Props) => {
+const ProductList = ({ header, variants, description, images }: Props) => {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex gap-4">
@@ -16,13 +18,20 @@ const ProductList = ({ header, variants: items }: Props) => {
         >
           {header}
         </div>
-        {/* {price && (
-          <div className="badge bg-gray-100 p-5 text-2xl">€{price}</div>
-        )} */}
       </div>
       <div className="flex flex-wrap gap-4">
-        {items.map((item) => (
-          <ProductItem key={item.title} {...item} />
+        {variants.map((item) => (
+          <ProductItem
+            key={item.title}
+            id={item.id}
+            imgUrl={item.thumbnail}
+            title={item.title}
+            price={item?.prices[0]?.amount}
+            description_short={" "}
+            description_long={description}
+            ingredients={item.material}
+            mediaUrls={images}
+          />
         ))}
       </div>
     </div>

@@ -1,5 +1,6 @@
 "use client";
 import NumberPicker from "@/components/NumberPicker";
+import { printPrice } from "@/utils";
 import { ArrowLeft } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,6 +10,8 @@ type Props = {
   id: string;
   imgUrl: string;
   title: string;
+  price: number;
+  mediaUrls: string[];
   description_short: string;
   description_long: string;
   ingredients: string;
@@ -19,6 +22,8 @@ const ProductItem = ({
   id,
   imgUrl,
   title,
+  price,
+  mediaUrls,
   description_short,
   description_long,
   ingredients,
@@ -31,12 +36,14 @@ const ProductItem = ({
     return (
       <div className="flex h-28 gap-2 bg-primary shadow-xl rounded-2xl overflow-hidden">
         <figure className="h-fit image-container rounded-xl m-0">
-          <Image
-            className="image rounded-xl border-2 border-secondary"
-            src={imgUrl}
-            alt={title}
-            fill
-          />
+          {!!imgUrl && (
+            <Image
+              className="image rounded-xl border-2 border-secondary"
+              src={imgUrl}
+              alt={title}
+              fill
+            />
+          )}
         </figure>
         <div className="h-full w-3/5 flex flex-col justify-between p-2">
           <p className="text-xl m-0">{title}</p>
@@ -57,12 +64,15 @@ const ProductItem = ({
         }
       >
         <figure className="h-fit scale-110 group-hover:scale-100 m-0 duration-500 rounded-lg">
-          <Image src={imgUrl} alt={title} height={200} width={200} />
+          {!!imgUrl && (
+            <Image src={imgUrl} alt={title} height={200} width={200} />
+          )}
         </figure>
         <div className="card-body">
           <div className="text-center">
             <div className="text-xl font-bold">{title}</div>
             <p>{description_short}</p>
+            {!!price && <p className="text-xl mb-0">{printPrice(price)}</p>}
           </div>
         </div>
       </div>
@@ -82,12 +92,15 @@ const ProductItem = ({
           </div>
 
           <div className="rounded-lg image-container">
-            <Image
-              className="image m-0 max-h-[400px]"
-              src={imgUrl}
-              alt={title}
-              fill
-            />
+            {mediaUrls?.map((media) => (
+              <Image
+                key={media}
+                className="image m-0 max-h-[400px]"
+                src={media}
+                alt={title}
+                fill
+              />
+            ))}
           </div>
           <p className="py-4 text-justify">{description_long}</p>
 
