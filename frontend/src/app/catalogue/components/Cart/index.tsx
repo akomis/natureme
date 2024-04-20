@@ -55,9 +55,9 @@ export const Cart = ({ items }: Props) => {
                 <button className="btn btn-primary">Proceed</button>
               </div>
             </div>
-            <p>
-              Με την ολοκλήρωση της παραγγελίας συμφωνώ με τους{" "}
-              <Link href="/">Όρους & Προϋποθέσεις</Link>
+            <p className="font-sans">
+              By proceeding with the order you agree to the{" "}
+              <Link href="/">Terms & Conditions</Link>
             </p>
           </div>
         </div>
