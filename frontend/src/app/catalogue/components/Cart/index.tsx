@@ -3,38 +3,15 @@
 import { ArrowLeft, ShoppingBasket } from "lucide-react";
 import Link from "next/link";
 import ProductItem from "../ProductItem";
-import { useEffect, useState } from "react";
-import { useCart } from "medusa-react";
+import { useState } from "react";
 import { printPrice } from "@/utils";
 
-type Props = {
-  items: any[];
-};
-
-export const Cart = ({ items }: Props) => {
+export const Cart = () => {
   const [email, setEmail] = useState("");
-
-  const { cart, createCart } = useCart();
 
   const handleInputChange = (event: any) => {
     setEmail(event.target.value);
   };
-
-  useEffect(() => {
-    const handleCreateCart = () => {
-      createCart.mutate(
-        {}, // create an empty cart
-        {
-          onSuccess: ({ cart }) => {
-            localStorage.setItem("cart_id", cart.id);
-          },
-        }
-      );
-    };
-
-    handleCreateCart();
-    console.log("cart: ", cart);
-  }, []);
 
   return (
     <>
@@ -62,9 +39,9 @@ export const Cart = ({ items }: Props) => {
               </div>
               <h1>Cart</h1>
             </div>
-            {items.map((item: any) => (
+            {/* {items.map((item: any) => (
               <ProductItem key={"title"} {...item} horizontal />
-            ))}
+            ))} */}
           </div>
           <div>
             <div className="flex justify-between w-full">
