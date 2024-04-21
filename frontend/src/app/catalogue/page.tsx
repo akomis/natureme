@@ -9,7 +9,6 @@ import LoadingIndicator from "@/components/LoadingIndicator";
 
 export default function Catalogue() {
   const { products, isLoading } = useProducts();
-  console.log(products);
 
   if (isLoading) {
     return (
@@ -18,6 +17,8 @@ export default function Catalogue() {
       </Screen>
     );
   }
+
+  console.log("products: ", products);
 
   if (!products) {
     return (

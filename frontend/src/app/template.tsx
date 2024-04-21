@@ -3,7 +3,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { QueryClient } from "@tanstack/react-query";
-import { MedusaProvider } from "medusa-react";
+import { CartProvider, MedusaProvider } from "medusa-react";
 
 const variants = {
   out: {
@@ -33,18 +33,23 @@ export default function Template({ children }: { children: React.ReactNode }) {
       queryClientProviderProps={{ client: queryClient }}
       baseUrl={process.env.NEXT_PUBLIC_MEDUSA_URL ?? "http://localhost:8000"}
     >
-      <AnimatePresence mode="wait" onExitComplete={() => window.scrollTo(0, 0)}>
-        <motion.div
-          key={pathname}
-          variants={variants}
-          animate="in"
-          initial="out"
-          exit="out"
-          transition={{ ease: "easeInOut", duration: 1 }}
+      <CartProvider>
+        <AnimatePresence
+          mode="wait"
+          onExitComplete={() => window.scrollTo(0, 0)}
         >
-          {children}
-        </motion.div>
-      </AnimatePresence>
+          <motion.div
+            key={pathname}
+            variants={variants}
+            animate="in"
+            initial="out"
+            exit="out"
+            transition={{ ease: "easeInOut", duration: 1 }}
+          >
+            {children}
+          </motion.div>
+        </AnimatePresence>
+      </CartProvider>
     </MedusaProvider>
   );
 }

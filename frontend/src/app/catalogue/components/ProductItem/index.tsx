@@ -10,6 +10,7 @@ type Props = {
   id: string;
   imgUrl: string;
   title: string;
+  thumbnailTitle: string;
   price: number;
   mediaUrls: string[];
   description_short: string;
@@ -22,6 +23,7 @@ const ProductItem = ({
   id,
   imgUrl,
   title,
+  thumbnailTitle,
   price,
   mediaUrls,
   description_short,
@@ -70,7 +72,7 @@ const ProductItem = ({
         </figure>
         <div className="card-body">
           <div className="text-center">
-            <div className="text-xl font-bold">{title}</div>
+            <div className="text-xl font-bold">{thumbnailTitle}</div>
             <p>{description_short}</p>
             {!!price && <p className="text-xl mb-0">{printPrice(price)}</p>}
           </div>
@@ -92,9 +94,9 @@ const ProductItem = ({
           </div>
 
           <div className="rounded-lg image-container">
-            {mediaUrls?.map((media) => (
+            {mediaUrls?.map((media, index) => (
               <Image
-                key={media}
+                key={media + index}
                 className="image m-0 max-h-[400px]"
                 src={media}
                 alt={title}

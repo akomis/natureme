@@ -9,6 +9,8 @@ type Props = {
 };
 
 const ProductList = ({ header, variants, description, images }: Props) => {
+  const isSingleVariant = variants[0].title.toLowerCase() === "default";
+
   return (
     <div className="flex flex-col gap-4">
       <div className="flex gap-4">
@@ -25,7 +27,8 @@ const ProductList = ({ header, variants, description, images }: Props) => {
             key={item.title}
             id={item.id}
             imgUrl={item.thumbnail}
-            title={item.title}
+            title={isSingleVariant ? header : item.title}
+            thumbnailTitle={isSingleVariant ? "" : item.title}
             price={item?.prices[0]?.amount}
             description_short={" "}
             description_long={description}

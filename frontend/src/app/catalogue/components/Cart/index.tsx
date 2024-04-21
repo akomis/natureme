@@ -3,12 +3,39 @@
 import { ArrowLeft, ShoppingBasket } from "lucide-react";
 import Link from "next/link";
 import ProductItem from "../ProductItem";
+import { useEffect, useState } from "react";
+import { useCart } from "medusa-react";
+import { printPrice } from "@/utils";
 
 type Props = {
   items: any[];
 };
 
 export const Cart = ({ items }: Props) => {
+  const [email, setEmail] = useState("");
+
+  const { cart, createCart } = useCart();
+
+  const handleInputChange = (event: any) => {
+    setEmail(event.target.value);
+  };
+
+  useEffect(() => {
+    const handleCreateCart = () => {
+      createCart.mutate(
+        {}, // create an empty cart
+        {
+          onSuccess: ({ cart }) => {
+            localStorage.setItem("cart_id", cart.id);
+          },
+        }
+      );
+    };
+
+    handleCreateCart();
+    console.log("cart: ", cart);
+  }, []);
+
   return (
     <>
       <button
@@ -43,14 +70,17 @@ export const Cart = ({ items }: Props) => {
             <div className="flex justify-between w-full">
               <div>
                 <button className="btn btn-outline pointer-events-none text-lg">
-                  €50
+                  {printPrice(0)}
                 </button>
               </div>
               <div className="flex gap-4">
                 <input
                   type="text"
-                  placeholder="Coupon"
+                  placeholder="e-mail"
                   className="input input-bordered w-24"
+                  value={email}
+                  onChange={handleInputChange}
+                  required
                 />
                 <button className="btn btn-primary">Proceed</button>
               </div>
