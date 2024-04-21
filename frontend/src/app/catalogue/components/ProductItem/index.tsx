@@ -16,6 +16,7 @@ type Props = {
   description_short: string;
   description_long: string;
   ingredients: string;
+  color: string;
   horizontal?: boolean;
 };
 
@@ -29,6 +30,7 @@ const ProductItem = ({
   description_short,
   description_long,
   ingredients,
+  color,
   horizontal,
 }: Props) => {
   const [amount, setAmount] = useState(0);
@@ -60,7 +62,8 @@ const ProductItem = ({
   return (
     <>
       <div
-        className="transition-all duration-500 group hover:cursor-pointer hover:scale-105 overflow-hidden card card-compact w-[200px] shadow-xl bg-gray-100"
+        className="h-fit transition-all duration-500 group hover:cursor-pointer hover:scale-105 overflow-hidden card card-compact w-[200px] shadow-xl bg-gray-100"
+        style={{ backgroundColor: color }}
         onClick={() =>
           (document?.getElementById(elementId) as HTMLDialogElement).showModal()
         }
@@ -71,7 +74,7 @@ const ProductItem = ({
           )}
         </figure>
         <div className="card-body">
-          <div className="text-center">
+          <div className="text-center ">
             <div className="text-xl font-bold">{thumbnailTitle}</div>
             <p>{description_short}</p>
             {!!price && <p className="text-xl mb-0">{printPrice(price)}</p>}
@@ -94,15 +97,16 @@ const ProductItem = ({
           </div>
 
           <div className="rounded-lg image-container">
-            {mediaUrls?.map((media, index) => (
-              <Image
-                key={media + index}
-                className="image m-0 max-h-[400px]"
-                src={media}
-                alt={title}
-                fill
-              />
-            ))}
+            {mediaUrls &&
+              mediaUrls.map((media, index) => (
+                <Image
+                  key={media + index}
+                  className="image m-0 max-h-[400px]"
+                  src={media}
+                  alt={title}
+                  fill
+                />
+              ))}
           </div>
           <p className="py-4 text-justify">{description_long}</p>
 
