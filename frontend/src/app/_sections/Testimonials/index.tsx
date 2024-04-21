@@ -1,4 +1,4 @@
-import { fetchFromSanity } from "@/utils";
+import { fetchFromSanity, getRandomPastelColor } from "@/utils";
 
 type ReviewCardProps = {
   author: string;
@@ -7,11 +7,11 @@ type ReviewCardProps = {
 };
 
 const ReviewCard = ({ author, review, date }: ReviewCardProps) => {
-  // const backgroundColor = getRandomPastelColor();
+  const backgroundColor = getRandomPastelColor();
 
   return (
     <div
-      // style={{ backgroundColor }}
+      style={{ backgroundColor }}
       className={
         "card bg-base-300 opacity-1 px-4 py-2 h-fit w-3/5 min-w-[300px] max-w-[30%] hover:scale-110 hover:z-10 hover:shadow-md transition-all duration-300"
       }
