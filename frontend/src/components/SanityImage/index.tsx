@@ -5,7 +5,7 @@ import { useNextSanityImage } from "next-sanity-image";
 import Image from "next/image";
 
 type Props = {
-  image: object;
+  image: string;
   alt: string;
 } & Omit<React.ComponentPropsWithRef<typeof Image>, "src">;
 

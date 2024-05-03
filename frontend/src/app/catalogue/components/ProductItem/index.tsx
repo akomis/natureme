@@ -1,4 +1,5 @@
 "use client";
+import ImageCarousel from "@/components/ImageCarousel";
 import NumberPicker from "@/components/NumberPicker";
 import { printPrice } from "@/utils";
 import { ArrowLeft } from "lucide-react";
@@ -12,7 +13,7 @@ type Props = {
   title: string;
   thumbnailTitle: string;
   price: number;
-  mediaUrls: string[];
+  media: string[];
   description_short: string;
   description_long: string;
   ingredients: string;
@@ -26,7 +27,7 @@ const ProductItem = ({
   title,
   thumbnailTitle,
   price,
-  mediaUrls,
+  media,
   description_short,
   description_long,
   ingredients,
@@ -34,6 +35,7 @@ const ProductItem = ({
   horizontal,
 }: Props) => {
   const [amount, setAmount] = useState(0);
+  const [isOpen, setIsOpen] = useState(false);
   const elementId = "productDetailsModal_" + id;
 
   if (horizontal) {
@@ -64,9 +66,7 @@ const ProductItem = ({
       <div
         className="h-fit transition-all duration-500 group hover:cursor-pointer hover:scale-105 overflow-hidden card card-compact w-[200px] shadow-xl bg-gray-100"
         style={{ backgroundColor: color }}
-        onClick={() =>
-          (document?.getElementById(elementId) as HTMLDialogElement).showModal()
-        }
+        onClick={() => setIsOpen(true)}
       >
         <figure className="h-fit scale-110 group-hover:scale-100 m-0 duration-500 rounded-lg">
           {!!imgUrl && (
@@ -82,7 +82,12 @@ const ProductItem = ({
         </div>
       </div>
 
-      <dialog id={elementId} className="modal">
+      <dialog
+        id={elementId}
+        className="modal"
+        open={isOpen}
+        onClose={() => setIsOpen(false)}
+      >
         <div className="modal-box w-11/12 max-w-4xl">
           <div className="flex flex-row gap-4  items-baseline align-middle">
             <div className="modal-action">
@@ -96,22 +101,26 @@ const ProductItem = ({
             <h1 className="font-bold">{title}</h1>
           </div>
 
-          <div className="rounded-lg image-container">
-            {mediaUrls &&
-              mediaUrls.map((media, index) => (
-                <Image
-                  key={media + index}
-                  className="image m-0 max-h-[400px]"
-                  src={media}
-                  alt={title}
-                  fill
-                />
-              ))}
-          </div>
+          {isOpen && (
+            <div className="rounded-lg image-container">
+              <ImageCarousel
+                hash={title}
+                images={media.map((item: any) => ({
+                  id: item.id,
+                  url: item.url,
+                }))}
+              />
+            </div>
+          )}
+
           <p className="py-4 text-justify">{description_long}</p>
 
-          <h3>Ingredients</h3>
-          <p>{ingredients}</p>
+          {ingredients && (
+            <>
+              <h3>Ingredients</h3>
+              <p>{ingredients}</p>
+            </>
+          )}
 
           <div className="modal-footer flex flex-col-reverse md:flex-row gap-4 justify-between items-center mt-24">
             <div className="flex justify-center">

@@ -35,7 +35,7 @@ const ProductList = ({ header, variants, description, images }: Props) => {
             description_long={description}
             ingredients={item.material}
             color={listColor}
-            mediaUrls={images}
+            media={images}
           />
         ))}
       </div>

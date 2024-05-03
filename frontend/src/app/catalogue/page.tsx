@@ -10,29 +10,29 @@ import { useEffect } from "react";
 
 export default function Catalogue() {
   const { products, isLoading } = useProducts();
-  const { cart, createCart } = useCart();
+  // const { cart, createCart } = useCart();
 
-  useEffect(() => {
-    const handleCreateCart = () => {
-      createCart.mutate(
-        products?.flatMap((product) =>
-          product.variants.map((variant: any) => ({
-            variant_id: variant.id,
-            quantity: 0,
-          }))
-        ),
-        {
-          onSuccess: ({ cart }) => {
-            localStorage.setItem("cart_id", cart.id);
-          },
-        }
-      );
-    };
+  // useEffect(() => {
+  //   const handleCreateCart = () => {
+  //     createCart.mutate(
+  //       products?.flatMap((product) =>
+  //         product.variants.map((variant: any) => ({
+  //           variant_id: variant.id,
+  //           quantity: 0,
+  //         }))
+  //       ),
+  //       {
+  //         onSuccess: ({ cart }) => {
+  //           localStorage.setItem("cart_id", cart.id);
+  //         },
+  //       }
+  //     );
+  //   };
 
-    if (!!products && products.length) {
-      handleCreateCart();
-    }
-  }, [!!products, products?.length]);
+  //   if (!!products && products.length) {
+  //     handleCreateCart();
+  //   }
+  // }, [!!products, products?.length]);
 
   if (isLoading) {
     return (

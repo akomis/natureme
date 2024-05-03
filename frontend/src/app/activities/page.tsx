@@ -10,7 +10,14 @@ export default async function Activities() {
   return (
     <Screen>
       <PageHeader title={"Activities"} />
-      <ImageCarousel items={activity.gallery.map((item: any) => item.asset)} />
+      <ImageCarousel
+        hash={activity.title}
+        isSanity={true}
+        images={activity.gallery.map((item: any) => ({
+          id: item.asset.id,
+          url: item.asset,
+        }))}
+      />
       <div className="flex w-full justify-between items-start gap-14">
         <h2>{activity.title}</h2>
         <p>{activity.date}</p>
