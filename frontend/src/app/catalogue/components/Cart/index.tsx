@@ -5,9 +5,11 @@ import Link from "next/link";
 import ProductItem from "../ProductItem";
 import { useState } from "react";
 import { printPrice } from "@/utils";
+import { useCart } from "medusa-react";
 
 export const Cart = () => {
   const [email, setEmail] = useState("");
+  const { cart } = useCart();
 
   const handleInputChange = (event: any) => {
     setEmail(event.target.value);

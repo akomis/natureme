@@ -6,9 +6,18 @@ type Props = {
   variants: any[];
   description: string;
   images: string[];
+  fallbackThumbnail?: string;
+  optionTitles: string[];
 };
 
-const ProductList = ({ header, variants, description, images }: Props) => {
+const ProductList = ({
+  header,
+  variants,
+  description,
+  images,
+  fallbackThumbnail,
+  optionTitles,
+}: Props) => {
   const isSingleVariant = variants[0].title.toLowerCase() === "default";
   const listColor = getRandomPastelColor();
 
@@ -17,7 +26,7 @@ const ProductList = ({ header, variants, description, images }: Props) => {
       <div className="flex gap-4">
         <div
           style={{ backgroundColor: listColor }}
-          className="badge p-5 text-2xl"
+          className="badge p-5 text-2xl border-0"
         >
           {header}
         </div>
@@ -27,14 +36,20 @@ const ProductList = ({ header, variants, description, images }: Props) => {
           <ProductItem
             key={item.title}
             id={item.id}
-            imgUrl={item.thumbnail}
+            imgUrl={item.thumbnail ?? fallbackThumbnail}
             title={isSingleVariant ? header : `${header} ${item.title}`}
             thumbnailTitle={isSingleVariant ? "" : item.title}
             price={item?.prices[0]?.amount}
-            description_short={" "}
             description_long={description}
             ingredients={item.material}
             color={listColor}
+            attributes={optionTitles
+              .filter((title: string) => {
+                return title !== "Type";
+              })
+              .map((title: string, index: number) => {
+                return { key: title, value: item.options[index + 1].value };
+              })}
             media={images}
           />
         ))}

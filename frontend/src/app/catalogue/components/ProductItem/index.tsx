@@ -3,9 +3,12 @@ import ImageCarousel from "@/components/ImageCarousel";
 import NumberPicker from "@/components/NumberPicker";
 import { printPrice } from "@/utils";
 import { ArrowLeft } from "lucide-react";
+import { useCart, useCreateLineItem } from "medusa-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+
+type Attribute = { key: string; value: string };
 
 type Props = {
   id: string;
@@ -14,10 +17,10 @@ type Props = {
   thumbnailTitle: string;
   price: number;
   media: string[];
-  description_short: string;
   description_long: string;
   ingredients: string;
   color: string;
+  attributes?: Attribute[];
   horizontal?: boolean;
 };
 
@@ -28,15 +31,37 @@ const ProductItem = ({
   thumbnailTitle,
   price,
   media,
-  description_short,
   description_long,
   ingredients,
   color,
+  attributes,
   horizontal,
 }: Props) => {
   const [amount, setAmount] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
   const elementId = "productDetailsModal_" + id;
+
+  // const { cart, isLoading } = useGetCart(cartId);
+  // const createLineItem = useCreateLineItem(cartId);
+
+  // const handleAddItem = (
+  //   variantId: string,
+
+  //   quantity: number
+  // ) => {
+  //   createLineItem.mutate(
+  //     {
+  //       variant_id: variantId,
+
+  //       quantity,
+  //     },
+  //     {
+  //       onSuccess: ({ cart }) => {
+  //         console.log(cart.items);
+  //       },
+  //     }
+  //   );
+  // };
 
   if (horizontal) {
     return (
@@ -73,11 +98,12 @@ const ProductItem = ({
             <Image src={imgUrl} alt={title} height={200} width={200} />
           )}
         </figure>
-        <div className="card-body">
-          <div className="text-center ">
-            <div className="text-xl font-bold">{thumbnailTitle}</div>
-            <p>{description_short}</p>
-            {!!price && <p className="text-xl mb-0">{printPrice(price)}</p>}
+        <div className="flex justify-center p-4">
+          <div className="text-center">
+            {thumbnailTitle && (
+              <div className="text-xl font-bold mt-4">{thumbnailTitle}</div>
+            )}
+            <p className="text-xl mb-0">{printPrice(price)}</p>
           </div>
         </div>
       </div>
@@ -89,7 +115,7 @@ const ProductItem = ({
         onClose={() => setIsOpen(false)}
       >
         <div className="modal-box w-11/12 max-w-4xl">
-          <div className="flex flex-row gap-4  items-baseline align-middle">
+          <div className="flex flex-row gap-4 items-baseline align-middle">
             <div className="modal-action">
               <form method="dialog">
                 {/* if there is a button in form, it will close the modal */}
@@ -121,6 +147,14 @@ const ProductItem = ({
               <p>{ingredients}</p>
             </>
           )}
+
+          {attributes &&
+            attributes.map((attribute: Attribute) => (
+              <>
+                <h3>{attribute.key}</h3>
+                <p>{attribute.value}</p>
+              </>
+            ))}
 
           <div className="modal-footer flex flex-col-reverse md:flex-row gap-4 justify-between items-center mt-24">
             <div className="flex justify-center">
