@@ -22,11 +22,11 @@ const ProductList = ({
   const listColor = getRandomPastelColor();
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 px-2">
       <div className="flex gap-4">
         <div
           style={{ backgroundColor: listColor }}
-          className="badge p-5 text-2xl border-0"
+          className="badge p-5 text-2xl border-0 shadow-lg"
         >
           {header}
         </div>

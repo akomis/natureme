@@ -89,7 +89,7 @@ const ProductItem = ({
   return (
     <>
       <div
-        className="h-fit transition-all duration-500 group hover:cursor-pointer hover:scale-105 overflow-hidden card card-compact w-[200px] shadow-xl bg-gray-100"
+        className="h-fit transition-all duration-500 group hover:cursor-pointer hover:scale-105 overflow-hidden card card-compact w-[200px] shadow-md bg-gray-100"
         style={{ backgroundColor: color }}
         onClick={() => setIsOpen(true)}
       >
