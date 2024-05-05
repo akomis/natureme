@@ -15,15 +15,11 @@ export default function Catalogue() {
   useEffect(() => {
     const handleCreateCart = () => {
       createCart.mutate(
-        products?.flatMap((product) =>
-          product.variants.map((variant: any) => ({
-            variant_id: variant.id,
-            quantity: 0,
-          }))
-        ),
+        {},
         {
           onSuccess: ({ cart }) => {
             localStorage.setItem("cart_id", cart.id);
+            console.log(cart);
           },
         }
       );

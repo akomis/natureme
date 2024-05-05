@@ -14,7 +14,7 @@ type Props = {
   id: string;
   imgUrl: string;
   title: string;
-  thumbnailTitle: string;
+  thumbnailTitle?: string;
   price: number;
   media: string[];
   description_long: string;
@@ -41,27 +41,22 @@ const ProductItem = ({
   const [isOpen, setIsOpen] = useState(false);
   const elementId = "productDetailsModal_" + id;
 
-  // const { cart, isLoading } = useGetCart(cartId);
-  // const createLineItem = useCreateLineItem(cartId);
+  const { cart } = useCart();
+  const createLineItem = useCreateLineItem(cart.id);
 
-  // const handleAddItem = (
-  //   variantId: string,
-
-  //   quantity: number
-  // ) => {
-  //   createLineItem.mutate(
-  //     {
-  //       variant_id: variantId,
-
-  //       quantity,
-  //     },
-  //     {
-  //       onSuccess: ({ cart }) => {
-  //         console.log(cart.items);
-  //       },
-  //     }
-  //   );
-  // };
+  const handleAddItem = async () => {
+    createLineItem.mutate(
+      {
+        variant_id: id,
+        quantity: 2,
+      },
+      {
+        onSuccess: ({ cart }) => {
+          console.log(cart.items);
+        },
+      }
+    );
+  };
 
   if (horizontal) {
     return (
@@ -79,7 +74,13 @@ const ProductItem = ({
         <div className="h-full w-3/5 flex flex-col justify-between p-2">
           <p className="text-xl m-0">{title}</p>
           <div className="">
-            <NumberPicker value={amount} setValue={setAmount} />
+            <NumberPicker
+              value={amount}
+              setValue={async (value) => {
+                setAmount(value);
+                await handleAddItem();
+              }}
+            />
           </div>
         </div>
       </div>
@@ -89,21 +90,21 @@ const ProductItem = ({
   return (
     <>
       <div
-        className="h-fit transition-all duration-500 group hover:cursor-pointer hover:scale-105 overflow-hidden card card-compact w-[200px] shadow-md bg-gray-100"
+        className="h-fit transition-all duration-500 group hover:cursor-pointer hover:scale-105 overflow-hidden card card-compact w-[200px] shadow-md"
         style={{ backgroundColor: color }}
         onClick={() => setIsOpen(true)}
       >
-        <figure className="h-fit scale-110 group-hover:scale-100 m-0 duration-500 rounded-lg">
+        <figure className="h-fit scale-100 group-hover:scale-105 m-0 duration-500 rounded-lg">
           {!!imgUrl && (
             <Image src={imgUrl} alt={title} height={200} width={200} />
           )}
         </figure>
-        <div className="flex justify-center p-4">
-          <div className="text-center">
-            {thumbnailTitle && (
-              <div className="text-xl font-bold mt-4">{thumbnailTitle}</div>
+        <div className="flex justify-center items-center">
+          <div className="text-center flex flex-col p-4">
+            {!!thumbnailTitle && (
+              <div className="text-xl font-bold">{thumbnailTitle}</div>
             )}
-            <p className="text-xl mb-0">{printPrice(price)}</p>
+            <p className="text-xl m-0">{printPrice(price)}</p>
           </div>
         </div>
       </div>
@@ -150,10 +151,10 @@ const ProductItem = ({
 
           {attributes &&
             attributes.map((attribute: Attribute) => (
-              <>
+              <div key={attribute.key}>
                 <h3>{attribute.key}</h3>
                 <p>{attribute.value}</p>
-              </>
+              </div>
             ))}
 
           <div className="modal-footer flex flex-col-reverse md:flex-row gap-4 justify-between items-center mt-24">
