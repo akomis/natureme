@@ -79,7 +79,7 @@ const plugins = [
       body_template_type: process.env.RESEND_BODY_TEMPLATE_TYPE,
       order_placed_template: "order_placed",
       order_shipped_template: "order_shipped",
-      // customer_password_reset_template: "customer_password_reset",
+      //customer_password_reset_template: "customer_password_reset",
       //gift_card_created_template: "gift_card_created",
       //order_canceled_template: 'order_canceled',
       //order_refund_created_template: 'order_refund_created',
@@ -91,6 +91,13 @@ const plugins = [
       //claim_shipment_created_template: 'claim_shipment_created',
       //user_password_reset_template: 'user_password_reset',
       //medusa_restock_template: 'medusa_restock',
+    },
+  },
+  {
+    resolve: `medusa-payment-stripe`,
+    options: {
+      api_key: process.env.STRIPE_API_KEY,
+      webhook_secret: process.env.STRIPE_WEBHOOK_SECRET,
     },
   },
 ];
