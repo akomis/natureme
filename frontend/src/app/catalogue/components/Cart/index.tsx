@@ -46,16 +46,13 @@ export const Cart = () => {
               </div>
               <h1>Cart</h1>
             </div>
+
             {hasItems ? (
-              cart?.items.map((item: any) => (
-                <CartItem
-                  key={item.variant_id}
-                  title={item.title}
-                  id={item.variant_id}
-                  imgUrl={item.thumbnail}
-                  total={item.total}
-                />
-              ))
+              <div className="flex flex-col gap-2 items-center">
+                {cart?.items.map((item: any) => (
+                  <CartItem key={item.variant_id} variantId={item.variant_id} />
+                ))}
+              </div>
             ) : (
               <div className="flex justify-center">
                 <p className="text-xl">Your cart is empty.</p>

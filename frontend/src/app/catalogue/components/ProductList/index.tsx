@@ -6,7 +6,6 @@ type Props = {
   variants: any[];
   description: string;
   images: string[];
-  fallbackThumbnail?: string;
   optionTitles: string[];
 };
 
@@ -15,7 +14,6 @@ const ProductList = ({
   variants,
   description,
   images,
-  fallbackThumbnail,
   optionTitles,
 }: Props) => {
   const isSingleVariant = variants[0].title.toLowerCase() === "default";
@@ -36,7 +34,7 @@ const ProductList = ({
           <ProductItem
             key={item.title}
             id={item.id}
-            imgUrl={item.thumbnail ?? fallbackThumbnail}
+            imgUrl={item.thumbnail}
             title={isSingleVariant ? header : `${header} ${item.title}`}
             thumbnailTitle={isSingleVariant ? undefined : item.title}
             price={item?.prices[0]?.amount}

@@ -66,7 +66,6 @@ export default function Catalogue() {
                 variants={variants}
                 description={description}
                 images={images}
-                fallbackThumbnail={thumbnail}
                 optionTitles={options.map((option: any) => option.title)}
               />
             )
