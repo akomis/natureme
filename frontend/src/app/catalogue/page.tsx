@@ -10,7 +10,7 @@ import { useEffect } from "react";
 
 export default function Catalogue() {
   const { products, isLoading } = useProducts();
-  const { cart, createCart } = useCart();
+  const { createCart } = useCart();
 
   useEffect(() => {
     const handleCreateCart = () => {
@@ -19,7 +19,6 @@ export default function Catalogue() {
         {
           onSuccess: ({ cart }) => {
             localStorage.setItem("cart_id", cart.id);
-            console.log(cart);
           },
         }
       );

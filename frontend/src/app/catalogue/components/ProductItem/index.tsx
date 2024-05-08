@@ -1,9 +1,8 @@
 "use client";
 import ImageCarousel from "@/components/ImageCarousel";
-import NumberPicker from "@/components/NumberPicker";
+import QuantityPicker from "@/components/QuantityPicker";
 import { printPrice } from "@/utils";
 import { ArrowLeft } from "lucide-react";
-import { useCart, useCreateLineItem } from "medusa-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -16,12 +15,11 @@ type Props = {
   title: string;
   thumbnailTitle?: string;
   price: number;
-  media: string[];
-  description_long: string;
-  ingredients: string;
-  color: string;
+  media?: string[];
+  description: string;
+  ingredients?: string;
+  color?: string;
   attributes?: Attribute[];
-  horizontal?: boolean;
 };
 
 const ProductItem = ({
@@ -31,61 +29,13 @@ const ProductItem = ({
   thumbnailTitle,
   price,
   media,
-  description_long,
+  description,
   ingredients,
   color,
   attributes,
-  horizontal,
 }: Props) => {
-  const [amount, setAmount] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
   const elementId = "productDetailsModal_" + id;
-
-  const { cart } = useCart();
-  const createLineItem = useCreateLineItem(cart.id);
-
-  const handleAddItem = async () => {
-    createLineItem.mutate(
-      {
-        variant_id: id,
-        quantity: 2,
-      },
-      {
-        onSuccess: ({ cart }) => {
-          console.log(cart.items);
-        },
-      }
-    );
-  };
-
-  if (horizontal) {
-    return (
-      <div className="flex h-28 gap-2 bg-primary shadow-xl rounded-2xl overflow-hidden">
-        <figure className="h-fit image-container rounded-xl m-0">
-          {!!imgUrl && (
-            <Image
-              className="image rounded-xl border-2 border-secondary"
-              src={imgUrl}
-              alt={title}
-              fill
-            />
-          )}
-        </figure>
-        <div className="h-full w-3/5 flex flex-col justify-between p-2">
-          <p className="text-xl m-0">{title}</p>
-          <div className="">
-            <NumberPicker
-              value={amount}
-              setValue={async (value) => {
-                setAmount(value);
-                await handleAddItem();
-              }}
-            />
-          </div>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <>
@@ -128,7 +78,7 @@ const ProductItem = ({
             <h1 className="font-bold">{title}</h1>
           </div>
 
-          {isOpen && (
+          {isOpen && media && (
             <div className="rounded-lg image-container">
               <ImageCarousel
                 hash={title}
@@ -140,7 +90,7 @@ const ProductItem = ({
             </div>
           )}
 
-          <p className="py-4 text-justify">{description_long}</p>
+          <p className="py-4 text-justify">{description}</p>
 
           {ingredients && (
             <>
@@ -164,7 +114,7 @@ const ProductItem = ({
                 <Link href="/faq">FAQ</Link>
               </p>
             </div>
-            <NumberPicker value={amount} setValue={setAmount} />
+            <QuantityPicker variantId={id} />
           </div>
         </div>
       </dialog>

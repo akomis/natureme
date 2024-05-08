@@ -2,18 +2,22 @@
 
 import { ArrowLeft, ShoppingBasket } from "lucide-react";
 import Link from "next/link";
-import ProductItem from "../ProductItem";
 import { useState } from "react";
 import { printPrice } from "@/utils";
-import { useCart } from "medusa-react";
+import CartItem from "../CartItem";
+import { useGetCart } from "medusa-react";
 
 export const Cart = () => {
   const [email, setEmail] = useState("");
-  const { cart } = useCart();
+
+  const cartId = localStorage.getItem("cart_id") ?? "";
+  const { cart } = useGetCart(cartId);
 
   const handleInputChange = (event: any) => {
     setEmail(event.target.value);
   };
+
+  const hasItems = cart?.items.length > 0;
 
   return (
     <>
@@ -26,6 +30,7 @@ export const Cart = () => {
         }
       >
         <ShoppingBasket />
+        <div>{cart?.items.length}</div>
       </button>
 
       <dialog id="cartModal" className="modal">
@@ -41,27 +46,44 @@ export const Cart = () => {
               </div>
               <h1>Cart</h1>
             </div>
-            {/* {items.map((item: any) => (
-              <ProductItem key={"title"} {...item} horizontal />
-            ))} */}
+            {hasItems ? (
+              cart?.items.map((item: any) => (
+                <CartItem
+                  key={item.variant_id}
+                  title={item.title}
+                  id={item.variant_id}
+                  imgUrl={item.thumbnail}
+                  total={item.total}
+                />
+              ))
+            ) : (
+              <div className="flex justify-center">
+                <p className="text-xl">Your cart is empty.</p>
+              </div>
+            )}
           </div>
           <div>
             <div className="flex justify-between w-full">
               <div>
                 <button className="btn btn-outline pointer-events-none text-lg">
-                  {printPrice(0)}
+                  {printPrice(cart?.total)}
                 </button>
               </div>
               <div className="flex gap-4">
                 <input
                   type="text"
-                  placeholder="e-mail"
-                  className="input input-bordered w-24"
+                  placeholder="* e-mail"
+                  className="input input-bordered w-42"
                   value={email}
                   onChange={handleInputChange}
                   required
                 />
-                <button className="btn btn-primary">Proceed</button>
+                <button
+                  className="btn btn-primary"
+                  disabled={!hasItems || !email}
+                >
+                  Proceed
+                </button>
               </div>
             </div>
             <p className="font-sans">
