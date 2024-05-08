@@ -17,7 +17,7 @@ export const Cart = () => {
     setEmail(event.target.value);
   };
 
-  const hasItems = cart?.items?.length > 0;
+  const hasItems = cart?.items && cart?.items?.length > 0;
 
   return (
     <>
