@@ -111,6 +111,11 @@ const QuantityPicker = ({ variantId }: Props) => {
         </button>
       ) : (
         <div className="flex gap-2">
+          <div>
+            <button className="btn text-lg" onClick={removeLineItem}>
+              <Trash2 />
+            </button>
+          </div>
           <div className="join join-horizontal">
             <button
               className="btn join-item"
@@ -126,11 +131,6 @@ const QuantityPicker = ({ variantId }: Props) => {
               onClick={() => setValueWithLimits(value + 1)}
             >
               <Plus />
-            </button>
-          </div>
-          <div>
-            <button className="btn text-lg" onClick={removeLineItem}>
-              <Trash2 />
             </button>
           </div>
         </div>

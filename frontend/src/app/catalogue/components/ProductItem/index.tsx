@@ -62,6 +62,7 @@ const ProductItem = ({
       <dialog
         id={elementId}
         className="modal"
+        role="dialog"
         open={isOpen}
         onClose={() => setIsOpen(false)}
       >
@@ -117,6 +118,14 @@ const ProductItem = ({
             <QuantityPicker variantId={id} />
           </div>
         </div>
+
+        <label
+          className="modal-backdrop bg-gray-600 opacity-50"
+          htmlFor={elementId}
+          onClick={() => {
+            setIsOpen(false);
+          }}
+        ></label>
       </dialog>
     </>
   );
