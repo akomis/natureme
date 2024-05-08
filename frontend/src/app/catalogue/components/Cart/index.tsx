@@ -17,7 +17,7 @@ export const Cart = () => {
     setEmail(event.target.value);
   };
 
-  const hasItems = cart?.items.length > 0;
+  const hasItems = cart?.items?.length > 0;
 
   return (
     <>
@@ -30,7 +30,7 @@ export const Cart = () => {
         }
       >
         <ShoppingBasket />
-        <div>{cart?.items.length}</div>
+        <div>{cart?.items?.length ?? 0}</div>
       </button>
 
       <dialog id="cartModal" className="modal">
