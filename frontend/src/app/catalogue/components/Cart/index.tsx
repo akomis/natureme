@@ -9,6 +9,7 @@ import { useGetCart } from "medusa-react";
 
 export const Cart = () => {
   const [email, setEmail] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
 
   const cartId = localStorage.getItem("cart_id") ?? "";
   const { cart } = useGetCart(cartId);
@@ -23,17 +24,19 @@ export const Cart = () => {
     <>
       <button
         className="drawer-button btn btn-secondary"
-        onClick={() =>
-          (
-            document?.getElementById("cartModal") as HTMLDialogElement
-          ).showModal()
-        }
+        onClick={() => setIsOpen(true)}
       >
         <ShoppingBasket />
         <div>{cart?.items?.length ?? 0}</div>
       </button>
 
-      <dialog id="cartModal" className="modal">
+      <dialog
+        id="cartModal"
+        className="modal"
+        role="dialog"
+        open={isOpen}
+        onClose={() => setIsOpen(false)}
+      >
         <div className="modal-box flex flex-col gap-20 max-w-2xl">
           <div>
             <div className="flex flex-row gap-4 items-baseline align-middle">
@@ -89,6 +92,13 @@ export const Cart = () => {
             </p>
           </div>
         </div>
+        <label
+          className="modal-backdrop bg-gray-600 opacity-50"
+          htmlFor={"cartModal"}
+          onClick={() => {
+            setIsOpen(false);
+          }}
+        ></label>
       </dialog>
     </>
   );
