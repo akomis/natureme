@@ -18,7 +18,6 @@ type Props = {
   media?: string[];
   description: string;
   ingredients?: string;
-  color?: string;
   attributes?: Attribute[];
 };
 
@@ -31,7 +30,6 @@ const ProductItem = ({
   media,
   description,
   ingredients,
-  color,
   attributes,
 }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -40,8 +38,7 @@ const ProductItem = ({
   return (
     <>
       <div
-        className="h-fit transition-all duration-500 group hover:cursor-pointer hover:scale-105 overflow-hidden card card-compact w-[200px] shadow-md"
-        style={{ backgroundColor: color }}
+        className="h-fit transition-all duration-500 group hover:cursor-pointer hover:scale-105 overflow-hidden card card-compact w-[200px] shadow-md bg-nescafeBoi"
         onClick={() => setIsOpen(true)}
       >
         <figure className="h-fit scale-100 group-hover:scale-105 m-0 duration-500 rounded-lg">
@@ -76,7 +73,7 @@ const ProductItem = ({
                 </button>
               </form>
             </div>
-            <h1 className="font-bold">{title}</h1>
+            <h1 className="font-bold mb-0">{title}</h1>
           </div>
 
           {isOpen && media && (
@@ -91,7 +88,7 @@ const ProductItem = ({
             </div>
           )}
 
-          <p className="py-4 text-justify">{description}</p>
+          <p className="py-4 text-justify text-xl">{description}</p>
 
           {ingredients && (
             <>

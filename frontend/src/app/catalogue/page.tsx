@@ -50,16 +50,9 @@ export default function Catalogue() {
         <Cart />
       </div>
       <div className="flex flex-col gap-10 w-full overflow-scroll mt-10 rounded-lg">
-        <div className="flex flex-wrap gap-10 pb-10">
+        <div className="flex flex-wrap gap-20 pb-10">
           {products.map(
-            ({
-              title,
-              variants,
-              description,
-              images,
-              thumbnail,
-              options,
-            }: any) => (
+            ({ title, variants, description, images, options }: any) => (
               <ProductList
                 key={title}
                 header={title}

@@ -21,40 +21,38 @@ export const Cart = () => {
   const hasItems = cart?.items && cart?.items?.length > 0;
 
   return (
-    <>
-      <button
-        className="drawer-button btn btn-secondary"
-        onClick={() => setIsOpen(true)}
-      >
-        <ShoppingBasket />
-        <div>{cart?.items?.length ?? 0}</div>
-      </button>
-
-      <dialog
-        id="cartModal"
-        className="modal"
-        role="dialog"
-        open={isOpen}
-        onClose={() => setIsOpen(false)}
-      >
-        <div className="modal-box flex flex-col gap-20 max-w-2xl">
+    <div className="drawer drawer-end">
+      <input id="drawer" type="checkbox" className="drawer-toggle" />
+      <div className="drawer-content">
+        <label
+          className="drawer-button btn btn-secondary"
+          onClick={() => setIsOpen(true)}
+          htmlFor="drawer"
+        >
+          <ShoppingBasket />
+          <div>{cart?.items?.length ?? 0}</div>
+        </label>
+      </div>
+      <div className="drawer-side">
+        <label
+          htmlFor="drawer"
+          aria-label="close sidebar"
+          className="drawer-overlay"
+        ></label>
+        <div className="flex flex-col justify-between gap-20 bg-jasmine h-screen px-8 py-16">
           <div>
             <div className="flex flex-row gap-4 items-baseline align-middle">
-              <div className="modal-action">
-                <form method="dialog">
-                  <button className="btn">
-                    <ArrowLeft />
-                  </button>
-                </form>
-              </div>
-              <h1>Cart</h1>
+              <ShoppingBasket size={42} />
             </div>
-
             {hasItems ? (
-              <div className="flex flex-col gap-2 items-center">
-                {cart?.items.map((item: any) => (
-                  <CartItem key={item.variant_id} variantId={item.variant_id} />
-                ))}
+              <div className="flex flex-col gap-4">
+                <ul className="flex flex-col gap-2">
+                  {cart?.items.map((item: any) => (
+                    <li key={item.variant_id}>
+                      <CartItem variantId={item.variant_id} />
+                    </li>
+                  ))}
+                </ul>
               </div>
             ) : (
               <div className="flex justify-center">
@@ -62,45 +60,46 @@ export const Cart = () => {
               </div>
             )}
           </div>
+
           <div>
-            <div className="flex justify-between w-full">
-              <div>
-                <button className="btn btn-outline pointer-events-none text-lg">
+            <div className="flex w-full justify-end">
+              <div className="flex flex-col gap-4 items-end">
+                <div className="badge badge-outline text-lg h-auto px-4 py-2">
                   {printPrice(cart?.total)}
-                </button>
-              </div>
-              <div className="flex gap-4">
-                <input
-                  type="text"
-                  placeholder="* e-mail"
-                  className="input input-bordered w-42"
-                  value={email}
-                  onChange={handleInputChange}
-                  required
-                />
-                <button
-                  className="btn btn-primary"
-                  disabled={!hasItems || !email}
-                >
-                  Proceed
-                </button>
+                </div>
+                <div className="flex gap-4">
+                  <input
+                    type="text"
+                    placeholder="* e-mail"
+                    className="input input-bordered w-42"
+                    value={email}
+                    onChange={handleInputChange}
+                    required
+                  />
+                  <button
+                    className="btn btn-primary"
+                    disabled={!hasItems || !email}
+                  >
+                    Proceed
+                  </button>
+                </div>
               </div>
             </div>
-            <p className="font-sans">
+            <p className="font-sans mb-0 text-center">
               By proceeding with the order you agree to the{" "}
               <Link href="/">Terms & Conditions</Link>
             </p>
           </div>
         </div>
-        <label
+        {/* <label
           className="modal-backdrop bg-gray-600 opacity-50"
           htmlFor={"cartModal"}
           onClick={() => {
             setIsOpen(false);
           }}
-        ></label>
-      </dialog>
-    </>
+        ></label> */}
+      </div>
+    </div>
   );
 };
 

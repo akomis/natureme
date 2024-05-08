@@ -12,6 +12,7 @@ const config: Config = {
     extend: {
       colors: {
         jasmine: "#F4E8E1",
+        nescafeBoi: "#FFECD2",
       },
       fontFamily: { serif: ["Mynerve", "cursive"] },
     },

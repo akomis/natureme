@@ -38,7 +38,7 @@ const CartItem = ({ variantId }: Props) => {
           </div>
           <div className="text-xl">{printPrice(cartItem.total)}</div>
         </div>
-        <div className="flex justify-center">
+        <div className="flex justify-end">
           <QuantityPicker variantId={variantId} />
         </div>
       </div>

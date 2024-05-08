@@ -17,17 +17,11 @@ const ProductList = ({
   optionTitles,
 }: Props) => {
   const isSingleVariant = variants[0].title.toLowerCase() === "default";
-  const listColor = getRandomPastelColor();
 
   return (
-    <div className="flex flex-col gap-4 px-2">
-      <div className="flex gap-4">
-        <div
-          style={{ backgroundColor: listColor }}
-          className="badge p-5 text-2xl border-0 shadow-lg"
-        >
-          {header}
-        </div>
+    <div className="flex flex-col gap-4 px-2 ">
+      <div className="badge p-5 text-2xl border-0 shadow-lg bg-nescafeBoi">
+        {header}
       </div>
       <div className="flex flex-wrap gap-4">
         {variants.map((item) => (
@@ -40,7 +34,6 @@ const ProductList = ({
             price={item?.prices[0]?.amount}
             description={description}
             ingredients={item.material}
-            color={listColor}
             attributes={optionTitles
               .filter((title: string) => {
                 return title !== "Type";

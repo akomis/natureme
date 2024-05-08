@@ -16,6 +16,7 @@ type Props = {
 
 const MIN = 1;
 const MAX = 99;
+const ICON_SIZE = 16;
 
 const QuantityPicker = ({ variantId }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -105,32 +106,32 @@ const QuantityPicker = ({ variantId }: Props) => {
           <LoadingIndicator />
         </div>
       ) : !isInitialized ? (
-        <button className="btn text-lg" onClick={initializeLineItem}>
-          <ShoppingBag />
+        <button className="btn btn-sm text-lg" onClick={initializeLineItem}>
+          <ShoppingBag size={ICON_SIZE} />
           {" Add to cart"}
         </button>
       ) : (
         <div className="flex gap-2">
           <div>
-            <button className="btn text-lg" onClick={removeLineItem}>
-              <Trash2 />
+            <button className="btn btn-sm text-lg" onClick={removeLineItem}>
+              <Trash2 size={ICON_SIZE} />
             </button>
           </div>
           <div className="join join-horizontal">
             <button
-              className="btn join-item"
+              className="btn btn-sm join-item"
               onClick={() => setValueWithLimits(value - 1)}
             >
-              <Minus />
+              <Minus size={ICON_SIZE} />
             </button>
-            <div className="btn join-item pointer-events-none text-lg w-10">
+            <div className="btn btn-sm join-item pointer-events-none text-lg w-6">
               {value}
             </div>
             <button
-              className="btn join-item"
+              className="btn btn-sm join-item"
               onClick={() => setValueWithLimits(value + 1)}
             >
-              <Plus />
+              <Plus size={ICON_SIZE} />
             </button>
           </div>
         </div>
