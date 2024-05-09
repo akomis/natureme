@@ -106,13 +106,13 @@ const ProductItem = ({
             ))}
 
           <div className="modal-footer flex flex-col-reverse md:flex-row gap-4 justify-between items-center mt-24">
-            <div className="flex justify-center">
+            <div className="flex justify-end">
               <p className="font-sans text-sm text-center md:text-left">
                 For details regarding ordering and products refer to the{" "}
                 <Link href="/faq">FAQ</Link>
               </p>
             </div>
-            <QuantityPicker variantId={id} />
+            <QuantityPicker variantId={id} size={24} />
           </div>
         </div>
 

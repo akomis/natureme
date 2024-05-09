@@ -12,13 +12,13 @@ import _ from "lodash";
 
 type Props = {
   variantId: string;
+  size: number;
 };
 
 const MIN = 1;
 const MAX = 99;
-const ICON_SIZE = 16;
 
-const QuantityPicker = ({ variantId }: Props) => {
+const QuantityPicker = ({ variantId, size }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [value, setValue] = useState(0);
 
@@ -37,11 +37,7 @@ const QuantityPicker = ({ variantId }: Props) => {
   // necessary evil for smooth animations for adding/removing (not updating) the line item
   useEffect(() => {
     setIsLoading(false);
-    setValue(cartItem?.quantity);
-  }, [cartItem?.quantity]);
-
-  useEffect(() => {
-    setIsLoading(false);
+    setValue(cartItem?.quantity ?? 0);
   }, [cartItem?.quantity]);
 
   const debouncedUpdateLineItem = _.debounce((newValues) => {
@@ -107,14 +103,14 @@ const QuantityPicker = ({ variantId }: Props) => {
         </div>
       ) : !isInitialized ? (
         <button className="btn btn-sm text-lg" onClick={initializeLineItem}>
-          <ShoppingBag size={ICON_SIZE} />
+          <ShoppingBag size={size} />
           {" Add to cart"}
         </button>
       ) : (
         <div className="flex gap-2">
           <div>
             <button className="btn btn-sm text-lg" onClick={removeLineItem}>
-              <Trash2 size={ICON_SIZE} />
+              <Trash2 size={size} />
             </button>
           </div>
           <div className="join join-horizontal">
@@ -122,7 +118,7 @@ const QuantityPicker = ({ variantId }: Props) => {
               className="btn btn-sm join-item"
               onClick={() => setValueWithLimits(value - 1)}
             >
-              <Minus size={ICON_SIZE} />
+              <Minus size={size} />
             </button>
             <div className="btn btn-sm join-item pointer-events-none text-lg w-6">
               {value}
@@ -131,7 +127,7 @@ const QuantityPicker = ({ variantId }: Props) => {
               className="btn btn-sm join-item"
               onClick={() => setValueWithLimits(value + 1)}
             >
-              <Plus size={ICON_SIZE} />
+              <Plus size={size} />
             </button>
           </div>
         </div>
