@@ -36,9 +36,11 @@ const QuantityPicker = ({ variantId, size }: Props) => {
 
   // necessary evil for smooth animations for adding/removing (not updating) the line item
   useEffect(() => {
-    setIsLoading(false);
-    setValue(cartItem?.quantity ?? 0);
-  }, [cartItem?.quantity]);
+    if (cartItem) {
+      setIsLoading(false);
+      setValue(cartItem.quantity);
+    }
+  }, [cartItem]);
 
   const debouncedUpdateLineItem = _.debounce((newValues) => {
     updateLineItem.mutate(newValues, {
