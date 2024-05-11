@@ -22,7 +22,6 @@ const QuantityPicker = ({ variantId, size }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [value, setValue] = useState(0);
 
-  const { cart: newCart } = useCart();
   const cartId = localStorage.getItem("cart_id") ?? "";
   const { cart, refetch: refetchCart } = useGetCart(cartId);
 
@@ -73,21 +72,23 @@ const QuantityPicker = ({ variantId, size }: Props) => {
   };
 
   const removeLineItem = () => {
-    setIsLoading(true);
-    deleteLineItem.mutate(
-      {
-        lineId: cartItem.id,
-      },
-      {
-        onSuccess: () => {
-          refetchCart();
+    if (cartItem) {
+      setIsLoading(true);
+      deleteLineItem.mutate(
+        {
+          lineId: cartItem.id,
         },
-      }
-    );
+        {
+          onSuccess: () => {
+            refetchCart();
+          },
+        }
+      );
+    }
   };
 
   const setValueWithLimits = (newValue: number) => {
-    if (newValue >= MIN && newValue <= MAX) {
+    if (newValue >= MIN && newValue <= MAX && cartItem) {
       setValue(newValue);
 
       debouncedUpdateLineItem({
