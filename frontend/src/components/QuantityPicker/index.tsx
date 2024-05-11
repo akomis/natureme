@@ -23,7 +23,7 @@ const QuantityPicker = ({ variantId, size }: Props) => {
   const [value, setValue] = useState(0);
 
   const { cart: newCart } = useCart();
-  const cartId = localStorage.getItem("cart_id") ?? newCart.id;
+  const cartId = localStorage.getItem("cart_id") ?? "";
   const { cart, refetch: refetchCart } = useGetCart(cartId);
 
   const createLineItem = useCreateLineItem(cartId);
