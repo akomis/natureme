@@ -9,7 +9,6 @@ import { useGetCart } from "medusa-react";
 
 export const Cart = () => {
   const [email, setEmail] = useState("");
-  const [isOpen, setIsOpen] = useState(false);
 
   const cartId = localStorage.getItem("cart_id") ?? "";
   const { cart } = useGetCart(cartId);
@@ -24,11 +23,7 @@ export const Cart = () => {
     <div className="drawer drawer-end">
       <input id="drawer" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content">
-        <label
-          className="drawer-button btn btn-secondary"
-          onClick={() => setIsOpen(true)}
-          htmlFor="drawer"
-        >
+        <label className="drawer-button btn btn-secondary" htmlFor="drawer">
           <ShoppingBasket />
           <div>{cart?.items?.length ?? 0}</div>
         </label>
@@ -39,7 +34,7 @@ export const Cart = () => {
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <div className="flex flex-col justify-between gap-20 bg-jasmine h-screen px-8 py-16">
+        <div className="flex flex-col justify-between gap-20 bg-jasmine h-screen px-8 py-16 rounded-s-xl shadow-2xl">
           <div>
             <div className="flex flex-row gap-4 items-baseline align-middle">
               <ShoppingBasket size={42} />
@@ -48,7 +43,7 @@ export const Cart = () => {
               <div className="flex flex-col gap-4">
                 <ul className="flex flex-col gap-2">
                   {cart?.items.map((item: any) => (
-                    <li key={item.variant_id}>
+                    <li className="list-none" key={item.variant_id}>
                       <CartItem variantId={item.variant_id} />
                     </li>
                   ))}
@@ -91,13 +86,6 @@ export const Cart = () => {
             </p>
           </div>
         </div>
-        {/* <label
-          className="modal-backdrop bg-gray-600 opacity-50"
-          htmlFor={"cartModal"}
-          onClick={() => {
-            setIsOpen(false);
-          }}
-        ></label> */}
       </div>
     </div>
   );

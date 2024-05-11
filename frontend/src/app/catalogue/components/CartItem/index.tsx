@@ -18,10 +18,14 @@ const CartItem = ({ variantId }: Props) => {
     (item: any) => item.variant_id === variantId
   );
 
+  if (!cartItem) {
+    return null;
+  }
+
   return (
     <div className="flex h-[100px] w-[500px] bg-primary shadow-xl rounded-2xl overflow-hidden">
       <figure className="image-container max-w-24 rounded-xl m-0">
-        {!!cartItem.thumbnail && (
+        {!!cartItem?.thumbnail && (
           <Image
             className="image rounded-xl"
             src={cartItem.thumbnail}
