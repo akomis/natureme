@@ -18,9 +18,7 @@ const CartItem = ({ variantId }: Props) => {
     (item: any) => item.variant_id === variantId
   );
 
-  if (!cartItem) {
-    return null;
-  }
+  if (!cartItem) return null;
 
   return (
     <div className="flex h-[100px] w-[500px] bg-primary shadow-xl rounded-2xl overflow-hidden">
@@ -37,10 +35,10 @@ const CartItem = ({ variantId }: Props) => {
       <div className="flex flex-1 flex-col justify-between px-4 py-2">
         <div className="flex justify-between whitespace-nowrap items-end">
           <div className="flex gap-2 items-end">
-            <div className="text-2xl">{cartItem.title}</div>
-            <div>{`(${printPrice(cartItem.unit_price)})`}</div>
+            <div className="text-2xl">{cartItem?.title}</div>
+            <div>{`(${printPrice(cartItem?.unit_price)})`}</div>
           </div>
-          <div className="text-xl">{printPrice(cartItem.total)}</div>
+          <div className="text-xl">{printPrice(cartItem?.total)}</div>
         </div>
         <div className="flex justify-end">
           <QuantityPicker variantId={variantId} size={16} />
