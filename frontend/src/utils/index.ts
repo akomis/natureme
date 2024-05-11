@@ -53,5 +53,5 @@ export const getRandomPastelColor = () =>
   (85 + 10 * Math.random()) +
   "%)";
 
-export const printPrice = (amount?: number) =>
+export const printPrice = (amount?: number | null) =>
   `€${((amount ?? 0) / 100).toFixed(2)}`;
