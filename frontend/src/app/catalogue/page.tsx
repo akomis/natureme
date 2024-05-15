@@ -49,7 +49,7 @@ export default function Catalogue() {
         <PageHeader title={"Catalogue"} />
         <Cart />
       </div>
-      <div className="flex flex-col gap-10 w-full overflow-scroll mt-10 rounded-lg">
+      <div className="flex flex-col gap-10 w-full overflow-y-scroll mt-10 rounded-lg">
         <div className="flex flex-wrap gap-20 pb-10">
           {products.map(
             ({ title, variants, description, images, options }: any) => (

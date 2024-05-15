@@ -37,7 +37,7 @@ export const Cart = () => {
         <div className="flex flex-col justify-between gap-20 bg-jasmine h-screen px-8 py-16 rounded-s-xl shadow-2xl">
           <div>
             <div className="flex flex-row gap-4 items-baseline align-middle">
-              <ShoppingBasket size={42} />
+              <ShoppingBasket size={36} />
             </div>
             {hasItems ? (
               <div className="flex flex-col gap-4">

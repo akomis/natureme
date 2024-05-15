@@ -19,7 +19,7 @@ const ProductList = ({
   const isSingleVariant = variants[0].title.toLowerCase() === "default";
 
   return (
-    <div className="flex flex-col gap-4 px-2 ">
+    <div className="flex flex-col gap-4 px-2">
       <div className="badge p-5 text-2xl border-0 shadow-lg bg-nescafeBoi">
         {header}
       </div>

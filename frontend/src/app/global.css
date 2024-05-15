@@ -8,6 +8,8 @@ html,
 body {
   padding: 0;
   margin: 0;
+  scrollbar-color: #fff0e7 #f4e8e1;
+  scrollbar-width: thin;
 }
 
 .image-container {
