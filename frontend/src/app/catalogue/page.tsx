@@ -44,7 +44,7 @@ export default function Catalogue() {
   }
 
   return (
-    <Screen className="relative items-start max-w-[80vw] pt-20">
+    <Screen className="items-start max-w-[80vw] min-h-0">
       <div className="flex h-auto justify-between mt-20 z-10 gap-20 px-2">
         <PageHeader title={"Catalogue"} />
         <Cart />
