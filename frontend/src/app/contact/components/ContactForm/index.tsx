@@ -36,13 +36,13 @@ const ContactForm = () => {
             className="text-lg text-gray-800 opacity-[0.8]"
             match="valueMissing"
           >
-            Υποχρεωτικό πεδίο!
+            Required field!
           </Form.Message>
           <Form.Message
             className="text-lg text-gray-800 opacity-[0.8]"
             match="typeMismatch"
           >
-            Άκυρο email!
+            Invalid email!
           </Form.Message>
         </div>
         <Form.Control asChild>
@@ -57,13 +57,13 @@ const ContactForm = () => {
       <Form.Field className="grid mb-[10px]" name="Message">
         <div className="flex items-baseline justify-between">
           <Form.Label className="text-xl font-medium leading-[35px] text-gray-800">
-            Μήνυμα
+            Message
           </Form.Label>
           <Form.Message
             className="text-lg text-gray-800 opacity-[0.8]"
             match="valueMissing"
           >
-            Υποχρεωτικό πεδίο!
+            Required field!
           </Form.Message>
         </div>
         <Form.Control asChild>
@@ -76,7 +76,7 @@ const ContactForm = () => {
       </Form.Field>
       <Form.Submit asChild className="self-end">
         <button className="hover:cursor-pointer mt-4 text-lg flex items-center gap-2 bg-primary hover:bg-secondary transition-all duration-300 px-4 py-2 rounded-2xl">
-          Αποστολή
+          Send
           <Send size={16} />
         </button>
       </Form.Submit>
