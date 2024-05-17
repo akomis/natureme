@@ -58,13 +58,13 @@ export const Cart = () => {
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <div className="flex flex-col justify-between gap-20 bg-jasmine min-w-[500px] p-8">
+        <div className="flex flex-col justify-between gap-20 bg-jasmine h-screen min-w-[500px] p-8 rounded-l-2xl shadow-2xl">
           <div className="flex flex-row gap-4 items-baseline align-middle">
             <ShoppingBasket size={36} />
           </div>
 
           {!clientSecret ? (
-            <div>
+            <div className="flex flex-1 flex-col justify-between">
               {hasItems ? (
                 <div className="flex flex-col gap-4">
                   <ul className="flex flex-col gap-2">
