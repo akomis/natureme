@@ -53,5 +53,13 @@ export const getRandomPastelColor = () =>
   (85 + 10 * Math.random()) +
   "%)";
 
-export const printPrice = (amount?: number | null) =>
-  `€${((amount ?? 0) / 100).toFixed(2)}`;
+export const printPrice = (amount?: number | null) => {
+  const formattedPrice = (amount ?? 0) / 100;
+  const priceString = formattedPrice.toFixed(2);
+
+  if (priceString.endsWith(".00")) {
+    return `€${formattedPrice.toFixed(0)}`;
+  } else {
+    return `€${priceString}`;
+  }
+};

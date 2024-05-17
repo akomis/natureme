@@ -55,7 +55,7 @@ const ImageCarousel = ({ hash, images, isSanity }: Props) => {
             id={`button_${hash}_${index}`}
             href={`#slide_${hash}_${index}`}
             className={cn(
-              "bg-pink-100 hover:bg-pink-400 rounded-lg h-2 w-10 transition-all",
+              "bg-white hover:bg-pink-400 rounded-lg h-2 w-10 transition-all",
               { "bg-pink-300": index === activeIndex }
             )}
             onClick={() => {

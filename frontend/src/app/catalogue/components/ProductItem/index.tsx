@@ -63,7 +63,7 @@ const ProductItem = ({
         open={isOpen}
         onClose={() => setIsOpen(false)}
       >
-        <div className="modal-box w-11/12 max-w-4xl">
+        <div className="modal-box w-11/12 max-w-4xl bg-jasmine">
           <div className="flex flex-row gap-4 items-baseline align-middle">
             <div className="modal-action">
               <form method="dialog">

@@ -4,16 +4,19 @@ import { ShoppingBasket } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { printPrice } from "@/utils";
-import CartItem from "../CartItem";
+import CartItem from "./components/Item";
 import { useGetCart, useMedusa } from "medusa-react";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import CheckoutForm from "./components/CheckoutForm";
+import LoadingIndicator from "@/components/LoadingIndicator";
+import ItemList from "./components/ItemList";
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_KEY ?? "pk_");
 
 export const Cart = () => {
   const [clientSecret, setClientSecret] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const cartId = localStorage.getItem("cart_id") ?? "";
   const { cart } = useGetCart(cartId);
@@ -24,22 +27,27 @@ export const Cart = () => {
   const loader = "auto";
 
   const onHandleProceed = () => {
-    client.carts.createPaymentSessions(cart?.id).then(({ cart }) => {
+    setIsLoading(true);
+
+    client.carts.createPaymentSessions(cart?.id ?? "").then(({ cart }) => {
       const isStripeAvailable = cart.payment_sessions?.some(
         (session: any) => session.provider_id === "stripe"
       );
 
-      if (!isStripeAvailable) {
-        return;
+      if (isStripeAvailable) {
+        client.carts
+          .setPaymentSession(cart.id, {
+            provider_id: "stripe",
+          })
+          .then(({ cart }) => {
+            setClientSecret(cart.payment_session.data.client_secret);
+          })
+          .finally(() => {
+            setIsLoading(false);
+          });
+      } else {
+        setIsLoading(false);
       }
-
-      client.carts
-        .setPaymentSession(cart.id, {
-          provider_id: "stripe",
-        })
-        .then(({ cart }) => {
-          setClientSecret(cart.payment_session.data.client_secret);
-        });
     });
   };
 
@@ -58,48 +66,49 @@ export const Cart = () => {
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <div className="flex flex-col justify-between gap-20 bg-jasmine h-screen min-w-[500px] p-8 rounded-l-2xl shadow-2xl">
-          <div className="flex flex-row gap-4 items-baseline align-middle">
-            <ShoppingBasket size={36} />
-          </div>
+        <div className="flex flex-col justify-between bg-jasmine h-screen  w-[500px] pl-8 pr-4 pt-8 rounded-l-2xl shadow-2xl">
+          <ShoppingBasket size={36} />
 
-          {!clientSecret ? (
-            <div className="flex flex-1 flex-col justify-between">
-              {hasItems ? (
-                <div className="flex flex-col gap-4">
-                  <ul className="flex flex-col gap-2">
-                    {cart?.items.map((item: any) => (
-                      <li className="list-none" key={item.variant_id}>
-                        <CartItem variantId={item.variant_id} />
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ) : (
-                <div className="flex justify-center">
-                  <p className="text-xl">Your cart is empty.</p>
-                </div>
-              )}
-              <div className="flex w-full justify-end">
-                <div className="flex gap-4 items-end">
-                  <div className="badge badge-outline text-lg h-auto px-4 py-2">
-                    {printPrice(cart?.total)}
+          <div className="overflow-scroll flex flex-1">
+            {!clientSecret ? (
+              <div className="flex flex-col justify-between">
+                {hasItems ? (
+                  <ItemList cart={cart} />
+                ) : (
+                  <div className="flex justify-center">
+                    <p className="text-xl">Your cart is empty.</p>
                   </div>
-                  <button
-                    className="btn btn-primary"
-                    disabled={!hasItems}
-                    onClick={onHandleProceed}
-                  >
-                    Proceed
-                  </button>
+                )}
+                <div className="flex w-full justify-end">
+                  {isLoading ? (
+                    <div className="flex self-center justify-center w-80 h-24">
+                      <LoadingIndicator />
+                    </div>
+                  ) : (
+                    <div className="flex gap-4 items-end">
+                      <div className="badge badge-outline text-lg h-auto px-4 py-2">
+                        {printPrice(cart?.total)}
+                      </div>
+                      <button
+                        className="btn btn-primary"
+                        disabled={!hasItems}
+                        onClick={onHandleProceed}
+                      >
+                        Proceed
+                      </button>
+                    </div>
+                  )}
                 </div>
               </div>
-            </div>
-          ) : (
-            <Elements stripe={stripePromise} options={{ clientSecret, loader }}>
-              <CheckoutForm clientSecret={clientSecret} cartId={cart?.id} />
-            </Elements>
-          )}
+            ) : (
+              <Elements
+                stripe={stripePromise}
+                options={{ clientSecret, loader }}
+              >
+                <CheckoutForm clientSecret={clientSecret} cartId={cart?.id} />
+              </Elements>
+            )}
+          </div>
         </div>
       </div>
     </div>

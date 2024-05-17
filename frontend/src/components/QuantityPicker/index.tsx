@@ -1,6 +1,5 @@
 import { Minus, Plus, ShoppingBag, Trash2 } from "lucide-react";
 import {
-  useCart,
   useCreateLineItem,
   useDeleteLineItem,
   useGetCart,
@@ -99,35 +98,35 @@ const QuantityPicker = ({ variantId, size }: Props) => {
   };
 
   return (
-    <div className="flex justify-center items-center">
+    <div className="flex h-14 justify-center items-center">
       {isLoading ? (
-        <div className="flex justify-center w-44 h-12">
+        <div className="flex justify-center h-14">
           <LoadingIndicator />
         </div>
       ) : !isInitialized ? (
-        <button className="btn btn-sm text-lg" onClick={initializeLineItem}>
+        <button className="btn text-lg" onClick={initializeLineItem}>
           <ShoppingBag size={size} />
           {" Add to cart"}
         </button>
       ) : (
         <div className="flex gap-2">
           <div>
-            <button className="btn btn-sm text-lg" onClick={removeLineItem}>
+            <button className="btn text-lg" onClick={removeLineItem}>
               <Trash2 size={size} />
             </button>
           </div>
           <div className="join join-horizontal">
             <button
-              className="btn btn-sm join-item"
+              className="btn join-item"
               onClick={() => setValueWithLimits(value - 1)}
             >
               <Minus size={size} />
             </button>
-            <div className="btn btn-sm join-item pointer-events-none text-lg w-6">
+            <div className="btn join-item pointer-events-none text-lg w-6">
               {value}
             </div>
             <button
-              className="btn btn-sm join-item"
+              className="btn join-item"
               onClick={() => setValueWithLimits(value + 1)}
             >
               <Plus size={size} />
