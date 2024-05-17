@@ -41,7 +41,7 @@ const CheckoutForm = ({ clientSecret, cartId }: Props) => {
   }
 
   return (
-    <form className="flex flex-col gap-4">
+    <form className="flex flex-col self-end gap-4">
       <LinkAuthenticationElement />
       <AddressElement
         onChange={(event) => {
@@ -67,7 +67,7 @@ const CheckoutForm = ({ clientSecret, cartId }: Props) => {
         </button>
       </div>
 
-      <p className="font-sans mb-0 text-center">
+      <p className="font-sans mb-0 text-start">
         By proceeding with the order you agree to the{" "}
         <Link href="/">Terms & Conditions</Link>
       </p>

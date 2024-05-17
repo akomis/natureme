@@ -40,7 +40,7 @@ export const Cart = () => {
             provider_id: "stripe",
           })
           .then(({ cart }) => {
-            setClientSecret(cart.payment_session.data.client_secret);
+            setClientSecret(cart?.payment_session.data.client_secret);
           })
           .finally(() => {
             setIsLoading(false);
@@ -66,12 +66,12 @@ export const Cart = () => {
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <div className="flex flex-col justify-between bg-jasmine h-screen  w-[500px] pl-8 pr-4 pt-8 rounded-l-2xl shadow-2xl">
+        <div className="flex flex-col justify-between bg-jasmine h-screen  w-[500px] pl-8 pr-4 pt-8 pb-4 rounded-l-2xl shadow-2xl">
           <ShoppingBasket size={36} />
 
-          <div className="overflow-scroll flex flex-1">
+          <div className="overflow-scroll flex flex-1 w-full">
             {!clientSecret ? (
-              <div className="flex flex-col justify-between">
+              <div className="flex flex-1 flex-col justify-between">
                 {hasItems ? (
                   <ItemList cart={cart} />
                 ) : (
@@ -81,7 +81,7 @@ export const Cart = () => {
                 )}
                 <div className="flex w-full justify-end">
                   {isLoading ? (
-                    <div className="flex self-center justify-center w-80 h-24">
+                    <div className="flex justify-center w-80 h-24">
                       <LoadingIndicator />
                     </div>
                   ) : (
