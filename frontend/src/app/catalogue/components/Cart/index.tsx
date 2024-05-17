@@ -58,16 +58,12 @@ export const Cart = () => {
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <div className="flex flex-col justify-between gap-20 bg-jasmine h-screen p-8 rounded-s-xl shadow-2xl">
+        <div className="flex flex-col justify-between gap-20 bg-jasmine min-w-[500px] p-8">
           <div className="flex flex-row gap-4 items-baseline align-middle">
             <ShoppingBasket size={36} />
           </div>
 
-          {clientSecret ? (
-            <Elements stripe={stripePromise} options={{ clientSecret, loader }}>
-              <CheckoutForm clientSecret={clientSecret} cartId={cart?.id} />
-            </Elements>
-          ) : (
+          {!clientSecret ? (
             <div>
               {hasItems ? (
                 <div className="flex flex-col gap-4">
@@ -99,6 +95,10 @@ export const Cart = () => {
                 </div>
               </div>
             </div>
+          ) : (
+            <Elements stripe={stripePromise} options={{ clientSecret, loader }}>
+              <CheckoutForm clientSecret={clientSecret} cartId={cart?.id} />
+            </Elements>
           )}
         </div>
       </div>
