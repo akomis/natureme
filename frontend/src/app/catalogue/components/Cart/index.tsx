@@ -66,10 +66,10 @@ export const Cart = () => {
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <div className="flex flex-col justify-between bg-jasmine h-screen  w-[500px] pl-8 pr-4 pt-8 pb-4 rounded-l-2xl shadow-2xl">
+        <div className="flex flex-col justify-between bg-jasmine h-screen w-[500px] pl-8 pr-4 pt-8 pb-4 rounded-l-2xl shadow-2xl">
           <ShoppingBasket size={36} />
 
-          <div className="overflow-scroll flex flex-1 w-full">
+          <div className="overflow-y-scroll overflow-x-hidden flex flex-1 w-full">
             {!clientSecret ? (
               <div className="flex flex-1 flex-col justify-between">
                 {hasItems ? (

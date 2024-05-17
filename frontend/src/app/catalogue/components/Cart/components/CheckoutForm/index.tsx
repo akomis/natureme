@@ -55,11 +55,11 @@ const CheckoutForm = ({ clientSecret, cartId }: Props) => {
 
       <PaymentElement />
       <div className="flex flex-1 gap-4 justify-end">
-        <div className="badge badge-outline text-lg h-fit px-4 py-2">
+        <div className="badge badge-outline h-fit text-lg px-4 py-2">
           {printPrice(cart?.total)}
         </div>
         <button
-          className="btn btn-primary flex flex-1"
+          className="btn btn-primary text-lg flex flex-1"
           onClick={handlePayment}
           disabled={!stripe}
         >
