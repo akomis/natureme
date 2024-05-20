@@ -40,7 +40,7 @@ export const Cart = () => {
             provider_id: "stripe",
           })
           .then(({ cart }) => {
-            setClientSecret(cart?.payment_session.data.client_secret);
+            setClientSecret(cart?.payment_session?.data.client_secret);
           })
           .finally(() => {
             setIsLoading(false);
