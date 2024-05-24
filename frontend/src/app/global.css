@@ -24,6 +24,7 @@ body {
   position: relative !important;
   object-fit: cover;
   border-radius: 0.5rem;
+  margin: 0;
 }
 
 .scroller {

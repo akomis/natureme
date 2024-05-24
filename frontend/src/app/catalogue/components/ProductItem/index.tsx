@@ -77,7 +77,7 @@ const ProductItem = ({
           </div>
 
           {isOpen && media && (
-            <div className="rounded-lg image-container">
+            <div className="mt-4">
               <ImageCarousel
                 hash={title}
                 images={media.map((item: any) => ({
@@ -88,7 +88,7 @@ const ProductItem = ({
             </div>
           )}
 
-          <p className="py-4 text-justify text-xl">{description}</p>
+          <p className="py-4 text-justify text-xl m-0">{description}</p>
 
           {ingredients && (
             <>
@@ -105,7 +105,7 @@ const ProductItem = ({
               </div>
             ))}
 
-          <div className="modal-footer flex flex-col-reverse md:flex-row gap-4 justify-between items-center mt-24">
+          <div className="modal-footer flex flex-col-reverse md:flex-row gap-4 justify-between items-center">
             <div className="flex justify-end">
               <p className="font-sans text-sm text-center md:text-left">
                 For details regarding ordering and products refer to the{" "}
