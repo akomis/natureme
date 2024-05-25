@@ -8,16 +8,15 @@ import {
 } from "@stripe/react-stripe-js";
 import { type StripeAddressElementChangeEvent } from "@stripe/stripe-js";
 import {
-  useCart,
   useCompleteCart,
   useGetCart,
   useMedusa,
   useUpdateCart,
-  useUpdatePaymentSession,
 } from "medusa-react";
 import Link from "next/link";
 import { useState } from "react";
 import * as Form from "@radix-ui/react-form";
+import { useRouter } from "next/navigation";
 
 type Props = {
   cartId: string;
@@ -30,10 +29,10 @@ const CheckoutForm = ({ cartId }: Props) => {
     StripeAddressElementChangeEvent["value"] | null
   >(null);
 
-  const { cart, refetch: refetchCart } = useGetCart(cartId);
+  const { cart } = useGetCart(cartId);
   const updateCart = useUpdateCart(cartId);
-  const completeCart = useCompleteCart(cartId);
   const { client } = useMedusa();
+  const router = useRouter();
 
   const stripe = useStripe();
   const elements = useElements();
@@ -43,9 +42,9 @@ const CheckoutForm = ({ cartId }: Props) => {
 
     if (!stripe || !elements) return;
 
+    setIsLoading(true);
     const result = await stripe.confirmPayment({
       payment_method: {
-        payment: elements.getElement(PaymentElement),
         billing_details: {
           name,
           email,
@@ -90,7 +89,14 @@ const CheckoutForm = ({ cartId }: Props) => {
           },
           {
             onSettled: () => {
-              client.carts.complete(cartId);
+              client.carts.complete(cartId).then((response) => {
+                router.push(
+                  `/confirmation?payment_intent_client_secret=${
+                    cart?.payment_sessions[0]?.data?.client_secret ?? null
+                  }`
+                );
+                setIsLoading(false);
+              });
 
               // completeCart.mutate(void 0, {
               //   onSettled: (response) => {

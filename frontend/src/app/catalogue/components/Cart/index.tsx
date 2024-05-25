@@ -7,8 +7,6 @@ import {
   useAddShippingMethodToCart,
   useCreatePaymentSession,
   useGetCart,
-  useSetPaymentSession,
-  useStartCheckout,
 } from "medusa-react";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
@@ -24,7 +22,6 @@ export const Cart = () => {
   const cartId = localStorage.getItem("cart_id") ?? "";
   const { cart, refetch: refetchCart } = useGetCart(cartId);
   const createPaymentSession = useCreatePaymentSession(cartId);
-  const setPaymentSession = useSetPaymentSession(cartId);
   const addShippingMethod = useAddShippingMethodToCart(cartId);
 
   const hasItems = cart?.items && cart?.items?.length > 0;
@@ -39,9 +36,6 @@ export const Cart = () => {
         addShippingMethod.mutate({
           option_id: "so_01HYG0KJ1Q7X51C2A4CZWZDEBC",
         });
-
-        console.log("payment sessions: ", cart?.payment_sessions[0]);
-
         refetchCart();
       },
     });

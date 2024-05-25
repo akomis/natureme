@@ -18,7 +18,10 @@ const Confirmation = () => {
   useEffect(() => {
     // Retrieve the PaymentIntent
     stripe?.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
-      if (!paymentIntent) return;
+      if (!paymentIntent) {
+        setMessage("Missing payment intent.");
+        return;
+      }
 
       switch (paymentIntent.status) {
         case "succeeded":
@@ -53,10 +56,15 @@ const Confirmation = () => {
       <div className="flex flex-col md:flex-row gap-4">
         <button className="btn btn-lg pointer-events-none">
           Status
-          <div className="badge badge-secondary py-4">{message}</div>
+          <div className="badge badge-secondary p-4">{message}</div>
         </button>
 
-        <button disabled className="btn btn-lg">
+        <button
+          onClick={() => {
+            location.reload();
+          }}
+          className="btn btn-lg"
+        >
           <RefreshCcw />
         </button>
 
