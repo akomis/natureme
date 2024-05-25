@@ -13,6 +13,8 @@ export default function Catalogue() {
   const { createCart } = useCart();
 
   useEffect(() => {
+    const cartId = localStorage.getItem("cart_id") ?? "";
+
     const handleCreateCart = () => {
       createCart.mutate(
         {},
@@ -24,7 +26,7 @@ export default function Catalogue() {
       );
     };
 
-    handleCreateCart();
+    if (!cartId) handleCreateCart();
   }, []); // eslint-disable-line
 
   if (isLoading) {

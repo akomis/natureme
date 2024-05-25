@@ -1,16 +1,23 @@
 import LoadingIndicator from "@/components/LoadingIndicator";
 import { printPrice } from "@/utils";
 import {
-  LinkAuthenticationElement,
   AddressElement,
   PaymentElement,
   useElements,
   useStripe,
 } from "@stripe/react-stripe-js";
 import { type StripeAddressElementChangeEvent } from "@stripe/stripe-js";
-import { useCart, useGetCart, useMedusa, useUpdateCart } from "medusa-react";
+import {
+  useCart,
+  useCompleteCart,
+  useGetCart,
+  useMedusa,
+  useUpdateCart,
+  useUpdatePaymentSession,
+} from "medusa-react";
 import Link from "next/link";
 import { useState } from "react";
+import * as Form from "@radix-ui/react-form";
 
 type Props = {
   cartId: string;
@@ -25,9 +32,11 @@ const CheckoutForm = ({ cartId }: Props) => {
 
   const { cart, refetch: refetchCart } = useGetCart(cartId);
   const updateCart = useUpdateCart(cartId);
+  const completeCart = useCompleteCart(cartId);
+  const { client } = useMedusa();
+
   const stripe = useStripe();
   const elements = useElements();
-  const { client } = useMedusa();
 
   const handlePayment = async (e: any) => {
     e.preventDefault();
@@ -35,61 +44,108 @@ const CheckoutForm = ({ cartId }: Props) => {
     if (!stripe || !elements) return;
 
     const result = await stripe.confirmPayment({
+      payment_method: {
+        payment: elements.getElement(PaymentElement),
+        billing_details: {
+          name,
+          email,
+        },
+      },
       elements,
       confirmParams: {
         return_url: window.origin + "/confirmation",
       },
+      // @ts-ignore
       redirect: "if_required",
     });
+
+    console.log(result);
 
     if (result?.error) {
       // Show error to your customer (for example, payment details incomplete)
       console.log(result.error.message);
     } else {
       try {
-        await updateCart.mutate({
-          email,
-          shipping_address: {
-            first_name: shippingAddress?.name.split(" ")[0],
-            last_name: shippingAddress?.name.split(" ")[1] ?? "",
-            address_1: shippingAddress?.address.line1,
-            address_2: shippingAddress?.address.line2,
-            city: shippingAddress?.address.city,
-            country_code: shippingAddress?.address.country.toLowerCase(),
-            postal_code: shippingAddress?.address.postal_code,
+        updateCart.mutate(
+          {
+            email,
+            shipping_address: {
+              first_name: shippingAddress?.name.split(" ")[0],
+              last_name: shippingAddress?.name.split(" ")[1] ?? "",
+              address_1: shippingAddress?.address.line1,
+              address_2: shippingAddress?.address.line2,
+              city: shippingAddress?.address.city,
+              country_code: shippingAddress?.address.country.toLowerCase(),
+              postal_code: shippingAddress?.address.postal_code,
+            },
+            billing_address: {
+              first_name: shippingAddress?.name.split(" ")[0],
+              last_name: shippingAddress?.name.split(" ")[1] ?? "",
+              address_1: shippingAddress?.address.line1,
+              address_2: shippingAddress?.address.line2,
+              city: shippingAddress?.address.city,
+              country_code: shippingAddress?.address.country.toLowerCase(),
+              postal_code: shippingAddress?.address.postal_code,
+            },
           },
-          billing_address: {
-            first_name: shippingAddress?.name.split(" ")[0],
-            last_name: shippingAddress?.name.split(" ")[1] ?? "",
-            address_1: shippingAddress?.address.line1,
-            address_2: shippingAddress?.address.line2,
-            city: shippingAddress?.address.city,
-            country_code: shippingAddress?.address.country.toLowerCase(),
-            postal_code: shippingAddress?.address.postal_code,
-          },
-        });
-        await refetchCart();
-        await client.carts.complete(cartId);
+          {
+            onSettled: () => {
+              client.carts.complete(cartId);
+
+              // completeCart.mutate(void 0, {
+              //   onSettled: (response) => {
+              //     console.log("completeCart ", response);
+              //     localStorage.removeItem("cart_id");
+              //     setIsLoading(false);
+              //   },
+              // });
+            },
+          }
+        );
       } catch (e: any) {
         console.log(e.message);
       }
     }
-    setIsLoading(false);
   };
 
   return (
-    <form className="flex flex-col gap-5">
-      <LinkAuthenticationElement
-        onChange={(event) => setEmail(event.value.email)}
-      />
+    <Form.Root className="flex flex-col gap-5 px-2 mt-4">
+      <Form.Field className="grid mb-[10px]" name="email">
+        <div className="flex items-baseline justify-between">
+          <Form.Label className="text-xl font-medium leading-[35px] text-gray-800">
+            Email
+          </Form.Label>
+          <Form.Message
+            className="text-lg text-gray-800 opacity-[0.8]"
+            match="valueMissing"
+          >
+            Required field!
+          </Form.Message>
+          <Form.Message
+            className="text-lg text-gray-800 opacity-[0.8]"
+            match="typeMismatch"
+          >
+            Invalid email!
+          </Form.Message>
+        </div>
+        <Form.Control asChild>
+          <input
+            className="box-border w-full bg-gray-100 shadow-blackA6 inline-flex h-[35px] appearance-none items-center justify-center rounded-[4px] px-[10px] text-xl leading-none text-gray-800 shadow-[0_0_0_1px] outline-none hover:shadow-[0_0_0_1px_black] focus:shadow-[0_0_0_2px_black] selection:color-white selection:bg-blackA6"
+            type="email"
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </Form.Control>
+      </Form.Field>
+
+      <div className="divider"></div>
+
       <AddressElement
         onChange={(event) => {
           setShippingAddress(event.value);
         }}
         options={{ mode: "shipping" }}
       />
-
-      <div className="divider"></div>
 
       <PaymentElement />
 
@@ -118,7 +174,7 @@ const CheckoutForm = ({ cartId }: Props) => {
         By proceeding with the order you agree to the{" "}
         <Link href="/">Terms & Conditions</Link>
       </p>
-    </form>
+    </Form.Root>
   );
 };
 

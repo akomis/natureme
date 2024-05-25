@@ -3,7 +3,13 @@
 import { ShoppingBasket } from "lucide-react";
 import { useState } from "react";
 import { printPrice } from "@/utils";
-import { useGetCart, useMedusa } from "medusa-react";
+import {
+  useAddShippingMethodToCart,
+  useCreatePaymentSession,
+  useGetCart,
+  useSetPaymentSession,
+  useStartCheckout,
+} from "medusa-react";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import CheckoutForm from "./components/CheckoutForm";
@@ -17,29 +23,28 @@ export const Cart = () => {
 
   const cartId = localStorage.getItem("cart_id") ?? "";
   const { cart, refetch: refetchCart } = useGetCart(cartId);
-  const { client } = useMedusa();
+  const createPaymentSession = useCreatePaymentSession(cartId);
+  const setPaymentSession = useSetPaymentSession(cartId);
+  const addShippingMethod = useAddShippingMethodToCart(cartId);
 
   const hasItems = cart?.items && cart?.items?.length > 0;
   const clientSecret = cart?.payment_sessions[0]?.data?.client_secret ?? null;
   const loader = "auto";
 
-  const onHandleProceed = async () => {
+  const onHandleProceed = () => {
     setIsLoading(true);
 
-    const session = await client.carts.createPaymentSessions(cart?.id ?? "");
+    createPaymentSession.mutate(void 0, {
+      onSuccess: ({ cart }) => {
+        addShippingMethod.mutate({
+          option_id: "so_01HYG0KJ1Q7X51C2A4CZWZDEBC",
+        });
 
-    const isStripeAvailable = session.cart.payment_sessions?.some(
-      (session: any) => session.provider_id === "stripe"
-    );
+        console.log("payment sessions: ", cart?.payment_sessions[0]);
 
-    if (isStripeAvailable) {
-      await client.carts.setPaymentSession(session.cart.id, {
-        provider_id: "stripe",
-      });
-    }
-
-    await refetchCart();
-    setIsLoading(false);
+        refetchCart();
+      },
+    });
   };
 
   return (
