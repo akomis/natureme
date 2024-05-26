@@ -30,13 +30,19 @@ export const Cart = () => {
 
   const onHandleProceed = () => {
     setIsLoading(true);
-
     createPaymentSession.mutate(void 0, {
       onSuccess: ({ cart }) => {
-        addShippingMethod.mutate({
-          option_id: "so_01HYG0KJ1Q7X51C2A4CZWZDEBC",
-        });
-        refetchCart();
+        addShippingMethod.mutate(
+          {
+            option_id: "so_01HYG0KJ1Q7X51C2A4CZWZDEBC",
+          },
+          {
+            onSuccess: () => {
+              refetchCart();
+              setIsLoading(false);
+            },
+          }
+        );
       },
     });
   };

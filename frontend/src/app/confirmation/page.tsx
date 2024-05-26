@@ -14,6 +14,7 @@ const Confirmation = () => {
   const stripe = useStripe();
 
   const clientSecret = searchParams.get("payment_intent_client_secret") ?? "";
+  const orderNo = searchParams.get("order_no") ?? "";
 
   useEffect(() => {
     // Retrieve the PaymentIntent
@@ -74,6 +75,11 @@ const Confirmation = () => {
           </button>
         </Link>
       </div>
+      {orderNo && (
+        <p className="text-lg text-center font-sans text-black">
+          {"Order Number: " + orderNo.replace("order_", "#")}
+        </p>
+      )}
     </Screen>
   );
 };
