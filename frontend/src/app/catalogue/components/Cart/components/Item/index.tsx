@@ -20,31 +20,24 @@ const CartItem = ({ variantId }: Props) => {
 
   if (!cartItem) return null;
 
+  console.log(cartItem);
+
   return (
     <div className="flex h-fit bg-primary shadow-xl rounded-xl">
-      <figure className="image-container max-w-24 rounded-xl m-0">
-        {!!cartItem?.thumbnail && (
-          <Image
-            className="image rounded-xl"
-            src={cartItem.thumbnail}
-            alt={cartItem.title}
-            fill
-          />
-        )}
-      </figure>
       <div className="flex flex-1 flex-col justify-between px-4 py-2">
         <div className="flex justify-between gap-10 mt-2">
-          <div className="text-2xl leading-6">
-            {`${cartItem?.title}`}{" "}
-            <span className="text-sm">{`(${printPrice(
+          <div className="">
+            <div className="text-2xl">{`${cartItem?.title}`} </div>
+            <div className="text-lg">{cartItem?.variant.title}</div>
+            <div className="text-sm">{`(${printPrice(
               cartItem?.unit_price
-            )})`}</span>
+            )})`}</div>
           </div>
 
-          <div className="text-xl ">{printPrice(cartItem?.total)}</div>
-        </div>
-        <div className="flex flex-col justify-end items-end">
-          <QuantityPicker variantId={variantId} size={16} />
+          <div className="flex flex-col justify-end items-end">
+            <div className="text-xl">{printPrice(cartItem?.total)}</div>
+            <QuantityPicker variantId={variantId} size={16} />
+          </div>
         </div>
       </div>
     </div>

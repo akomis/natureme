@@ -1,9 +1,7 @@
 "use client";
 
-import { cn } from "@/utils";
 import SanityImage from "../SanityImage";
 import { useState } from "react";
-import { useInterval } from "usehooks-ts";
 import Image from "next/image";
 
 type ImageType = { id: string; url: string };
@@ -22,7 +20,7 @@ const ImageWithLoading = ({ isSanity, image }: ImageWithLoadingProps) => {
   const [isLoading, setIsLoading] = useState(true);
 
   return (
-    <div className="image-container max-h-56">
+    <div className="image-container">
       {isLoading && <div className="skeleton h-full opacity-75"></div>}
       <div className={isLoading ? "opacity-0" : "opacity-100"}>
         {isSanity ? (
@@ -36,7 +34,7 @@ const ImageWithLoading = ({ isSanity, image }: ImageWithLoadingProps) => {
           />
         ) : (
           <Image
-            className="image max-h-56"
+            className="image"
             src={image.url}
             alt={image.id}
             fill
@@ -50,48 +48,36 @@ const ImageWithLoading = ({ isSanity, image }: ImageWithLoadingProps) => {
   );
 };
 
-const ImageCarousel = ({ hash, images, isSanity }: Props) => {
-  // const [activeIndex, setActiveIndex] = useState(0);
-  // const lastIndex = images.length - 1;
-
-  // useInterval(() => {
-  //   const nextIndex = activeIndex === lastIndex ? 0 : activeIndex + 1;
-
-  //   document.getElementById(`button_${hash}_${nextIndex}`)?.click();
-  //   setActiveIndex(nextIndex);
-  // }, 5000);
+const ImageBentoGrid = ({ hash, images, isSanity }: Props) => {
+  const firstColumn = images.filter((_, index) => index % 3 === 0);
+  const secondColumn = images.filter((_, index) => index % 3 === 1);
+  const thirdColumn = images.filter((_, index) => index % 3 === 2);
 
   return (
-    <div className="flex flex-col gap-2">
-      <div className="carousel max-h-[250px] gap-4 overflow-hidden">
-        {images.map((image: ImageType, index: number) => (
-          <div
-            key={`slide_${hash}_${index}`}
-            id={`slide_${hash}_${index}`}
-            className="w-48"
-          >
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 max-h-[200px] overflow-y-scroll rounded-lg p-2">
+      <div className="grid gap-4">
+        {firstColumn.map((image: ImageType, index: number) => (
+          <div key={`slide_${hash}_${index}`} id={`slide_${hash}_${index}`}>
             <ImageWithLoading image={image} isSanity={isSanity} />
           </div>
         ))}
       </div>
-      {/* <div className="flex justify-center gap-2">
-        {images.map((_: ImageType, index: number) => (
-          <a
-            key={`button_${hash}_${index}`}
-            id={`button_${hash}_${index}`}
-            href={`#slide_${hash}_${index}`}
-            className={cn(
-              "bg-white hover:bg-pink-400 rounded-lg h-2 w-10 transition-all",
-              { "bg-pink-300": index === activeIndex }
-            )}
-            onClick={() => {
-              setActiveIndex(index);
-            }}
-          ></a>
+      <div className="grid gap-4">
+        {secondColumn.map((image: ImageType, index: number) => (
+          <div key={`slide_${hash}_${index}`} id={`slide_${hash}_${index}`}>
+            <ImageWithLoading image={image} isSanity={isSanity} />
+          </div>
         ))}
-      </div> */}
+      </div>
+      <div className="grid gap-4">
+        {thirdColumn.map((image: ImageType, index: number) => (
+          <div key={`slide_${hash}_${index}`} id={`slide_${hash}_${index}`}>
+            <ImageWithLoading image={image} isSanity={isSanity} />
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
 
-export default ImageCarousel;
+export default ImageBentoGrid;

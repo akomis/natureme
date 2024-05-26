@@ -1,5 +1,5 @@
 "use client";
-import ImageCarousel from "@/components/ImageCarousel";
+import ImageBentoGrid from "@/components/ImageCarousel";
 import QuantityPicker from "@/components/QuantityPicker";
 import { printPrice } from "@/utils";
 import { ArrowLeft } from "lucide-react";
@@ -78,7 +78,7 @@ const ProductItem = ({
 
           {isOpen && media && (
             <div className="mt-4">
-              <ImageCarousel
+              <ImageBentoGrid
                 hash={title}
                 images={media.map((item: any) => ({
                   id: item.id,

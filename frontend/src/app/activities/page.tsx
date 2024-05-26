@@ -1,4 +1,4 @@
-import ImageCarousel from "@/components/ImageCarousel";
+import ImageBentoGrid from "@/components/ImageCarousel";
 import PageHeader from "@/components/PageHeader";
 import Screen from "@/components/Screen";
 import { fetchFromSanity } from "@/utils";
@@ -10,7 +10,7 @@ export default async function Activities() {
   return (
     <Screen>
       <PageHeader title={"Activities"} />
-      <ImageCarousel
+      <ImageBentoGrid
         hash={activity.title}
         isSanity={true}
         images={activity.gallery.map((item: any) => ({
