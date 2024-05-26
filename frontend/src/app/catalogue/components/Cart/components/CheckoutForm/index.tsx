@@ -7,16 +7,9 @@ import {
   useStripe,
 } from "@stripe/react-stripe-js";
 import { type StripeAddressElementChangeEvent } from "@stripe/stripe-js";
-import {
-  useAdminCapturePayment,
-  useCompleteCart,
-  useGetCart,
-  useMedusa,
-  useUpdateCart,
-} from "medusa-react";
+import { useCompleteCart, useGetCart, useUpdateCart } from "medusa-react";
 import Link from "next/link";
 import { useState } from "react";
-import * as Form from "@radix-ui/react-form";
 import { useRouter } from "next/navigation";
 
 type Props = {
@@ -25,16 +18,14 @@ type Props = {
 
 const CheckoutForm = ({ cartId }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [email, setEmail] = useState<string | null>(null);
-  const [phone, setPhone] = useState<string | null>(null);
 
   const [shippingAddress, setShippingAddress] = useState<
     StripeAddressElementChangeEvent["value"] | null
   >(null);
 
   const { cart } = useGetCart(cartId);
+  const completeCart = useCompleteCart(cartId);
   const updateCart = useUpdateCart(cartId);
-  const { client } = useMedusa();
   const router = useRouter();
 
   const stripe = useStripe();
@@ -51,7 +42,6 @@ const CheckoutForm = ({ cartId }: Props) => {
       elements,
       confirmParams: {
         return_url: window.origin + "/confirmation",
-        payment_method: "card",
       },
       redirect: "if_required",
     });
@@ -62,7 +52,6 @@ const CheckoutForm = ({ cartId }: Props) => {
     } else {
       updateCart.mutate(
         {
-          email,
           shipping_address: {
             first_name: shippingAddress?.name.split(" ")[0],
             last_name: shippingAddress?.name.split(" ")[1] ?? "",
@@ -71,7 +60,6 @@ const CheckoutForm = ({ cartId }: Props) => {
             city: shippingAddress?.address.city,
             country_code: shippingAddress?.address.country.toLowerCase(),
             postal_code: shippingAddress?.address.postal_code,
-            phone,
           },
           billing_address: {
             first_name: shippingAddress?.name.split(" ")[0],
@@ -81,111 +69,37 @@ const CheckoutForm = ({ cartId }: Props) => {
             city: shippingAddress?.address.city,
             country_code: shippingAddress?.address.country.toLowerCase(),
             postal_code: shippingAddress?.address.postal_code,
-            phone,
           },
         },
         {
           onSuccess: () => {
-            client.carts
-              .complete(cartId)
-              .then((response) => {
-                console.log(response);
+            completeCart.mutate(void 0, {
+              onSuccess: (response) => {
                 router.push(
                   `/confirmation?payment_intent_client_secret=${
                     cart?.payment_sessions[0]?.data?.client_secret ?? null
                   }&order_no=${response.data.id}`
                 );
                 localStorage.removeItem("cart_id");
-              })
-              .catch((error) => {
-                console.error("Exception:", error.message);
-              })
-              .finally(() => {
                 setIsLoading(false);
-              });
+              },
+            });
           },
         }
       );
     }
   };
 
-  const setPhoneInput = (phone: string) => {
-    if (phone.length > 8 || !/^\d*$/.test(phone)) {
-      return;
-    }
-
-    setPhone(phone);
-  };
-
   return (
-    <Form.Root className="flex flex-col gap-5 px-2 mt-4">
-      <Form.Field className="grid" name="email">
-        <div className="flex items-baseline justify-between">
-          <Form.Label className="text-xl font-medium leading-[35px] text-gray-800">
-            Email
-          </Form.Label>
-          <Form.Message
-            className="text-lg text-gray-800 opacity-[0.8]"
-            match="valueMissing"
-          >
-            Required field!
-          </Form.Message>
-          <Form.Message
-            className="text-lg text-gray-800 opacity-[0.8]"
-            match="typeMismatch"
-          >
-            Invalid email!
-          </Form.Message>
-        </div>
-        <Form.Control asChild>
-          <input
-            className="box-border w-full bg-gray-100 shadow-blackA6 inline-flex h-[35px] appearance-none items-center justify-center rounded-[4px] px-[10px] text-xl leading-none text-gray-800 shadow-[0_0_0_1px] outline-none hover:shadow-[0_0_0_1px_black] focus:shadow-[0_0_0_2px_black] selection:color-white selection:bg-blackA6"
-            type="email"
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            placeholder="your@email.com"
-          />
-        </Form.Control>
-      </Form.Field>
-
-      <Form.Field className="grid" name="telephone">
-        <div className="flex items-baseline justify-between">
-          <Form.Label className="text-xl font-medium leading-[35px] text-gray-800">
-            Telephone
-          </Form.Label>
-          <Form.Message
-            className="text-lg text-gray-800 opacity-[0.8]"
-            match="valueMissing"
-          >
-            Required field!
-          </Form.Message>
-          <Form.Message
-            className="text-lg text-gray-800 opacity-[0.8]"
-            match={(value) => !/^\d{8}$/.test(value)}
-          >
-            Invalid phone!
-          </Form.Message>
-        </div>
-        <Form.Control asChild>
-          <input
-            className="box-border w-full bg-gray-100 shadow-blackA6 inline-flex h-[35px] appearance-none items-center justify-center rounded-[4px] px-[10px] text-xl leading-none text-gray-800 shadow-[0_0_0_1px] outline-none hover:shadow-[0_0_0_1px_black] focus:shadow-[0_0_0_2px_black] selection:color-white selection:bg-blackA6"
-            type="text"
-            onChange={(e) => setPhoneInput(e.target.value)}
-            value={phone ?? ""}
-            required
-            placeholder="99112233"
-          />
-        </Form.Control>
-      </Form.Field>
-
-      <div className="divider"></div>
-
+    <form>
       <AddressElement
         onChange={(event) => {
           setShippingAddress(event.value);
         }}
         options={{ mode: "shipping" }}
       />
+
+      <div className="divider"></div>
 
       <PaymentElement />
 
@@ -214,7 +128,7 @@ const CheckoutForm = ({ cartId }: Props) => {
         By proceeding with the order you agree to the{" "}
         <Link href="/">Terms & Conditions</Link>
       </p>
-    </Form.Root>
+    </form>
   );
 };
 

@@ -47,7 +47,7 @@ const Confirmation = () => {
   });
 
   return (
-    <Screen>
+    <Screen className="min-h-fit p-4">
       <h1 className="mb-1">Order Confirmation</h1>
       <p className="text-2xl text-center">
         Thank you for ordering! You should receive an email with the order
@@ -70,7 +70,7 @@ const Confirmation = () => {
         </button>
 
         <Link href="/">
-          <button className="btn btn-lg">
+          <button className="btn btn-lg w-full">
             <Home />
           </button>
         </Link>

@@ -7,44 +7,66 @@ import {
   useAddShippingMethodToCart,
   useCreatePaymentSession,
   useGetCart,
+  useUpdateCart,
 } from "medusa-react";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import CheckoutForm from "./components/CheckoutForm";
 import LoadingIndicator from "@/components/LoadingIndicator";
 import ItemList from "./components/ItemList";
+import ContactForm from "./components/ContactForm";
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_KEY ?? "pk_");
 
 export const Cart = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [email, setEmail] = useState<string | null>(null);
+  const [phone, setPhone] = useState<string | null>(null);
 
   const cartId = localStorage.getItem("cart_id") ?? "";
   const { cart, refetch: refetchCart } = useGetCart(cartId);
   const createPaymentSession = useCreatePaymentSession(cartId);
   const addShippingMethod = useAddShippingMethodToCart(cartId);
+  const updateCart = useUpdateCart(cartId);
 
   const hasItems = cart?.items && cart?.items?.length > 0;
+  const isProceedDisabled = !hasItems || !email || !phone;
   const clientSecret = cart?.payment_sessions[0]?.data?.client_secret ?? null;
   const loader = "auto";
 
   const onHandleProceed = () => {
     setIsLoading(true);
-    createPaymentSession.mutate(void 0, {
-      onSuccess: ({ cart }) => {
-        addShippingMethod.mutate(
-          {
-            option_id: "so_01HYG0KJ1Q7X51C2A4CZWZDEBC",
-          },
-          {
-            onSuccess: () => {
-              refetchCart();
-              setIsLoading(false);
-            },
-          }
-        );
+
+    updateCart.mutate(
+      {
+        email,
+        shipping_address: {
+          phone,
+        },
+        billing_address: {
+          phone,
+        },
       },
-    });
+      {
+        onSuccess: () => {
+          createPaymentSession.mutate(void 0, {
+            onSuccess: () => {
+              addShippingMethod.mutate(
+                {
+                  option_id: "so_01HYG0KJ1Q7X51C2A4CZWZDEBC",
+                },
+                {
+                  onSuccess: () => {
+                    refetchCart();
+                    setIsLoading(false);
+                  },
+                }
+              );
+            },
+          });
+        },
+      }
+    );
   };
 
   return (
@@ -75,7 +97,20 @@ export const Cart = () => {
                     <p className="text-xl">Your cart is empty.</p>
                   </div>
                 )}
-                <div className="flex w-full h-20 justify-end items-center">
+
+                {hasItems && (
+                  <>
+                    <div className="divider"></div>
+                    <ContactForm
+                      email={email}
+                      setEmail={setEmail}
+                      phone={phone}
+                      setPhone={setPhone}
+                    />
+                  </>
+                )}
+
+                <div className="flex w-full h-20 justify-end items-center mt-5">
                   {isLoading ? (
                     <div className="flex justify-center w-full h-20">
                       <LoadingIndicator />
@@ -87,7 +122,7 @@ export const Cart = () => {
                       </div>
                       <button
                         className="btn btn-primary btn-lg"
-                        disabled={!hasItems}
+                        disabled={isProceedDisabled}
                         onClick={onHandleProceed}
                       >
                         Proceed
