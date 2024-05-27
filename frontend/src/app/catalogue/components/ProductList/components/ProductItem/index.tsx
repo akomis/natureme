@@ -1,5 +1,5 @@
 "use client";
-import ImageBentoGrid from "@/components/ImageCarousel";
+import ImageBentoGrid from "@/components/ImageBentoGrid";
 import QuantityPicker from "@/components/QuantityPicker";
 import { printPrice } from "@/utils";
 import { ArrowLeft } from "lucide-react";

@@ -1,5 +1,4 @@
-import { getRandomPastelColor } from "@/utils";
-import ProductItem from "../ProductItem";
+import ProductItem from "./components/ProductItem";
 
 type Props = {
   header: string;

@@ -1,4 +1,4 @@
-import ImageBentoGrid from "@/components/ImageCarousel";
+import ImageBentoGrid from "@/components/ImageBentoGrid";
 import PageHeader from "@/components/PageHeader";
 import Screen from "@/components/Screen";
 import { fetchFromSanity } from "@/utils";

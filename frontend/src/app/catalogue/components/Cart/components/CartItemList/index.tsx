@@ -1,10 +1,10 @@
-import CartItem from "../Item";
+import CartItem from "./components/CartItem";
 
 type Props = {
   cart: any;
 };
 
-const ItemList = ({ cart }: Props) => {
+const CartItemList = ({ cart }: Props) => {
   return (
     <div className="flex flex-col gap-4">
       <ul className="flex flex-col gap-2 p-0">
@@ -18,4 +18,4 @@ const ItemList = ({ cart }: Props) => {
   );
 };
 
-export default ItemList;
+export default CartItemList;

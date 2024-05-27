@@ -13,7 +13,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import CheckoutForm from "./components/CheckoutForm";
 import LoadingIndicator from "@/components/LoadingIndicator";
-import ItemList from "./components/ItemList";
+import CartItemList from "./components/CartItemList";
 import ContactForm from "./components/ContactForm";
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_KEY ?? "pk_");
@@ -91,7 +91,7 @@ export const Cart = () => {
             {!clientSecret ? (
               <div className="flex flex-1 flex-col">
                 {hasItems ? (
-                  <ItemList cart={cart} />
+                  <CartItemList cart={cart} />
                 ) : (
                   <div className="flex justify-center">
                     <p className="text-xl">Your cart is empty.</p>

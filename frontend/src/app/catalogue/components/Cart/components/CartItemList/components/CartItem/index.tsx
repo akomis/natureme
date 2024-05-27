@@ -2,7 +2,6 @@
 import QuantityPicker from "@/components/QuantityPicker";
 import { printPrice } from "@/utils";
 import { useGetCart } from "medusa-react";
-import Image from "next/image";
 
 type Props = {
   variantId: string;
@@ -19,8 +18,6 @@ const CartItem = ({ variantId }: Props) => {
   );
 
   if (!cartItem) return null;
-
-  console.log(cartItem);
 
   return (
     <div className="flex h-fit bg-primary shadow-xl rounded-xl">
