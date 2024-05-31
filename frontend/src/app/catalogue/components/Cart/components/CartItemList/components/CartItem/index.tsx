@@ -15,7 +15,7 @@ const CartItem = ({ item }: Props) => {
       <div className="flex flex-1 flex-col justify-between px-4 py-2">
         <div className="flex justify-between gap-10 mt-2">
           <div className="">
-            <div className="text-2xl">{`${product.title}`} </div>
+            <div className="text-2xl">{`${product?.title}`} </div>
             {item.variant.title.toLowerCase() !== "default" && (
               <div className="text-xl">{`${item.variant.title}`} </div>
             )}

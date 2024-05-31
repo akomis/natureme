@@ -61,7 +61,7 @@ const QuantityPicker = ({ variant, size }: Props) => {
       removeItem(cartItem.variant.id);
       deleteLineItem.mutate(
         {
-          lineId: cartItem.variant.id,
+          lineId: lineItem.id,
         },
         {
           onSuccess: () => {},
