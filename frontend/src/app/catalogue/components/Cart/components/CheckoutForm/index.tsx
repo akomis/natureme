@@ -7,7 +7,12 @@ import {
   useStripe,
 } from "@stripe/react-stripe-js";
 import { type StripeAddressElementChangeEvent } from "@stripe/stripe-js";
-import { useCompleteCart, useGetCart, useUpdateCart } from "medusa-react";
+import {
+  useCompleteCart,
+  useGetCart,
+  useSessionCart,
+  useUpdateCart,
+} from "medusa-react";
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -27,6 +32,7 @@ const CheckoutForm = ({ cartId }: Props) => {
   const completeCart = useCompleteCart(cartId);
   const updateCart = useUpdateCart(cartId);
   const router = useRouter();
+  const { total } = useSessionCart();
 
   const stripe = useStripe();
   const elements = useElements();
@@ -111,7 +117,7 @@ const CheckoutForm = ({ cartId }: Props) => {
         ) : (
           <div className="flex flex-1 gap-4 justify-end">
             <div className="badge badge-outline h-fit text-lg px-4 py-2">
-              {printPrice(cart?.total)}
+              {printPrice(total)}
             </div>
             <button
               className="btn btn-primary text-lg flex flex-1"

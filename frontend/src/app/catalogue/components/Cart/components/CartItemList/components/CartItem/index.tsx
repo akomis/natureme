@@ -1,39 +1,37 @@
 "use client";
 import QuantityPicker from "@/components/QuantityPicker";
 import { printPrice } from "@/utils";
-import { useGetCart } from "medusa-react";
+import { useProduct, useSessionCart } from "medusa-react";
 
 type Props = {
-  variantId: string;
+  item: any;
 };
 
-const CartItem = ({ variantId }: Props) => {
-  const cartId = localStorage.getItem("cart_id") ?? "";
-  const { cart } = useGetCart(cartId);
-
-  if (!cart) return null;
-
-  const cartItem = cart.items.find(
-    (item: any) => item.variant_id === variantId
-  );
-
-  if (!cartItem) return null;
+const CartItem = ({ item }: Props) => {
+  const { product } = useProduct(item.variant.product_id);
 
   return (
     <div className="flex h-fit bg-primary shadow-xl rounded-xl">
       <div className="flex flex-1 flex-col justify-between px-4 py-2">
         <div className="flex justify-between gap-10 mt-2">
           <div className="">
-            <div className="text-2xl">{`${cartItem?.title}`} </div>
-            <div className="text-lg">{cartItem?.variant.title}</div>
+            <div className="text-2xl">{`${product.title}`} </div>
+            {item.variant.title.toLowerCase() !== "default" && (
+              <div className="text-xl">{`${item.variant.title}`} </div>
+            )}
             <div className="text-sm">{`(${printPrice(
-              cartItem?.unit_price
+              item.variant.prices[0].amount
             )})`}</div>
           </div>
 
-          <div className="flex flex-col justify-end items-end">
-            <div className="text-xl">{printPrice(cartItem?.total)}</div>
-            <QuantityPicker variantId={variantId} size={16} />
+          <div className="flex flex-col justify-between items-end">
+            <div className="text-xl">
+              {
+                //need to investigate why item.total doesnt update on quantity change
+                printPrice(item.quantity * item.variant.prices[0].amount)
+              }
+            </div>
+            <QuantityPicker variant={item.variant} size={16} />
           </div>
         </div>
       </div>

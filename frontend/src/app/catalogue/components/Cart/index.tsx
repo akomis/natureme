@@ -7,6 +7,7 @@ import {
   useAddShippingMethodToCart,
   useCreatePaymentSession,
   useGetCart,
+  useSessionCart,
   useUpdateCart,
 } from "medusa-react";
 import { Elements } from "@stripe/react-stripe-js";
@@ -25,11 +26,13 @@ export const Cart = () => {
 
   const cartId = localStorage.getItem("cart_id") ?? "";
   const { cart, refetch: refetchCart } = useGetCart(cartId);
+  const { items, total } = useSessionCart();
+
   const createPaymentSession = useCreatePaymentSession(cartId);
   const addShippingMethod = useAddShippingMethodToCart(cartId);
   const updateCart = useUpdateCart(cartId);
 
-  const hasItems = cart?.items && cart?.items?.length > 0;
+  const hasItems = items && items.length > 0;
   const isProceedDisabled = !hasItems || !email || !phone;
   const clientSecret = cart?.payment_sessions[0]?.data?.client_secret ?? null;
   const loader = "auto";
@@ -75,7 +78,7 @@ export const Cart = () => {
       <div className="drawer-content">
         <label className="drawer-button btn btn-secondary" htmlFor="drawer">
           <ShoppingBasket />
-          <div>{cart?.items?.length ?? 0}</div>
+          <div>{items?.length ?? 0}</div>
         </label>
       </div>
       <div className="drawer-side">
@@ -91,7 +94,7 @@ export const Cart = () => {
             {!clientSecret ? (
               <div className="flex flex-1 flex-col">
                 {hasItems ? (
-                  <CartItemList cart={cart} />
+                  <CartItemList />
                 ) : (
                   <div className="flex justify-center">
                     <p className="text-xl">Your cart is empty.</p>
@@ -117,8 +120,8 @@ export const Cart = () => {
                     </div>
                   ) : (
                     <div className="flex gap-4 items-end">
-                      <div className="badge badge-outline text-lg h-auto px-4 py-2">
-                        {printPrice(cart?.total)}
+                      <div className="badge badge-outline text-lg h-auto min-w-24 px-4 py-2">
+                        {printPrice(total)}
                       </div>
                       <button
                         className="btn btn-primary btn-lg"

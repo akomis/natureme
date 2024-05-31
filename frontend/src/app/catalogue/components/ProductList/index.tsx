@@ -25,14 +25,10 @@ const ProductList = ({
       <div className="flex flex-wrap gap-4">
         {variants.map((item) => (
           <ProductItem
-            key={item.title}
-            id={item.id}
-            imgUrl={item.thumbnail}
+            key={item.id}
             title={isSingleVariant ? header : `${header} ${item.title}`}
             thumbnailTitle={isSingleVariant ? undefined : item.title}
-            price={item?.prices[0]?.amount}
             description={description}
-            ingredients={item.material}
             attributes={optionTitles
               .filter((title: string) => {
                 return title !== "Type";
@@ -41,6 +37,7 @@ const ProductList = ({
                 return { key: title, value: item.options[index + 1].value };
               })}
             media={images}
+            item={item}
           />
         ))}
       </div>

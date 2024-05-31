@@ -10,30 +10,24 @@ import { useState } from "react";
 type Attribute = { key: string; value: string };
 
 type Props = {
-  id: string;
-  imgUrl: string;
   title: string;
-  thumbnailTitle?: string;
-  price: number;
+  thumbnailTitle: string;
   media?: string[];
   description: string;
-  ingredients?: string;
   attributes?: Attribute[];
+  item: any;
 };
 
 const ProductItem = ({
-  id,
-  imgUrl,
   title,
   thumbnailTitle,
-  price,
   media,
   description,
-  ingredients,
   attributes,
+  item,
 }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
-  const elementId = "productDetailsModal_" + id;
+  const elementId = "productDetailsModal_" + item.id;
 
   return (
     <>
@@ -42,16 +36,14 @@ const ProductItem = ({
         onClick={() => setIsOpen(true)}
       >
         <figure className="h-fit scale-100 group-hover:scale-105 m-0 duration-500 rounded-lg">
-          {!!imgUrl && (
-            <Image src={imgUrl} alt={title} height={200} width={200} />
+          {!!item.thumbnail && (
+            <Image src={item.thumbnail} alt={title} height={200} width={200} />
           )}
         </figure>
         <div className="flex justify-center items-center">
           <div className="text-center flex flex-col p-4">
-            {!!thumbnailTitle && (
-              <div className="text-xl font-bold">{thumbnailTitle}</div>
-            )}
-            <p className="text-xl m-0">{printPrice(price)}</p>
+            <div className="text-xl font-bold">{thumbnailTitle}</div>
+            <p className="text-xl m-0">{printPrice(item?.prices[0]?.amount)}</p>
           </div>
         </div>
       </div>
@@ -90,10 +82,10 @@ const ProductItem = ({
 
           <p className="py-4 text-justify text-xl m-0">{description}</p>
 
-          {ingredients && (
+          {item.material && (
             <>
               <h3>Ingredients</h3>
-              <p>{ingredients}</p>
+              <p>{item.material}</p>
             </>
           )}
 
@@ -112,7 +104,7 @@ const ProductItem = ({
                 <Link href="/faq">FAQ</Link>
               </p>
             </div>
-            <QuantityPicker variantId={id} size={24} />
+            <QuantityPicker variant={item} size={24} />
           </div>
         </div>
 

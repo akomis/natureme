@@ -1,70 +1,56 @@
+import { cn } from "@/utils";
 import { Minus, Plus, ShoppingBag, Trash2 } from "lucide-react";
 import {
   useCreateLineItem,
   useDeleteLineItem,
   useGetCart,
+  useSessionCart,
   useUpdateLineItem,
 } from "medusa-react";
-import { useEffect, useState } from "react";
-import LoadingIndicator from "../LoadingIndicator";
-import _ from "lodash";
+import { useState } from "react";
 
 type Props = {
-  variantId: string;
+  variant: any;
   size: number;
 };
 
 const MIN = 1;
 const MAX = 99;
 
-const QuantityPicker = ({ variantId, size }: Props) => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [value, setValue] = useState(0);
-
+const QuantityPicker = ({ variant, size }: Props) => {
   const cartId = localStorage.getItem("cart_id") ?? "";
-  const { cart, refetch: refetchCart } = useGetCart(cartId);
 
+  const {
+    items,
+    getItem,
+    addItem,
+    removeItem,
+    decrementItemQuantity,
+    setItems,
+  } = useSessionCart();
+
+  const { cart, refetch: refetchCart } = useGetCart(cartId);
   const createLineItem = useCreateLineItem(cartId);
   const updateLineItem = useUpdateLineItem(cartId);
   const deleteLineItem = useDeleteLineItem(cartId);
 
-  const cartItem = cart?.items.find(
-    (item: any) => item.variant_id === variantId
+  const cartItem = getItem(variant.id);
+  const quantity = cartItem?.quantity ?? 0;
+
+  const lineItem = cart?.items.find(
+    (item: any) => item.variant.id === variant.id
   );
 
-  // necessary evil for smooth animations for adding/removing (not updating) the line item
-  useEffect(() => {
-    if (cartItem) {
-      setIsLoading(false);
-      setValue(cartItem.quantity);
-    }
-  }, [cartItem]);
-
-  const debouncedUpdateLineItem = _.debounce((newValues) => {
-    updateLineItem.mutate(newValues, {
-      onSuccess: () => {
-        refetchCart();
-      },
-      onError: () => {
-        // Handle error, if needed
-      },
-    });
-  }, 300);
-
-  if (!cart) return null;
-
-  const isInitialized = !!cartItem;
-
   const initializeLineItem = () => {
-    setIsLoading(true);
+    addItem({ variant, quantity: 1 });
     createLineItem.mutate(
       {
-        variant_id: variantId,
+        variant_id: variant.id,
         quantity: 1,
       },
       {
-        onSuccess: () => {
-          refetchCart();
+        onSuccess: async () => {
+          await refetchCart();
         },
       }
     );
@@ -72,68 +58,92 @@ const QuantityPicker = ({ variantId, size }: Props) => {
 
   const removeLineItem = () => {
     if (cartItem) {
-      setIsLoading(true);
+      removeItem(cartItem.variant.id);
       deleteLineItem.mutate(
         {
-          lineId: cartItem.id,
+          lineId: cartItem.variant.id,
         },
         {
-          onSuccess: () => {
-            refetchCart();
-          },
+          onSuccess: () => {},
         }
       );
     }
   };
 
-  const setValueWithLimits = (newValue: number) => {
-    if (newValue >= MIN && newValue <= MAX && cartItem) {
-      setValue(newValue);
+  const increaseItemQuantity = () => {
+    if (cartItem && cartItem.variant && isValueInBounds(quantity + 1)) {
+      // for some reason incrementItemQuantity by useSessionCart doesn't work that's why we use setItems
+      // incrementItemQuantity(variant.id);
 
-      debouncedUpdateLineItem({
-        lineId: cartItem.id,
-        quantity: newValue,
-      });
+      setItems(
+        items.map((item) =>
+          item.variant.id === variant.id
+            ? { ...item, quantity: quantity + 1 }
+            : item
+        )
+      );
+
+      updateLineItem.mutate(
+        { lineId: lineItem.id, quantity: quantity + 1 },
+        {
+          onSuccess: () => {},
+          onError: () => {},
+        }
+      );
     }
   };
 
+  const decreaseItemQuantity = () => {
+    if (isValueInBounds(quantity - 1)) {
+      decrementItemQuantity(variant.id);
+
+      updateLineItem.mutate(
+        { lineId: lineItem.id, quantity: quantity - 1 },
+        {
+          onSuccess: () => {},
+          onError: () => {},
+        }
+      );
+    }
+  };
+
+  const isValueInBounds = (newValue: number) => {
+    return newValue >= MIN && newValue <= MAX;
+  };
+
+  if (!cartItem || !lineItem) {
+    return (
+      <button
+        className={cn("btn text-lg", {
+          "bg-gray-200 border-0": !lineItem,
+          "bg-gray-100": !cartItem,
+        })}
+        onClick={initializeLineItem}
+      >
+        <ShoppingBag size={size} />
+        {" Add to cart"}
+      </button>
+    );
+  }
+
   return (
-    <div className="flex h-14 justify-center items-center">
-      {isLoading ? (
-        <div className="flex justify-center h-14">
-          <LoadingIndicator />
-        </div>
-      ) : !isInitialized ? (
-        <button className="btn text-lg" onClick={initializeLineItem}>
-          <ShoppingBag size={size} />
-          {" Add to cart"}
+    <div className="flex gap-2">
+      <div>
+        <button className="btn text-lg" onClick={removeLineItem}>
+          <Trash2 size={size} />
         </button>
-      ) : (
-        <div className="flex gap-2">
-          <div>
-            <button className="btn text-lg" onClick={removeLineItem}>
-              <Trash2 size={size} />
-            </button>
-          </div>
-          <div className="join join-horizontal">
-            <button
-              className="btn join-item"
-              onClick={() => setValueWithLimits(value - 1)}
-            >
-              <Minus size={size} />
-            </button>
-            <div className="btn join-item pointer-events-none text-lg w-6">
-              {value}
-            </div>
-            <button
-              className="btn join-item"
-              onClick={() => setValueWithLimits(value + 1)}
-            >
-              <Plus size={size} />
-            </button>
-          </div>
+      </div>
+      <div className="join join-horizontal">
+        <button className="btn join-item" onClick={decreaseItemQuantity}>
+          <Minus size={size} />
+        </button>
+        <div className="btn join-item pointer-events-none text-lg w-6">
+          {quantity}
         </div>
-      )}
+        <button className="btn join-item" onClick={increaseItemQuantity}>
+          <Plus size={size} />
+        </button>
+      </div>
     </div>
   );
 };

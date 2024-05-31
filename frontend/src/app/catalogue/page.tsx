@@ -3,31 +3,71 @@
 import PageHeader from "@/components/PageHeader";
 import Cart from "./components/Cart";
 import ProductList from "./components/ProductList";
-import { useCart, useProducts } from "medusa-react";
+import { useCart, useMedusa, useProducts, useSessionCart } from "medusa-react";
 import Screen from "@/components/Screen";
 import LoadingIndicator from "@/components/LoadingIndicator";
 import { useEffect } from "react";
 
 export default function Catalogue() {
-  const { products, isLoading } = useProducts();
   const { createCart } = useCart();
+  const { client } = useMedusa();
+  const { setItems, setRegion, clearItems } = useSessionCart();
+  const { products, isLoading } = useProducts();
 
   useEffect(() => {
-    const cartId = localStorage.getItem("cart_id") ?? "";
+    if (products) {
+      const cartId = localStorage.getItem("cart_id") ?? "";
 
-    const handleCreateCart = () => {
-      createCart.mutate(
-        {},
-        {
-          onSuccess: ({ cart }) => {
-            localStorage.setItem("cart_id", cart.id);
-          },
+      const getProductItemVariant = (variantId: any) => {
+        if (products) {
+          for (const product of products) {
+            const variant = product.variants.find(
+              (variant: any) => variant.id === variantId
+            );
+
+            if (variant) {
+              return variant;
+            }
+          }
         }
-      );
-    };
 
-    if (!cartId) handleCreateCart();
-  }, []); // eslint-disable-line
+        return null;
+      };
+
+      const handleCreateCart = () => {
+        createCart.mutate(
+          {},
+          {
+            onSuccess: ({ cart }: any) => {
+              localStorage.setItem("cart_id", cart.id);
+              clearItems();
+              setRegion(cart.region);
+            },
+          }
+        );
+      };
+
+      const fetchCart = () => {
+        client.carts.retrieve(cartId).then(({ cart }) => {
+          if (cart) {
+            setRegion(cart.region);
+            setItems(
+              cart.items.map(({ variant, quantity }: any) => ({
+                variant: getProductItemVariant(variant.id),
+                quantity,
+              }))
+            );
+          }
+        });
+      };
+
+      if (!cartId) {
+        handleCreateCart();
+      } else {
+        fetchCart();
+      }
+    }
+  }, [products]);
 
   if (isLoading) {
     return (
