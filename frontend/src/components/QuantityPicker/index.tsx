@@ -29,7 +29,11 @@ const QuantityPicker = ({ variant, size }: Props) => {
     setItems,
   } = useSessionCart();
 
-  const { cart, refetch: refetchCart } = useGetCart(cartId);
+  const {
+    cart,
+    refetch: refetchCart,
+    isRefetching: isCartRefetching,
+  } = useGetCart(cartId);
   const createLineItem = useCreateLineItem(cartId);
   const updateLineItem = useUpdateLineItem(cartId);
   const deleteLineItem = useDeleteLineItem(cartId);
@@ -64,7 +68,9 @@ const QuantityPicker = ({ variant, size }: Props) => {
           lineId: lineItem.id,
         },
         {
-          onSuccess: () => {},
+          onSuccess: () => {
+            refetchCart();
+          },
         }
       );
     }
@@ -115,8 +121,9 @@ const QuantityPicker = ({ variant, size }: Props) => {
     return (
       <button
         className={cn("btn text-lg", {
-          "bg-gray-200 border-0": !lineItem,
-          "bg-gray-100": !cartItem,
+          "bg-gray-200 pointer-events-none cursor-not-allowed":
+            (cartItem && !lineItem) || isCartRefetching,
+          "bg-gray-100 hover:bg-pink-200 hover:border-white": !cartItem,
         })}
         onClick={initializeLineItem}
       >

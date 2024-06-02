@@ -10,6 +10,8 @@ type Props = {
 const CartItem = ({ item }: Props) => {
   const { product } = useProduct(item.variant.product_id);
 
+  if (!product) return null;
+
   return (
     <div className="flex h-fit bg-primary shadow-xl rounded-xl">
       <div className="flex flex-1 flex-col justify-between px-4 py-2">
