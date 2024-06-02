@@ -52,7 +52,7 @@ const Footer = async () => {
     "flex gap-4 justify-center items-center hover:scale-110 hover:z-10 transition-all";
 
   return (
-    <section className="flex flex-col h-screen justify-center items-center gap-32 md:gap-52 px-10 py-10 overflow-scroll max-w-7xl mx-auto">
+    <section className="flex flex-col h-screen justify-center items-center gap-32 md:gap-52 p-4 max-w-7xl mx-auto">
       <Extras />
       <footer className="flex flex-col items-center gap-20 justify-center lg:flex-row md:justify-between w-full">
         <Logo width={LOGO_SIZE} height={LOGO_SIZE} />

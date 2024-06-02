@@ -10,20 +10,22 @@ export default async function Activities() {
   return (
     <Screen>
       <PageHeader title={"Activities"} />
-      <ImageBentoGrid
-        hash={activity.title}
-        isSanity={true}
-        images={activity.gallery.map((item: any) => ({
-          id: item.asset.id,
-          url: item.asset,
-        }))}
-      />
-      <div className="flex w-full justify-between items-start gap-14">
+      <div className="pt-4">
+        <ImageBentoGrid
+          hash={activity.title}
+          isSanity={true}
+          images={activity.gallery.map((item: any) => ({
+            id: item.asset.id,
+            url: item.asset,
+          }))}
+        />
+      </div>
+      <div className="flex flex-col w-full">
         <h2>{activity.title}</h2>
         <p>{activity.date}</p>
-      </div>
 
-      <PortableText value={activity.text as any} />
+        <PortableText value={activity.text as any} />
+      </div>
     </Screen>
   );
 }

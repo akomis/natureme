@@ -26,13 +26,3 @@ body {
   border-radius: 0.5rem;
   margin: 0;
 }
-
-.scroller {
-  height: 100vh;
-  overflow-y: scroll;
-  scroll-snap-type: y mandatory;
-}
-
-.scroller section {
-  scroll-snap-align: start;
-}

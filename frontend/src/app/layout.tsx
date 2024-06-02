@@ -13,7 +13,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-jasmine overflow-hidden">{children}</body>
+      <body className="bg-jasmine">{children}</body>
     </html>
   );
 }
