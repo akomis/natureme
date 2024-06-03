@@ -82,7 +82,7 @@ const QuantityPicker = ({ variant, size }: Props) => {
       removeItem(cartItem.variant.id);
       deleteLineItem.mutate(
         {
-          lineId: lineItem.id,
+          lineId: lineItem?.id,
         },
         {
           onSuccess: async () => {
@@ -107,7 +107,7 @@ const QuantityPicker = ({ variant, size }: Props) => {
       incrementItemQuantity();
 
       updateLineItem.mutate(
-        { lineId: lineItem.id, quantity: quantity + 1 },
+        { lineId: lineItem?.id, quantity: quantity + 1 },
         {
           onError: () => {
             toast.error(
@@ -125,7 +125,7 @@ const QuantityPicker = ({ variant, size }: Props) => {
       decrementItemQuantity(variant.id);
 
       updateLineItem.mutate(
-        { lineId: lineItem.id, quantity: quantity - 1 },
+        { lineId: lineItem?.id, quantity: quantity - 1 },
         {
           onError: () => {
             toast.error(
