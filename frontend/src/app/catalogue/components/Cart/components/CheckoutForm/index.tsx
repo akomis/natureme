@@ -7,32 +7,20 @@ import {
   useStripe,
 } from "@stripe/react-stripe-js";
 import { type StripeAddressElementChangeEvent } from "@stripe/stripe-js";
-import {
-  useCompleteCart,
-  useGetCart,
-  useSessionCart,
-  useUpdateCart,
-} from "medusa-react";
+import { useSessionCart, useUpdateCart } from "medusa-react";
 import Link from "next/link";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 
-type Props = {
-  cartId: string;
-};
-
-const CheckoutForm = ({ cartId }: Props) => {
+const CheckoutForm = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const [shippingAddress, setShippingAddress] = useState<
     StripeAddressElementChangeEvent["value"] | null
   >(null);
 
-  const { cart } = useGetCart(cartId);
-  const completeCart = useCompleteCart(cartId);
+  const cartId = localStorage.getItem("cart_id") ?? "";
   const updateCart = useUpdateCart(cartId);
-  const router = useRouter();
-  const { total } = useSessionCart();
+  const { items, total } = useSessionCart();
 
   const stripe = useStripe();
   const elements = useElements();
@@ -44,55 +32,37 @@ const CheckoutForm = ({ cartId }: Props) => {
 
     setIsLoading(true);
 
+    updateCart.mutate({
+      shipping_address: {
+        first_name: shippingAddress?.name.split(" ")[0],
+        last_name: shippingAddress?.name.split(" ")[1] ?? "",
+        address_1: shippingAddress?.address.line1,
+        address_2: shippingAddress?.address.line2,
+        city: shippingAddress?.address.city,
+        country_code: shippingAddress?.address.country.toLowerCase(),
+        postal_code: shippingAddress?.address.postal_code,
+      },
+      billing_address: {
+        first_name: shippingAddress?.name.split(" ")[0],
+        last_name: shippingAddress?.name.split(" ")[1] ?? "",
+        address_1: shippingAddress?.address.line1,
+        address_2: shippingAddress?.address.line2,
+        city: shippingAddress?.address.city,
+        country_code: shippingAddress?.address.country.toLowerCase(),
+        postal_code: shippingAddress?.address.postal_code,
+      },
+    });
+
     const result = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url: window.origin + "/confirmation",
+        return_url: window.origin + `/confirmation`,
       },
-      redirect: "if_required",
     });
 
     if (result?.error) {
       // Show error to your customer (for example, payment details incomplete)
       console.log(result.error.message);
-    } else {
-      updateCart.mutate(
-        {
-          shipping_address: {
-            first_name: shippingAddress?.name.split(" ")[0],
-            last_name: shippingAddress?.name.split(" ")[1] ?? "",
-            address_1: shippingAddress?.address.line1,
-            address_2: shippingAddress?.address.line2,
-            city: shippingAddress?.address.city,
-            country_code: shippingAddress?.address.country.toLowerCase(),
-            postal_code: shippingAddress?.address.postal_code,
-          },
-          billing_address: {
-            first_name: shippingAddress?.name.split(" ")[0],
-            last_name: shippingAddress?.name.split(" ")[1] ?? "",
-            address_1: shippingAddress?.address.line1,
-            address_2: shippingAddress?.address.line2,
-            city: shippingAddress?.address.city,
-            country_code: shippingAddress?.address.country.toLowerCase(),
-            postal_code: shippingAddress?.address.postal_code,
-          },
-        },
-        {
-          onSuccess: () => {
-            completeCart.mutate(void 0, {
-              onSuccess: (response) => {
-                router.push(
-                  `/confirmation?payment_intent_client_secret=${
-                    cart?.payment_sessions[0]?.data?.client_secret ?? null
-                  }&order_no=${response.data.id}`
-                );
-                localStorage.removeItem("cart_id");
-                setIsLoading(false);
-              },
-            });
-          },
-        }
-      );
     }
   };
 
@@ -116,13 +86,13 @@ const CheckoutForm = ({ cartId }: Props) => {
           </div>
         ) : (
           <div className="flex flex-1 gap-4 justify-end">
-            <div className="badge badge-outline h-fit text-lg px-4 py-2">
+            <div className="badge badge-outline h-fit min-w-24 text-lg px-4 py-2">
               {printPrice(total)}
             </div>
             <button
               className="btn btn-primary text-lg flex flex-1"
               onClick={handlePayment}
-              disabled={!stripe}
+              disabled={!stripe || !items.length}
             >
               Checkout
             </button>

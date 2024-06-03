@@ -91,57 +91,58 @@ export const Cart = () => {
           <ShoppingBasket size={36} />
 
           <div className="overflow-x-hidden flex w-full">
-            {!clientSecret ? (
-              <div className="flex flex-1 flex-col">
-                {hasItems ? (
+            <div className="flex flex-1 flex-col">
+              {hasItems ? (
+                <>
                   <CartItemList />
-                ) : (
-                  <div className="flex justify-center">
-                    <p className="text-xl">Your cart is empty.</p>
-                  </div>
-                )}
+                  <div className="divider"></div>
+                </>
+              ) : (
+                <div className="flex justify-center">
+                  <p className="text-xl">Your cart is empty.</p>
+                </div>
+              )}
 
-                {hasItems && (
-                  <>
-                    <div className="divider"></div>
+              {!clientSecret ? (
+                <div>
+                  {hasItems && (
                     <ContactForm
                       email={email}
                       setEmail={setEmail}
                       phone={phone}
                       setPhone={setPhone}
                     />
-                  </>
-                )}
-
-                <div className="flex w-full h-20 justify-end items-center mt-5">
-                  {isLoading ? (
-                    <div className="flex justify-center w-full h-20">
-                      <LoadingIndicator />
-                    </div>
-                  ) : (
-                    <div className="flex gap-4 items-end">
-                      <div className="badge badge-outline text-lg h-auto min-w-24 px-4 py-2">
-                        {printPrice(total)}
-                      </div>
-                      <button
-                        className="btn btn-primary btn-lg"
-                        disabled={isProceedDisabled}
-                        onClick={onHandleProceed}
-                      >
-                        Proceed
-                      </button>
-                    </div>
                   )}
+                  <div className="flex w-full h-20 justify-end items-center mt-5">
+                    {isLoading ? (
+                      <div className="flex justify-center w-full h-20">
+                        <LoadingIndicator />
+                      </div>
+                    ) : (
+                      <div className="flex gap-4 items-end">
+                        <div className="badge badge-outline text-lg h-auto min-w-24 px-4 py-2">
+                          {printPrice(total)}
+                        </div>
+                        <button
+                          className="btn btn-primary btn-lg"
+                          disabled={isProceedDisabled}
+                          onClick={onHandleProceed}
+                        >
+                          Proceed
+                        </button>
+                      </div>
+                    )}
+                  </div>
                 </div>
-              </div>
-            ) : (
-              <Elements
-                stripe={stripePromise}
-                options={{ clientSecret, loader }}
-              >
-                <CheckoutForm cartId={cart?.id} />
-              </Elements>
-            )}
+              ) : (
+                <Elements
+                  stripe={stripePromise}
+                  options={{ clientSecret, loader }}
+                >
+                  <CheckoutForm />
+                </Elements>
+              )}
+            </div>
           </div>
         </div>
       </div>

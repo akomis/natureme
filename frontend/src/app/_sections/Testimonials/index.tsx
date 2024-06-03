@@ -29,7 +29,7 @@ const Testimonials = async () => {
   const testimonials = await fetchFromSanity("testimonial");
 
   return (
-    <section className="flex flex-col gap-4 h-screen justify-center items-center w-fit">
+    <section className="flex flex-col gap-4 h-fit justify-center items-center w-fit p-10">
       <h2 className="text-4xl font-bold">Testimonials</h2>
       <div className="flex flex-wrap justify-center items-center gap-4 p-4 max-h-[80vh] overflow-scroll">
         {testimonials.map((testimonial) => (

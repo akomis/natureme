@@ -44,12 +44,12 @@ const AnimatedImageSwitch = ({ index }: { index: number }) => {
         initial="out"
         exit="out"
         transition={{ ease: "easeInOut", duration: 1 }}
-        className="mx-auto w-fit"
+        className="mx-auto w-max"
       >
         <Image
           src={SLIDESHOW[index].imageUrl}
-          width={500}
-          height={500}
+          width={400}
+          height={400}
           alt="Product"
           priority={index === 0}
         />
@@ -70,8 +70,8 @@ const Header = () => {
   }, [slideIndex]);
 
   return (
-    <section className="flex justify-center items-center min-h-[500px] h-screen max-h-screen">
-      <div className="h-[50vh] w-[670px]">
+    <section className="flex justify-center items-center min-h-[750px] h-screen p-10">
+      <div className="w-[670px]">
         <div className="flex flex-1 items-center justify-center">
           <div>
             <Logo height={LOGO_SIZE} width={LOGO_SIZE} priority />
@@ -86,7 +86,7 @@ const Header = () => {
             </div>
           </div>
         </div>
-        <div className="mt-5">
+        <div className="mt-5 h-[400px]">
           <AnimatedImageSwitch index={slideIndex} />
         </div>
       </div>

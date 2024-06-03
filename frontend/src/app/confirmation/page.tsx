@@ -2,49 +2,72 @@
 
 import Screen from "@/components/Screen";
 import { useStripe } from "@stripe/react-stripe-js";
-import { Home, RefreshCcw } from "lucide-react";
+import { Home } from "lucide-react";
+import { useMedusa } from "medusa-react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const Confirmation = () => {
-  const [message, setMessage] = useState<string | null>(null);
+  const [status, setStatus] = useState<string | null>(null);
+  const [orderNo, setOrderNo] = useState<string | null>(null);
 
   const searchParams = useSearchParams();
   const stripe = useStripe();
 
-  const clientSecret = searchParams.get("payment_intent_client_secret") ?? "";
-  const orderNo = searchParams.get("order_no") ?? "";
+  const { client } = useMedusa();
 
   useEffect(() => {
+    const clientSecret = searchParams.get("payment_intent_client_secret") ?? "";
+    const cartId = localStorage.getItem("cart_id") ?? "";
+
+    if (!clientSecret) {
+      setStatus("Missing payment intent client secret.");
+      return;
+    }
+
+    if (!cartId) {
+      setStatus("Order placed.");
+      return;
+    }
+
     // Retrieve the PaymentIntent
     stripe?.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
       if (!paymentIntent) {
-        setMessage("Missing payment intent.");
+        setStatus("Missing payment intent.");
         return;
       }
 
       switch (paymentIntent.status) {
         case "succeeded":
-          setMessage("Success! Payment received.");
+          client.carts.complete(cartId).then(({ data, response, type }) => {
+            if (type !== "order") {
+              setStatus("Payment succeeded, but order not created.");
+            } else {
+              setStatus("Payment and order created!");
+              setOrderNo(data.id.replace("order_", "#"));
+            }
+
+            localStorage.removeItem("cart_id");
+          });
           break;
 
         case "processing":
-          setMessage(
+          setStatus(
             "Payment processing. We'll update you when payment is received."
           );
           break;
 
         case "requires_payment_method":
-          setMessage("Payment failed. Please try another payment method.");
+          setStatus("Payment failed. Please try another payment method.");
           break;
 
         default:
-          setMessage("Something went wrong.");
+          setStatus("Something went wrong.");
           break;
       }
     });
-  });
+  }, [stripe, searchParams]);
 
   return (
     <Screen className="min-h-fit p-4">
@@ -55,19 +78,12 @@ const Confirmation = () => {
       </p>
 
       <div className="flex flex-col md:flex-row gap-4">
-        <button className="btn btn-lg pointer-events-none">
-          Status
-          <div className="badge badge-secondary p-4">{message}</div>
-        </button>
-
-        <button
-          onClick={() => {
-            location.reload();
-          }}
-          className="btn btn-lg"
-        >
-          <RefreshCcw />
-        </button>
+        {status && (
+          <button className="btn btn-lg pointer-events-none">
+            Status
+            <div className="badge badge-secondary p-4">{status}</div>
+          </button>
+        )}
 
         <Link href="/">
           <button className="btn btn-lg w-full">

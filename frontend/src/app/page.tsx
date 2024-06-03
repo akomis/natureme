@@ -5,7 +5,7 @@ import Header from "./_sections/Header";
 
 export default function Index() {
   return (
-    <div className="font-serif">
+    <div className="font-serif flex flex-col gap-80">
       <Header />
       <About />
       {/* <Testimonials /> */}
