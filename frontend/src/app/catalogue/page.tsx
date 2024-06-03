@@ -60,9 +60,9 @@ export default function Catalogue() {
 
             setItems(
               cart.items.map(({ variant, quantity }: any) => ({
-                variant: getProductItemVariant(variant.id), // @ts-ignore
+                variant: getProductItemVariant(variant.id),
                 quantity,
-              }))
+              })) as any
             );
           }
         });
