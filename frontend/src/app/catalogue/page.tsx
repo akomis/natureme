@@ -58,10 +58,10 @@ export default function Catalogue() {
           if (cart) {
             setRegion(cart.region);
             setItems(
-              cart.items.map(({ variant, quantity }: any) => ({
+              cart?.items.map(({ variant, quantity }: any) => ({
                 variant: getProductItemVariant(variant.id),
                 quantity,
-              }))
+              })) ?? []
             );
           }
         });
