@@ -13,9 +13,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const searchParams = useSearchParams();
 
   const clientSecret = searchParams.get("payment_intent_client_secret") ?? "";
+  const loader = "auto";
 
   return (
-    <Elements stripe={stripePromise} options={{ clientSecret }}>
+    <Elements stripe={stripePromise} options={{ clientSecret, loader }}>
       <MedusaProvider
         queryClientProviderProps={{ client: queryClient }}
         baseUrl={process.env.NEXT_PUBLIC_MEDUSA_URL ?? "http://localhost:8000"}

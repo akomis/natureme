@@ -10,15 +10,11 @@ import {
   useSessionCart,
   useUpdateCart,
 } from "medusa-react";
-import { Elements } from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
 import CheckoutForm from "./components/CheckoutForm";
 import LoadingIndicator from "@/components/LoadingIndicator";
 import CartItemList from "./components/CartItemList";
 import ContactForm from "./components/ContactForm";
 import { toast } from "react-toastify";
-
-const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_KEY ?? "pk_");
 
 export const Cart = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -41,7 +37,6 @@ export const Cart = () => {
     !phone ||
     !isPhoneValid(phone);
   const clientSecret = cart?.payment_sessions[0]?.data?.client_secret ?? null;
-  const loader = "auto";
 
   const onHandleProceed = () => {
     setIsLoading(true);
@@ -158,12 +153,7 @@ export const Cart = () => {
                   </div>
                 </div>
               ) : (
-                <Elements
-                  stripe={stripePromise}
-                  options={{ clientSecret, loader }}
-                >
-                  <CheckoutForm />
-                </Elements>
+                <CheckoutForm />
               )}
             </div>
           </div>
