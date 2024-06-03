@@ -94,7 +94,7 @@ export const Cart = () => {
       <div className="drawer-content">
         <label className="drawer-button btn btn-secondary" htmlFor="drawer">
           <ShoppingBasket />
-          <div className="badge badge-sm">{items?.length ?? 0}</div>
+          <div className="badge badge-sm py-3">{items?.length ?? 0}</div>
         </label>
       </div>
       <div className="drawer-side">

@@ -38,9 +38,9 @@ const QuantityPicker = ({ variant, size }: Props) => {
   const updateLineItem = useUpdateLineItem(cartId);
   const deleteLineItem = useDeleteLineItem(cartId);
 
+  // Essentially cartItem is the item living in client's memory and lineItem is the item living in the backend
   const cartItem = getItem(variant.id);
   const quantity = cartItem?.quantity ?? 0;
-
   const lineItem = cart?.items.find(
     (item: any) => item.variant.id === variant.id
   );
