@@ -10,6 +10,7 @@ import { type StripeAddressElementChangeEvent } from "@stripe/stripe-js";
 import { useSessionCart, useUpdateCart } from "medusa-react";
 import Link from "next/link";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 const CheckoutForm = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -61,8 +62,7 @@ const CheckoutForm = () => {
     });
 
     if (result?.error) {
-      // Show error to your customer (for example, payment details incomplete)
-      console.log(result.error.message);
+      toast.error(`Couldn't process payment ${result.error.message}`);
     }
   };
 

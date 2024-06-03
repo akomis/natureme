@@ -7,6 +7,7 @@ import { useCart, useMedusa, useProducts, useSessionCart } from "medusa-react";
 import Screen from "@/components/Screen";
 import LoadingIndicator from "@/components/LoadingIndicator";
 import { useEffect } from "react";
+import { toast } from "react-toastify";
 
 export default function Catalogue() {
   const { createCart } = useCart();
@@ -42,6 +43,11 @@ export default function Catalogue() {
               localStorage.setItem("cart_id", cart.id);
               clearItems();
               setRegion(cart.region);
+            },
+            onError: () => {
+              toast.error(
+                "There was a problem. Please try again later. (Couldn't create cart)"
+              );
             },
           }
         );
@@ -86,8 +92,8 @@ export default function Catalogue() {
   }
 
   return (
-    <Screen className="items-start max-w-[80vw] min-h-0">
-      <div className="flex h-auto justify-between mt-20 z-10 gap-20 px-2">
+    <Screen className="items-start max-w-[80vw]">
+      <div className="flex w-full justify-between items-center mt-20 z-10 px-2">
         <PageHeader title={"Catalogue"} />
         <Cart />
       </div>

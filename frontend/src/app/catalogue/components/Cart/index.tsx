@@ -16,6 +16,7 @@ import CheckoutForm from "./components/CheckoutForm";
 import LoadingIndicator from "@/components/LoadingIndicator";
 import CartItemList from "./components/CartItemList";
 import ContactForm from "./components/ContactForm";
+import { toast } from "react-toastify";
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_KEY ?? "pk_");
 
@@ -63,22 +64,37 @@ export const Cart = () => {
                     refetchCart();
                     setIsLoading(false);
                   },
+                  onError: () => {
+                    toast.error(
+                      "There was a problem. Please try again later. (Couldn't update shipping methrod)"
+                    );
+                  },
                 }
               );
             },
+            onError: () => {
+              toast.error(
+                "There was a problem. Please try again later. (Couldn't create payment session)"
+              );
+            },
           });
+        },
+        onError: () => {
+          toast.error(
+            "There was a problem. Please try again later. (Couldn't update user details)"
+          );
         },
       }
     );
   };
 
   return (
-    <div className="drawer drawer-end">
+    <div className="drawer drawer-end w-fit">
       <input id="drawer" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content">
         <label className="drawer-button btn btn-secondary" htmlFor="drawer">
           <ShoppingBasket />
-          <div>{items?.length ?? 0}</div>
+          <div className="badge badge-sm">{items?.length ?? 0}</div>
         </label>
       </div>
       <div className="drawer-side">

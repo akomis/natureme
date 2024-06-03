@@ -7,7 +7,7 @@ import {
   useSessionCart,
   useUpdateLineItem,
 } from "medusa-react";
-import { useState } from "react";
+import { toast } from "react-toastify";
 
 type Props = {
   variant: any;
@@ -45,8 +45,19 @@ const QuantityPicker = ({ variant, size }: Props) => {
     (item: any) => item.variant.id === variant.id
   );
 
+  const incrementItemQuantity = () => {
+    setItems(
+      items.map((item) =>
+        item.variant.id === variant.id
+          ? { ...item, quantity: quantity + 1 }
+          : item
+      )
+    );
+  };
+
   const initializeLineItem = () => {
     addItem({ variant, quantity: 1 });
+
     createLineItem.mutate(
       {
         variant_id: variant.id,
@@ -55,6 +66,12 @@ const QuantityPicker = ({ variant, size }: Props) => {
       {
         onSuccess: async () => {
           await refetchCart();
+        },
+        onError: () => {
+          toast.error(
+            "There was a problem. Please try again later. (Couldn't add item to cart)"
+          );
+          removeItem(variant.id);
         },
       }
     );
@@ -68,8 +85,14 @@ const QuantityPicker = ({ variant, size }: Props) => {
           lineId: lineItem.id,
         },
         {
-          onSuccess: () => {
-            refetchCart();
+          onSuccess: async () => {
+            await refetchCart();
+          },
+          onError: () => {
+            toast.error(
+              "There was a problem. Please try again later. (Couldn't remove item from cart)"
+            );
+            addItem(variant.id);
           },
         }
       );
@@ -81,19 +104,17 @@ const QuantityPicker = ({ variant, size }: Props) => {
       // for some reason incrementItemQuantity by useSessionCart doesn't work that's why we use setItems
       // incrementItemQuantity(variant.id);
 
-      setItems(
-        items.map((item) =>
-          item.variant.id === variant.id
-            ? { ...item, quantity: quantity + 1 }
-            : item
-        )
-      );
+      incrementItemQuantity();
 
       updateLineItem.mutate(
         { lineId: lineItem.id, quantity: quantity + 1 },
         {
-          onSuccess: () => {},
-          onError: () => {},
+          onError: () => {
+            toast.error(
+              "There was a problem. Please try again later. (Couldn't update item from cart)"
+            );
+            decrementItemQuantity(variant.id);
+          },
         }
       );
     }
@@ -106,8 +127,12 @@ const QuantityPicker = ({ variant, size }: Props) => {
       updateLineItem.mutate(
         { lineId: lineItem.id, quantity: quantity - 1 },
         {
-          onSuccess: () => {},
-          onError: () => {},
+          onError: () => {
+            toast.error(
+              "There was a problem. Please try again later. (Couldn't update item from cart)"
+            );
+            incrementItemQuantity();
+          },
         }
       );
     }
