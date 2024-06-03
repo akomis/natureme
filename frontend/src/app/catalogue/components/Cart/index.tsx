@@ -46,6 +46,8 @@ export const Cart = () => {
   const onHandleProceed = () => {
     setIsLoading(true);
 
+    if (isProceedDisabled) return;
+
     updateCart.mutate(
       {
         email,
