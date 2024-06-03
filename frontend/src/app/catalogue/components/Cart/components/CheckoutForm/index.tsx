@@ -65,6 +65,7 @@ const CheckoutForm = () => {
 
     if (result?.error) {
       toast.error(`Couldn't process payment ${result.error.message}`);
+      setIsLoading(false);
     }
   };
 
