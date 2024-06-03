@@ -9,7 +9,7 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const Confirmation = () => {
-  const [status, setStatus] = useState<string | null>(null);
+  const [status, setStatus] = useState<string | null>("Pending..");
   const [orderNo, setOrderNo] = useState<string | null>(null);
 
   const searchParams = useSearchParams();
