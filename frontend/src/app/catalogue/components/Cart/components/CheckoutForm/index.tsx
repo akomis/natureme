@@ -37,20 +37,22 @@ const CheckoutForm = () => {
       shipping_address: {
         first_name: shippingAddress?.name.split(" ")[0],
         last_name: shippingAddress?.name.split(" ")[1] ?? "",
-        address_1: shippingAddress?.address?.line1,
-        address_2: shippingAddress?.address?.line2,
-        city: shippingAddress?.address?.city,
-        country_code: shippingAddress?.address?.country.toLowerCase(),
-        postal_code: shippingAddress?.address?.postal_code,
+        address_1: shippingAddress?.address?.line1 ?? undefined,
+        address_2: shippingAddress?.address?.line2 ?? undefined,
+        city: shippingAddress?.address?.city ?? undefined,
+        country_code:
+          shippingAddress?.address?.country.toLowerCase() ?? undefined,
+        postal_code: shippingAddress?.address?.postal_code ?? undefined,
       },
       billing_address: {
-        first_name: shippingAddress?.name.split(" ")[0],
-        last_name: shippingAddress?.name.split(" ")[1] ?? "",
-        address_1: shippingAddress?.address?.line1,
-        address_2: shippingAddress?.address?.line2,
-        city: shippingAddress?.address?.city,
-        country_code: shippingAddress?.address?.country.toLowerCase(),
-        postal_code: shippingAddress?.address?.postal_code,
+        first_name: shippingAddress?.name.split(" ")[0] ?? undefined,
+        last_name: shippingAddress?.name.split(" ")[1] ?? "" ?? undefined,
+        address_1: shippingAddress?.address?.line1 ?? undefined,
+        address_2: shippingAddress?.address?.line2 ?? undefined,
+        city: shippingAddress?.address?.city ?? undefined,
+        country_code:
+          shippingAddress?.address?.country.toLowerCase() ?? undefined,
+        postal_code: shippingAddress?.address?.postal_code ?? undefined,
       },
     });
 

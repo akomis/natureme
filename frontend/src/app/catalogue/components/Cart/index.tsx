@@ -2,7 +2,7 @@
 
 import { ShoppingBasket } from "lucide-react";
 import { useState } from "react";
-import { printPrice } from "@/utils";
+import { isEmailValid, isPhoneValid, printPrice } from "@/utils";
 import {
   useAddShippingMethodToCart,
   useCreatePaymentSession,
@@ -34,7 +34,12 @@ export const Cart = () => {
   const updateCart = useUpdateCart(cartId);
 
   const hasItems = items && items.length > 0;
-  const isProceedDisabled = !hasItems || !email || !phone;
+  const isProceedDisabled =
+    !hasItems ||
+    !email ||
+    !isEmailValid(email) ||
+    !phone ||
+    !isPhoneValid(phone);
   const clientSecret = cart?.payment_sessions[0]?.data?.client_secret ?? null;
   const loader = "auto";
 

@@ -1,3 +1,4 @@
+import { isPhoneValid } from "@/utils";
 import * as Form from "@radix-ui/react-form";
 
 type Props = {
@@ -61,7 +62,7 @@ const ContactForm = ({ email, setEmail, phone, setPhone }: Props) => {
           </Form.Message>
           <Form.Message
             className="text-lg text-gray-800 opacity-[0.8]"
-            match={(value) => !/^\d{8}$/.test(value)}
+            match={(value) => !isPhoneValid(value)}
           >
             Invalid phone!
           </Form.Message>

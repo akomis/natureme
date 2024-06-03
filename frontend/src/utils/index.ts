@@ -63,3 +63,11 @@ export const printPrice = (amount?: number | null) => {
     return `€${priceString}`;
   }
 };
+
+export const isPhoneValid = (phone: string) => {
+  return /^\d{8}$/.test(phone);
+};
+
+export const isEmailValid = (email: string) => {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+};
