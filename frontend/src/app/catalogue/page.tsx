@@ -57,11 +57,12 @@ export default function Catalogue() {
         client.carts.retrieve(cartId).then(({ cart }) => {
           if (cart) {
             setRegion(cart.region);
+
             setItems(
-              cart?.items.map(({ variant, quantity }: any) => ({
-                variant: getProductItemVariant(variant.id),
+              cart.items.map(({ variant, quantity }: any) => ({
+                variant: getProductItemVariant(variant.id), // @ts-ignore
                 quantity,
-              })) ?? []
+              }))
             );
           }
         });
