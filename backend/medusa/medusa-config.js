@@ -75,7 +75,7 @@ const plugins = [
       from: "mail@natureme.life",
       enable_endpoint: false,
       template_path: "data/templates",
-      subject_template_type: "handle_bars",
+      subject_template_type: "handlebars",
       body_template_type: "react",
       order_placed_template: "order_placed",
       order_shipped_template: "order_shipped",
