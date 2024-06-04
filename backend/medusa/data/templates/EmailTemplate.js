@@ -10,6 +10,6 @@ var EmailTemplate = function EmailTemplate() {
       fontFamily: "Arial, sans-serif",
       lineHeight: "1.6"
     }
-  }, /*#__PURE__*/React.createElement("h1", null, "Hello, ", name, "!"), /*#__PURE__*/React.createElement("p", null, "Thank you for your order. Here are the details:"));
+  }, /*#__PURE__*/React.createElement("h1", null, "Hello!"), /*#__PURE__*/React.createElement("p", null, "Thank you for your order. Here are the details:"));
 };
 var _default = exports["default"] = EmailTemplate;
