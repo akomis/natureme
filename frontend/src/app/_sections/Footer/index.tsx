@@ -12,7 +12,7 @@ const Extras = () => {
     "flex flex-col justify-center items-center hover:scale-110 hover:z-10 transition-all duration-300";
 
   return (
-    <div className="flex flex-col lg:flex-row gap-10 md:gap-40 text-2xl">
+    <div className="flex flex-col lg:flex-row gap-20 md:gap-40 text-2xl">
       <Link href="/faq" className={pageLinkStyle}>
         <Image
           src={"/FAQ.png"}

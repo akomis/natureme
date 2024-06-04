@@ -1,24 +1,37 @@
 "use client";
 
+import LoadingIndicator from "@/components/LoadingIndicator";
 import { sendEmail } from "@/utils";
 import * as Form from "@radix-ui/react-form";
 import { Send } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 import { toast } from "react-toastify";
 
 const ContactForm = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const formRef = useRef<HTMLFormElement | null>(null);
+  const router = useRouter();
 
   // Function to submit the form
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
     if (formRef.current?.checkValidity()) {
-      await sendEmail(email, `Message from ${email}`, message);
-      toast.success(`Thank you for your message!`);
-      formRef.current.reset();
+      try {
+        setIsLoading(true);
+        await sendEmail(`Message from ${email}`, message);
+        toast.success(`Thank you for your message!`);
+        setTimeout(() => router.push("/"), 2000);
+      } catch (error) {
+        toast.error("Failed to send email. Please try again later.");
+        formRef.current.reset();
+      } finally {
+        setIsLoading(false);
+      }
     } else {
       toast.warning("Please fill in all required fields.");
     }
@@ -77,13 +90,21 @@ const ContactForm = () => {
           />
         </Form.Control>
       </Form.Field>
-      <Form.Submit asChild className="self-end mt-4">
-        <button
-          className="btn btn-lg btn-primary font-bold"
-          disabled={!email || !message}
-        >
-          <Send size={20} />
-        </button>
+      <Form.Submit asChild className="mt-4">
+        <div className="flex justify-end h-20">
+          {isLoading ? (
+            <div className="w-40 self-center">
+              <LoadingIndicator />
+            </div>
+          ) : (
+            <button
+              className="btn btn-lg btn-primary font-bold"
+              disabled={!email || !message}
+            >
+              <Send size={20} />
+            </button>
+          )}
+        </div>
       </Form.Submit>
     </Form.Root>
   );

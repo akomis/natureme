@@ -144,23 +144,25 @@ const CustomerDetailsForm = () => {
         </Form.Control>
       </Form.Field>
       <Form.Submit asChild className="self-end mt-4">
-        {isLoading ? (
-          <div className="flex justify-center w-full h-20">
-            <LoadingIndicator />
-          </div>
-        ) : (
-          <div className="flex gap-4 items-end">
-            <div className="badge badge-outline text-lg h-auto min-w-24 px-4 py-2">
-              {printPrice(total)}
+        <div className="flex justify-center h-20">
+          {isLoading ? (
+            <div className="w-40 self-center">
+              <LoadingIndicator />
             </div>
-            <button
-              className="btn btn-primary btn-lg"
-              disabled={!email || !phone}
-            >
-              Proceed
-            </button>
-          </div>
-        )}
+          ) : (
+            <div className="flex gap-4 items-end">
+              <div className="badge badge-outline text-lg h-auto min-w-24 px-4 py-2">
+                {printPrice(total)}
+              </div>
+              <button
+                className="btn btn-primary btn-lg"
+                disabled={!email || !phone}
+              >
+                Proceed
+              </button>
+            </div>
+          )}
+        </div>
       </Form.Submit>
     </Form.Root>
   );
