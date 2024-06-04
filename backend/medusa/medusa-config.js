@@ -72,7 +72,7 @@ const plugins = [
     resolve: `medusa-plugin-resend`,
     options: {
       api_key: process.env.RESEND_API_KEY,
-      from: "contact@natureme.life",
+      from: "mail@natureme.life",
       enable_endpoint: false,
       template_path: "data/templates",
       subject_template_type: "handle_bars",
@@ -81,9 +81,6 @@ const plugins = [
       order_shipped_template: "order_shipped",
       order_canceled_template: "order_canceled",
       order_refund_created_template: "order_refund_created",
-      //order_return_requested_template: 'order_return_requested',
-      //order_items_returned_template: 'order_items_returned',
-      //claim_shipment_created_template: 'claim_shipment_created',
     },
   },
   {
