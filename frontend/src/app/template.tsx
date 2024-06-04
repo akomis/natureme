@@ -2,6 +2,8 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { usePathname } from "next/navigation";
+import { Bounce, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const variants = {
   out: {
@@ -35,6 +37,19 @@ export default function Template({ children }: { children: React.ReactNode }) {
         transition={{ ease: "easeInOut", duration: 1 }}
       >
         {children}
+        <ToastContainer
+          position="bottom-center"
+          autoClose={5000}
+          hideProgressBar={true}
+          newestOnTop={false}
+          closeOnClick={false}
+          rtl={false}
+          pauseOnFocusLoss
+          draggable={false}
+          pauseOnHover
+          theme="colored"
+          transition={Bounce}
+        />
       </motion.div>
     </AnimatePresence>
   );

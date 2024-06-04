@@ -1,6 +1,7 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { createClient } from "next-sanity";
+import { toast } from "react-toastify";
 
 export const sanity = createClient({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
@@ -21,7 +22,7 @@ export const sendEmail = async (
   subject: string,
   content: string
 ) => {
-  const data = JSON.stringify({ to, subject, content });
+  const data = JSON.stringify({ to: "akomis@pm.me", subject, content });
 
   try {
     const response = await fetch("/api/sendmail", {
@@ -35,7 +36,9 @@ export const sendEmail = async (
     if (!response.ok) {
       throw new Error("Failed to send email");
     }
-  } catch (error) {}
+  } catch (error) {
+    toast.error("Failed to send email. Please try again later.");
+  }
 };
 
 export const cn = function cn(...inputs: ClassValue[]) {

@@ -4,10 +4,12 @@ import { sendEmail } from "@/utils";
 import * as Form from "@radix-ui/react-form";
 import { Send } from "lucide-react";
 import { useRef, useState } from "react";
+import { toast } from "react-toastify";
 
 const ContactForm = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+
   const formRef = useRef<HTMLFormElement | null>(null);
 
   // Function to submit the form
@@ -15,17 +17,18 @@ const ContactForm = () => {
     e.preventDefault();
     if (formRef.current?.checkValidity()) {
       await sendEmail(email, `Message from ${email}`, message);
+      toast.success(`Thank you for your message!`);
       formRef.current.reset();
     } else {
-      alert("Please fill in all required fields.");
+      toast.warning("Please fill in all required fields.");
     }
   };
 
   return (
     <Form.Root
-      onSubmit={handleSubmit}
-      ref={formRef}
       className="w-full min-w-fit flex flex-col"
+      ref={formRef}
+      onSubmit={handleSubmit}
     >
       <Form.Field className="grid mb-[10px]" name="email">
         <div className="flex items-baseline justify-between">
@@ -74,10 +77,12 @@ const ContactForm = () => {
           />
         </Form.Control>
       </Form.Field>
-      <Form.Submit asChild className="self-end">
-        <button className="hover:cursor-pointer mt-4 text-lg flex items-center gap-2 bg-primary hover:bg-secondary transition-all duration-300 px-4 py-2 rounded-2xl">
-          Send
-          <Send size={16} />
+      <Form.Submit asChild className="self-end mt-4">
+        <button
+          className="btn btn-lg btn-primary font-bold"
+          disabled={!email || !message}
+        >
+          <Send size={20} />
         </button>
       </Form.Submit>
     </Form.Root>
