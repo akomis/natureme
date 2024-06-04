@@ -15,10 +15,9 @@ const StripeProvider = ({ children }: { children: React.ReactNode }) => {
   const searchParams = useSearchParams();
 
   const clientSecret = searchParams.get("payment_intent_client_secret") ?? "";
-  const loader = "auto";
 
   return (
-    <Elements stripe={stripePromise} options={{ clientSecret, loader }}>
+    <Elements stripe={stripePromise} options={{ clientSecret }}>
       {children}
     </Elements>
   );

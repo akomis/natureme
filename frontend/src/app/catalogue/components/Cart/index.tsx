@@ -51,7 +51,7 @@ export const Cart = () => {
             ) : (
               <Elements
                 stripe={stripePromise}
-                options={{ clientSecret, loader }}
+                options={{ clientSecret, loader }} // @ts-ignore
               >
                 <CheckoutForm />
               </Elements>
