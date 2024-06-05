@@ -1,12 +1,14 @@
 "use client";
 
-import { ShoppingBasket } from "lucide-react";
+import { ArrowLeft, ShoppingBasket } from "lucide-react";
 import { useGetCart, useSessionCart } from "medusa-react";
 import CheckoutForm from "./components/CheckoutForm";
 import CartItemList from "./components/CartItemList";
 import CustomerDetailsForm from "./components/CustomerDetailsForm";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import PageHeader from "@/components/PageHeader";
+import { useRef } from "react";
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_KEY ?? "pk_");
 
@@ -16,6 +18,11 @@ export const Cart = () => {
   const { cart } = useGetCart(cartId);
   const { items } = useSessionCart();
 
+  const drawerToggle = useRef<HTMLInputElement>(null);
+  const toggleDrawer = () => {
+    drawerToggle?.current?.click();
+  };
+
   const hasItems = items && items.length > 0;
 
   const clientSecret = cart?.payment_sessions[0]?.data?.client_secret ?? null;
@@ -23,7 +30,13 @@ export const Cart = () => {
 
   return (
     <div className="drawer drawer-end w-fit">
-      <input id="drawer" type="checkbox" className="drawer-toggle" />
+      <input
+        ref={drawerToggle}
+        id="drawer"
+        type="checkbox"
+        className="drawer-toggle"
+      />
+
       <div className="drawer-content">
         <label className="drawer-button btn btn-secondary" htmlFor="drawer">
           <ShoppingBasket />
@@ -36,8 +49,10 @@ export const Cart = () => {
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <div className="flex flex-col justify-between bg-jasmine h-screen w-[500px] p-6 rounded-l-2xl shadow-2xl overflow-scroll overflow-x-hidden">
-          <ShoppingBasket size={36} />
+        <div className="flex flex-col justify-between bg-jasmine h-screen max-w-[100vw] w-[500px] p-6 rounded-l-2xl shadow-2xl overflow-scroll overflow-x-hidden">
+          <button className="btn btn-secondary w-fit" onClick={toggleDrawer}>
+            <ArrowLeft />
+          </button>
 
           <div className="flex flex-1 flex-col justify-between">
             {hasItems ? (
