@@ -54,7 +54,7 @@ const ImageBentoGrid = ({ hash, images, isSanity }: Props) => {
   const thirdColumn = images.filter((_, index) => index % 3 === 2);
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 max-h-[200px] overflow-y-scroll rounded-lg p-2">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 max-h-96 overflow-y-scroll rounded-lg p-2">
       <div className="grid gap-4">
         {firstColumn.map((image: ImageType, index: number) => (
           <div key={`slide_${hash}_${index}`} id={`slide_${hash}_${index}`}>
