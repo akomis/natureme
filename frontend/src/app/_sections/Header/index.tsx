@@ -72,13 +72,13 @@ const Header = () => {
   return (
     <section className="flex justify-center items-center min-h-[750px] h-screen p-10">
       <div className="w-[670px]">
-        <div className="flex flex-1 items-center justify-center">
+        <div className="flex flex-col sm:flex-row  items-center justify-center">
           <div>
             <Logo height={LOGO_SIZE} width={LOGO_SIZE} priority />
           </div>
           <div className="flex flex-col flex-grow items-start justify-center  whitespace-nowrap ml-4">
             <div>
-              <p className="text-2xl flex flex-1">{"We trust nature for"}</p>
+              <p className="text-2xl flex ">{"We trust nature for"}</p>
               <AnimatedText
                 key={slideIndex}
                 words={SLIDESHOW[slideIndex].slogan}
@@ -86,7 +86,7 @@ const Header = () => {
             </div>
           </div>
         </div>
-        <div className="mt-5 h-[400px]">
+        <div className="mt-5 h-[300px]">
           <AnimatedImageSwitch index={slideIndex} />
         </div>
       </div>

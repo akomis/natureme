@@ -1,3 +1,4 @@
+import ImageBentoGrid from "@/components/ImageBentoGrid";
 import { fetchFromSanity } from "@/utils";
 import { PortableText } from "next-sanity";
 import Image from "next/image";
@@ -8,29 +9,15 @@ const About = async () => {
 
   return (
     <section className="flex flex-col-reverse lg:flex-row gap-4 h-fit justify-center items-center p-10">
-      <div className="min-w-[40vw] w-[100vw] grid grid-cols-1 gap-2">
-        <div className="image-container max-h-56">
-          <Image
-            className="image"
-            src={"/about_1.webp"}
-            fill
-            alt="Κεραλοιφές NatureMe"
-          />
-        </div>
-        <div className="image-container flex gap-2 max-h-40">
-          <Image
-            className="image"
-            src={"/about_2.webp"}
-            fill
-            alt="Αρωματικά Χώρου NatureMe"
-          />
-          <Image
-            className="image"
-            src={"/about_3.webp"}
-            fill
-            alt="Σαπούνια NatureMe"
-          />
-        </div>
+      <div className="min-h-fit">
+        <ImageBentoGrid
+          hash="activity"
+          images={[
+            { id: "1", url: "/about_1.webp" },
+            { id: "2", url: "/about_2.webp" },
+            { id: "3", url: "/about_3.webp" },
+          ]}
+        />
       </div>
       <div>
         <h2 className="text-4xl font-bold">About Us</h2>
