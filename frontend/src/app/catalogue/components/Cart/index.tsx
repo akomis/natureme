@@ -29,7 +29,7 @@ export const Cart = () => {
   const loader = "auto";
 
   return (
-    <div className="drawer drawer-end w-fit">
+    <div className="drawer drawer-end w-fit overflow-hidden">
       <input
         ref={drawerToggle}
         id="drawer"
@@ -38,7 +38,10 @@ export const Cart = () => {
       />
 
       <div className="drawer-content">
-        <label className="drawer-button btn btn-secondary" htmlFor="drawer">
+        <label
+          className="drawer-button btn btn-secondary flex-nowrap"
+          htmlFor="drawer"
+        >
           <ShoppingBasket />
           <div className="badge badge-sm py-3">{items?.length ?? 0}</div>
         </label>
