@@ -28,7 +28,7 @@ const ImageWithLoading = ({ isSanity, image }: ImageWithLoadingProps) => {
             className="image"
             image={image.url}
             alt={image.id}
-            onLoadingComplete={() => {
+            onLoad={() => {
               setIsLoading(false);
             }}
           />
@@ -38,7 +38,7 @@ const ImageWithLoading = ({ isSanity, image }: ImageWithLoadingProps) => {
             src={image.url}
             alt={image.id}
             fill
-            onLoadingComplete={() => {
+            onLoad={() => {
               setIsLoading(false);
             }}
           />
