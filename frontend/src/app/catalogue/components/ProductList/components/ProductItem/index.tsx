@@ -37,7 +37,13 @@ const ProductItem = ({
       >
         <figure className="h-fit scale-100 group-hover:scale-105 m-0 duration-500 rounded-lg">
           {!!item.thumbnail && (
-            <Image src={item.thumbnail} alt={title} height={200} width={200} />
+            <Image
+              src={item.thumbnail}
+              alt={title}
+              height={200}
+              width={200}
+              unoptimized
+            />
           )}
         </figure>
         <div className="flex justify-center items-center">

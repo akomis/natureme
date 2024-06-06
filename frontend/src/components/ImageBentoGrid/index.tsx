@@ -41,6 +41,7 @@ const ImageWithLoading = ({ isSanity, image }: ImageWithLoadingProps) => {
             onLoad={() => {
               setIsLoading(false);
             }}
+            unoptimized
           />
         )}
       </div>
