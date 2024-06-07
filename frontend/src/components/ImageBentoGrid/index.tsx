@@ -1,52 +1,10 @@
-"use client";
-
-import SanityImage from "../SanityImage";
-import { useState } from "react";
-import Image from "next/image";
-
-type ImageType = { id: string; url: string };
+import ImageWithLoading from "../ImageWithLoading";
+import { ImageType } from "../models";
 
 type Props = {
   hash: string;
   images: ImageType[];
   isSanity?: boolean;
-};
-
-type ImageWithLoadingProps = {
-  isSanity?: boolean;
-  image: ImageType;
-};
-const ImageWithLoading = ({ isSanity, image }: ImageWithLoadingProps) => {
-  const [isLoading, setIsLoading] = useState(true);
-
-  return (
-    <div className="image-container">
-      {isLoading && <div className="skeleton h-full opacity-75"></div>}
-      <div className={isLoading ? "opacity-0" : "opacity-100"}>
-        {isSanity ? (
-          <SanityImage
-            className="image"
-            image={image.url}
-            alt={image.id}
-            onLoad={() => {
-              setIsLoading(false);
-            }}
-          />
-        ) : (
-          <Image
-            className="image"
-            src={image.url}
-            alt={image.id}
-            fill
-            onLoad={() => {
-              setIsLoading(false);
-            }}
-            unoptimized
-          />
-        )}
-      </div>
-    </div>
-  );
 };
 
 const ImageBentoGrid = ({ hash, images, isSanity }: Props) => {
