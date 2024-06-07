@@ -74,17 +74,20 @@ const ProductItem = ({
             <h1 className="font-bold mb-0">{title}</h1>
           </div>
 
-          {isOpen && media && (
-            <div className="mt-4">
-              <ImageBentoGrid
-                hash={title}
-                images={media.map((item: any) => ({
-                  id: item.id,
-                  url: item.url,
-                }))}
-              />
+          {/* {isOpen && media && (
+            <div className="mt-4 flex flex-wrap">
+              {media.map((item: any) => (
+                <Image
+                  key={item.key}
+                  src={item.url}
+                  alt={title}
+                  height={200}
+                  width={200}
+                  unoptimized
+                />
+              ))}
             </div>
-          )}
+          )} */}
 
           <p className="py-4 text-justify text-xl m-0">{description}</p>
 

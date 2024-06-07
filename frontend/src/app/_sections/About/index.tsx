@@ -8,13 +8,13 @@ const About = async () => {
 
   return (
     <section className="flex flex-col-reverse lg:flex-row gap-4 h-fit justify-center items-center p-10">
-      <div className="flex flex-col w-[70vw] gap-2 rounded-lg">
+      <div className="flex flex-col w-full md:min-w-[50vw] gap-2 rounded-lg items-center">
         <Image
           src="/about_1.webp"
           alt="nature me soaps"
           width={500}
           height={500}
-          className="rounded-lg"
+          className="rounded-lg mr-auto"
         />
         <Image
           src="/about_2.webp"
@@ -23,13 +23,12 @@ const About = async () => {
           height={500}
           className="rounded-xl"
         />
-
         <Image
           src="/about_3.webp"
           alt="nature me gift boxes"
           width={500}
           height={500}
-          className="rounded-2xl"
+          className="rounded-2xl ml-auto"
         />
       </div>
       <div>

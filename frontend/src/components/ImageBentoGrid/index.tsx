@@ -16,23 +16,17 @@ const ImageBentoGrid = ({ hash, images, isSanity }: Props) => {
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 max-h-96 overflow-y-scroll rounded-lg p-2">
       <div className="grid gap-4">
         {firstColumn.map((image: ImageType, index: number) => (
-          <div key={`slide_${hash}_${index}`} id={`slide_${hash}_${index}`}>
-            <ImageWithLoading image={image} isSanity={isSanity} />
-          </div>
+          <ImageWithLoading image={image} key={image.id} isSanity={isSanity} />
         ))}
       </div>
       <div className="grid gap-4">
         {secondColumn.map((image: ImageType, index: number) => (
-          <div key={`slide_${hash}_${index}`} id={`slide_${hash}_${index}`}>
-            <ImageWithLoading image={image} isSanity={isSanity} />
-          </div>
+          <ImageWithLoading key={image.id} image={image} isSanity={isSanity} />
         ))}
       </div>
       <div className="grid gap-4">
         {thirdColumn.map((image: ImageType, index: number) => (
-          <div key={`slide_${hash}_${index}`} id={`slide_${hash}_${index}`}>
-            <ImageWithLoading image={image} isSanity={isSanity} />
-          </div>
+          <ImageWithLoading image={image} key={image.id} isSanity={isSanity} />
         ))}
       </div>
     </div>
