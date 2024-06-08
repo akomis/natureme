@@ -1,4 +1,4 @@
-import ImageBentoGrid from "@/components/ImageBentoGrid";
+import ImageWithLoading from "@/components/ImageWithLoading";
 import PageHeader from "@/components/PageHeader";
 import Screen from "@/components/Screen";
 import { fetchFromSanity } from "@/utils";
@@ -10,22 +10,23 @@ export default async function Activities() {
   return (
     <Screen>
       <PageHeader title={"Activities"} />
-      <div className="pt-4">
-        <ImageBentoGrid
-          hash={activity.title}
-          isSanity={true}
-          images={activity.gallery.map((item: any) => ({
-            id: item.asset.id,
-            url: item.asset,
-          }))}
-        />
-      </div>
+
       <div className="flex flex-col w-full">
         <h2>{activity.title}</h2>
         <p>{activity.date}</p>
 
         <PortableText value={activity.text as any} />
       </div>
+
+      {/* <div className="h-[200px] flex gap-2">
+        {activity.gallery.map((item: any) => (
+          <ImageWithLoading
+            key={item._key}
+            image={{ id: item._key, url: item }}
+            isSanity={true}
+          />
+        ))}
+      </div> */}
     </Screen>
   );
 }

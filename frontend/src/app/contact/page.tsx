@@ -5,7 +5,7 @@ import Screen from "@/components/Screen";
 
 export default async function Contact() {
   return (
-    <Screen className="gap-4">
+    <Screen>
       <PageHeader title={"Contact"} />
       <ContactForm />
     </Screen>

@@ -1,5 +1,5 @@
 "use client";
-import ImageBentoGrid from "@/components/ImageBentoGrid";
+import ImageCarousel from "@/components/ImageCarousel";
 import QuantityPicker from "@/components/QuantityPicker";
 import { printPrice } from "@/utils";
 import { ArrowLeft } from "lucide-react";
@@ -62,7 +62,7 @@ const ProductItem = ({
         onClose={() => setIsOpen(false)}
       >
         <div className="modal-box w-11/12 max-w-4xl bg-jasmine">
-          <div className="flex flex-row gap-4 items-baseline align-middle">
+          <div className="flex flex-row gap-4 items-baseline align-middle mb-5">
             <div className="modal-action">
               <form method="dialog">
                 {/* if there is a button in form, it will close the modal */}
@@ -74,20 +74,14 @@ const ProductItem = ({
             <h1 className="font-bold mb-0">{title}</h1>
           </div>
 
-          {/* {isOpen && media && (
-            <div className="mt-4 flex flex-wrap">
-              {media.map((item: any) => (
-                <Image
-                  key={item.key}
-                  src={item.url}
-                  alt={title}
-                  height={200}
-                  width={200}
-                  unoptimized
-                />
-              ))}
-            </div>
-          )} */}
+          {isOpen && media && (
+            <ImageCarousel
+              images={media.map((image: any) => ({
+                id: image.id,
+                url: image.url,
+              }))}
+            />
+          )}
 
           <p className="py-4 text-justify text-xl m-0">{description}</p>
 
