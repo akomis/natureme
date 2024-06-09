@@ -74,7 +74,7 @@ const plugins = [
       api_key: process.env.RESEND_API_KEY,
       from: "mail@natureme.life",
       enable_endpoint: false,
-      template_path: "data/templates",
+      template_path: "./data/templates",
       subject_template_type: "handlebars",
       body_template_type: "react",
       order_placed_template: "order_placed",
