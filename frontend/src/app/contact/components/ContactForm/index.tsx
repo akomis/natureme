@@ -66,6 +66,7 @@ const ContactForm = () => {
             className="box-border w-full bg-gray-100 shadow-blackA6 inline-flex h-[35px] appearance-none items-center justify-center rounded-[4px] px-[10px] text-xl leading-none text-gray-800 shadow-[0_0_0_1px] outline-none hover:shadow-[0_0_0_1px_black] focus:shadow-[0_0_0_2px_black] selection:color-white selection:bg-blackA6"
             type="email"
             onChange={(e) => setEmail(e.target.value)}
+            placeholder="your@email.com"
             required
           />
         </Form.Control>
@@ -86,6 +87,7 @@ const ContactForm = () => {
           <textarea
             className="box-border w-full h-48 bg-gray-100 shadow-blackA6 inline-flex appearance-none items-center justify-center rounded-[4px] p-[10px] text-xl leading-none text-gray-800 shadow-[0_0_0_1px] outline-none hover:shadow-[0_0_0_1px_black] focus:shadow-[0_0_0_2px_black] selection:color-white selection:bg-blackA6 resize-none"
             onChange={(e) => setMessage(e.target.value)}
+            placeholder="Tell us anything.."
             required
           />
         </Form.Control>

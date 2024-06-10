@@ -29,7 +29,7 @@ export default async function Activities() {
               isSanity
             />
 
-            <div className="text-xl">
+            <div className="text-xl font-sans">
               <PortableText value={activity.text as any} />
             </div>
 

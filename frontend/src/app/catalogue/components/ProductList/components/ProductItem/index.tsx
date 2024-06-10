@@ -77,12 +77,14 @@ const ProductItem = ({
             />
           )}
 
-          <p className="py-4 text-justify text-xl m-0">{description}</p>
+          <p className="py-4 text-justify text-xl m-0 font-sans">
+            {description}
+          </p>
 
           {item.material && (
             <>
               <h3>Ingredients</h3>
-              <p>{item.material}</p>
+              <p className="font-sans">{item.material}</p>
             </>
           )}
 
@@ -90,7 +92,7 @@ const ProductItem = ({
             attributes.map((attribute: Attribute) => (
               <div key={attribute.key}>
                 <h3>{attribute.key}</h3>
-                <p>{attribute.value}</p>
+                <p className="font-sans">{attribute.value}</p>
               </div>
             ))}
 

@@ -14,15 +14,24 @@ const About = async () => {
           alt="nature me soaps"
           width={500}
           height={500}
-          className="rounded-lg mr-auto"
+          className="rounded-lg"
         />
-        <Image
-          src="/about_2.webp"
-          alt="nature me besswsax"
-          width={500}
-          height={500}
-          className="rounded-xl"
-        />
+        <div className="flex flex-col lg:flex-row gap-20 my-10">
+          <Image
+            src="/about_2.webp"
+            alt="nature me besswsax"
+            width={500}
+            height={500}
+            className="rounded-xl"
+          />
+          <div>
+            <h2 className="text-4xl font-bold">About Us</h2>
+            <div className="flex flex-col gap-4 text-xl font-sans">
+              <PortableText value={about as any} />
+            </div>
+          </div>
+        </div>
+
         <Image
           src="/about_3.webp"
           alt="nature me gift boxes"
@@ -30,12 +39,6 @@ const About = async () => {
           height={500}
           className="rounded-2xl ml-auto"
         />
-      </div>
-      <div>
-        <h2 className="text-4xl font-bold">About Us</h2>
-        <div className="flex flex-col gap-4 text-xl">
-          <PortableText value={about as any} />
-        </div>
       </div>
     </section>
   );
