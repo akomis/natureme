@@ -98,7 +98,7 @@ export default function Catalogue() {
         <PageHeader title={"Catalogue"} />
         <Cart />
       </div>
-      <div className="flex flex-col gap-10 w-full overflow-y-scroll mt-10 rounded-lg">
+      <div className="flex flex-col gap-10 w-full overflow-y-auto mt-10 rounded-lg">
         <div className="flex flex-wrap gap-20 pb-10">
           {products
             .sort((a, b) => b.variants.length - a.variants.length)

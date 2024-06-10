@@ -7,22 +7,24 @@ export default async function Faq() {
   const faq = await fetchFromSanity("faq");
 
   return (
-    <Screen>
+    <Screen className="min-h-full">
       <div className="flex flex-col justify-center items-start gap-4">
         <PageHeader title={"FAQ"} />
-        {faq.map(
-          (
-            { question, answer }: { question: string; answer: object },
-            index: number
-          ) => (
-            <AccordionItem
-              key={question}
-              question={question}
-              answer={answer}
-              defaultChecked={index === 0}
-            />
-          )
-        )}
+        <div className="flex flex-col gap-10 w-full overflow-y-auto pr-4 rounded-lg">
+          {faq.map(
+            (
+              { question, answer }: { question: string; answer: object },
+              index: number
+            ) => (
+              <AccordionItem
+                key={question}
+                question={question}
+                answer={answer}
+                defaultChecked={index === 0}
+              />
+            )
+          )}
+        </div>
       </div>
     </Screen>
   );
