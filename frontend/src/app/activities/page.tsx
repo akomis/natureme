@@ -9,7 +9,7 @@ export default async function Activities() {
   const activities = await fetchFromSanity("activity");
 
   return (
-    <Screen className="min-h-full ">
+    <Screen>
       <PageHeader title={"Activities"} />
 
       <div className="flex flex-col gap-10 w-full overflow-y-auto pr-4 rounded-lg">

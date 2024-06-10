@@ -7,7 +7,7 @@ export default async function Faq() {
   const faq = await fetchFromSanity("faq");
 
   return (
-    <Screen className="min-h-full">
+    <Screen>
       <div className="flex flex-col justify-center items-start gap-4">
         <PageHeader title={"FAQ"} />
         <div className="flex flex-col gap-10 w-full overflow-y-auto pr-4 rounded-lg">
