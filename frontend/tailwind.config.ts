@@ -14,7 +14,10 @@ const config: Config = {
         jasmine: "#F4E8E1",
         nescafeBoi: "#FFECD2",
       },
-      fontFamily: { serif: ["Mynerve", "cursive"] },
+      fontFamily: {
+        serif: ["Mynerve", "cursive"],
+        sans: ["LXGW WenKai TC", "sans-serif"],
+      },
     },
   },
   plugins: [require("@tailwindcss/typography"), require("daisyui")],

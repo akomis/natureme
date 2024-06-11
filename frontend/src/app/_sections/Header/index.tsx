@@ -78,7 +78,7 @@ const Header = () => {
           </div>
           <div className="flex flex-col flex-grow items-start justify-center  whitespace-nowrap ml-4">
             <div>
-              <p className="text-2xl flex ">{"We trust nature for"}</p>
+              <p className="text-3xl flex">We trust nature for</p>
               <AnimatedText
                 key={slideIndex}
                 words={SLIDESHOW[slideIndex].slogan}
