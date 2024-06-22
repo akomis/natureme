@@ -1,7 +1,8 @@
 To run the medusa locally make sure Railway instance is setup properly and run
 
 ```
-railway link && railway shell && medusa develop
+yarn railway
+yarn dev
 ```
 
 Medusa Admin http://localhost:7001
