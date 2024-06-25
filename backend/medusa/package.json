@@ -23,14 +23,12 @@
     "start": "cross-env npm run build && medusa start",
     "start:custom": "cross-env npm run build && node --preserve-symlinks --trace-warnings index.js",
     "dev": "cross-env npm run build:server && medusa develop",
-    "transpile": "node transpile-emails.js",
+    "transpile": "node ./scripts/transpile-emails.js",
     "railway": "railway login && railway link && railway shell"
   },
   "dependencies": {
     "@medusajs/admin": "7.1.11",
-    "@medusajs/cache-inmemory": "^1.8.9",
     "@medusajs/cache-redis": "^1.9.1",
-    "@medusajs/event-bus-local": "^1.9.8",
     "@medusajs/event-bus-redis": "^1.8.13",
     "@medusajs/file-local": "^1.0.3",
     "@medusajs/medusa": "1.20.2",
@@ -43,10 +41,10 @@
     "medusa-interfaces": "^1.3.8",
     "medusa-payment-manual": "^1.0.24",
     "medusa-payment-stripe": "^6.0.9",
-    "medusa-plugin-resend": "^1.1.0",
     "medusa-plugin-variant-images": "^1.0.5",
     "object-assign": "^4.1.1",
     "prism-react-renderer": "^2.0.4",
+    "resend": "^3.3.0",
     "typeorm": "^0.3.16"
   },
   "devDependencies": {

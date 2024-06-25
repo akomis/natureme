@@ -69,21 +69,6 @@ const plugins = [
     },
   },
   {
-    resolve: `medusa-plugin-resend`,
-    options: {
-      api_key: process.env.RESEND_API_KEY,
-      from: "mail@natureme.life",
-      enable_endpoint: false,
-      template_path: "./data/templates",
-      subject_template_type: "handlebars",
-      body_template_type: "react",
-      order_placed_template: "order_placed",
-      order_shipped_template: "order_shipped",
-      order_canceled_template: "order_canceled",
-      order_refund_created_template: "order_refund_created",
-    },
-  },
-  {
     resolve: `medusa-payment-stripe`,
     options: {
       api_key: process.env.STRIPE_API_KEY,
