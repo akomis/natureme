@@ -49,6 +49,7 @@ const Confirmation = () => {
             }
 
             localStorage.removeItem("cart_id");
+            localStorage.removeItem("medusa-session-cart");
           });
           break;
 

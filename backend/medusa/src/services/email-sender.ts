@@ -1,6 +1,7 @@
 import {
   AbstractNotificationService,
   CartService,
+  Logger,
   OrderService,
 } from "@medusajs/medusa";
 import { Resend } from "resend";
@@ -10,12 +11,14 @@ export default class EmailSenderService extends AbstractNotificationService {
   protected orderService_: OrderService;
   protected cartService_: CartService;
   protected emailClient_: Resend;
+  protected logger_: Logger;
 
   constructor(container, options) {
     super(container);
     this.orderService_ = container.orderService;
     this.cartService_ = container.cartService;
     this.emailClient_ = new Resend(process.env.RESEND_API_KEY);
+    this.logger_ = container.logger;
   }
 
   /**
@@ -33,29 +36,36 @@ export default class EmailSenderService extends AbstractNotificationService {
     status: string;
     data: Record<string, unknown>;
   }> {
-    if (event === "order.placed") {
-      const order = await this.orderService_.retrieve(data.id, {
-        relations: ["items", "customer", "shipping_address"],
-      });
-      // const cart = await this.cartService_.retrieve(order.cart_id);
-      console.log(order, "order");
-      await this.emailClient_.emails.send({
-        from: "mail@natureme.life",
-        to: order.email,
-        subject: "Thank you for your order!",
-        html: "Thank you for your order!",
-      });
+    this.logger_.info("Trying to send email...");
+    await this.emailClient_.emails.send({
+      from: "mail@natureme.life",
+      to: "akomis@pm.me",
+      subject: "TEST EMAIL",
+      html: "test email!",
+    });
 
-      return Promise.resolve({
-        to: order.email,
-        status: "done",
-        data: {
-          subject: "You placed a new order!",
-          items: order.items,
-        },
-      });
-    }
-    return Promise.resolve(undefined);
+    this.logger_.info("SENT SENT SENT...");
+
+    const order = await this.orderService_.retrieve(data.id, {
+      relations: ["items", "customer", "shipping_address"],
+    });
+    // const cart = await this.cartService_.retrieve(order.cart_id);
+    console.log(order, "order");
+    await this.emailClient_.emails.send({
+      from: "mail@natureme.life",
+      to: order.email,
+      subject: "TEST EMAIL",
+      html: "test email!",
+    });
+
+    return Promise.resolve({
+      to: order.email,
+      status: "done",
+      data: {
+        subject: "You placed a new order!",
+        items: order.items,
+      },
+    });
   }
 
   resendNotification(
