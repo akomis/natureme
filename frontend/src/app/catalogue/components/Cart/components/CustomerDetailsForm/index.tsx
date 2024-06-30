@@ -79,11 +79,7 @@ const CustomerDetailsForm = () => {
   };
 
   return (
-    <Form.Root
-      className="flex flex-col gap-5 px-2"
-      //ref={formRef}
-      onSubmit={handleSubmit}
-    >
+    <Form.Root className="flex flex-col gap-5 px-2" onSubmit={handleSubmit}>
       <Form.Field className="grid" name="email">
         <div className="flex items-baseline justify-between">
           <Form.Label className="text-xl font-medium leading-[35px] text-gray-800">
