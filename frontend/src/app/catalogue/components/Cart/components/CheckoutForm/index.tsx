@@ -108,7 +108,9 @@ const CheckoutForm = () => {
 
       <p className="font-sans my-0 text-start">
         By proceeding with the order you agree to the{" "}
-        <Link href="/">Terms & Conditions</Link>
+        <Link href="/legal" target="_blank">
+          Terms & Conditions
+        </Link>
       </p>
     </form>
   );

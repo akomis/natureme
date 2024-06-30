@@ -9,7 +9,6 @@ import {
   Hr,
   Head,
   Column,
-  Section,
   Link,
 } from "@react-email/components";
 
@@ -58,7 +57,7 @@ export function EmailTemplate({ message, order }: EmailTemplateProps) {
           <title>{message}</title>
         </Head>
 
-        <Container className="bg-jasmine flex flex-col justify-center items-center p-4 rounded-xl">
+        <Container className="bg-jasmine p-4 rounded-xl">
           <Row>
             <Heading className="font-serif" as="h1">
               {message}

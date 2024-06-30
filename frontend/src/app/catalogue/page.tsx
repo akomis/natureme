@@ -93,7 +93,7 @@ export default function Catalogue() {
   }
 
   return (
-    <Screen className="items-start max-w-[80vw] pt-10 px-10 pb-0">
+    <Screen className="items-start max-w-[90vw] pb-0">
       <div className="flex w-full justify-between items-center mt-20 z-10">
         <PageHeader title={"Catalogue"} />
         <Cart />

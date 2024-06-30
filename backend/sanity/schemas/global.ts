@@ -50,7 +50,13 @@ export default defineType({
     }),
     defineField({
       title: 'Terms & Conditions',
-      name: 'tac',
+      name: 'terms',
+      type: 'array',
+      of: [defineArrayMember({ type: 'block' })],
+    }),
+    defineField({
+      title: 'Privacy Policy',
+      name: 'privacy',
       type: 'array',
       of: [defineArrayMember({ type: 'block' })],
     }),
