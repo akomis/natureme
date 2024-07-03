@@ -57,8 +57,8 @@ export function EmailTemplate({ message, order }: EmailTemplateProps) {
         <Head>
           <title>{message}</title>
         </Head>
-        <Section className="bg-nescafeBoi p-10 h-screen w-screen">
-          <Container className="bg-jasmine p-4 rounded-2xl">
+        <Section className="bg-jasmine p-10 h-screen w-screen">
+          <Container className="bg-nescafeBoi p-4 rounded-2xl">
             <Row>
               <Heading className="font-serif" as="h1">
                 {message}
