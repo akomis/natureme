@@ -96,7 +96,7 @@ export function EmailTemplate({ message, order }: EmailTemplateProps) {
 
             <Hr />
 
-            <Text className="font-serif text-lg text-black text-center">
+            <Text className="font-serif text-xl text-black text-center">
               <Link
                 className="font-bold text-[#b459d5]"
                 href={"https://www.natureme.com.cy"}
