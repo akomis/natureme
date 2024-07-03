@@ -96,7 +96,7 @@ export function EmailTemplate({ message, order }: EmailTemplateProps) {
 
             <Hr />
 
-            <Text className="font-serif text-black text-center">
+            <Text className="font-serif text-lg text-black text-center">
               <Link
                 className="font-bold text-[#b459d5]"
                 href={"https://www.natureme.com.cy"}
@@ -106,11 +106,11 @@ export function EmailTemplate({ message, order }: EmailTemplateProps) {
               - We trust nature for everything
             </Text>
 
-            <Text className="text-md text-amber-100 text-center">
+            <Text className="text-md text-gray-800 text-center">
               Please do not reply to this email.{"\n"}
               Instead, comunnicate with us through{" "}
               <Link
-                className="font-bold text-gray-100 hover:text-white"
+                className="font-bold text-gray-700 hover:text-white"
                 href={"https://www.natureme.com.cy/contact"}
               >
                 our contact page
