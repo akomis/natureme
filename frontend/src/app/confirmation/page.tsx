@@ -42,9 +42,9 @@ const Confirmation = () => {
         case "succeeded":
           client.carts.complete(cartId).then(({ data, response, type }) => {
             if (type !== "order") {
-              setStatus("Payment succeeded, but order not created.");
+              setStatus("Payment succeeded, but order not placed succesfully.");
             } else {
-              setStatus("Payment and order created!");
+              setStatus("Payment and order placed!");
               setOrderNo(data.id.replace("order_", "#"));
             }
 
