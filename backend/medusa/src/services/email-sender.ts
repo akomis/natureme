@@ -14,6 +14,9 @@ export default class EmailSenderService extends AbstractNotificationService {
   protected cartService_: CartService;
   protected emailClient_: Resend;
   protected logger_: Logger;
+  private fromEmail = `noreply${
+    process.env.ENV !== "development" ? "+test" : ""
+  }@natureme.life`;
 
   constructor(container, options) {
     super(container);
@@ -25,7 +28,7 @@ export default class EmailSenderService extends AbstractNotificationService {
 
   private orderPlacedHandler = async (order: Order) => {
     await this.emailClient_.emails.send({
-      from: "mail@natureme.life",
+      from: this.fromEmail,
       to: order.email,
       subject: "NatureMe - Order Confirmation",
       react: EmailTemplate({ message: "Thank you for your order!", order }),
@@ -43,7 +46,7 @@ export default class EmailSenderService extends AbstractNotificationService {
 
   private orderShipmentCreatedHandler = async (order: Order) => {
     await this.emailClient_.emails.send({
-      from: "mail@natureme.life",
+      from: this.fromEmail,
       to: order.email,
       subject: "NatureMe - Order Shipped",
       react: EmailTemplate({ message: "We  have shipped your order!", order }),
@@ -60,7 +63,7 @@ export default class EmailSenderService extends AbstractNotificationService {
 
   private orderRefundCratedHandler = async (order: Order) => {
     await this.emailClient_.emails.send({
-      from: "mail@natureme.life",
+      from: this.fromEmail,
       to: order.email,
       subject: "NatureMe - Order Refunded",
       react: EmailTemplate({ message: "We have refunded your order.", order }),

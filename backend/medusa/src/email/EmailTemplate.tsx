@@ -105,6 +105,17 @@ export function EmailTemplate({ message, order }: EmailTemplateProps) {
               </Link>{" "}
               - We trust nature for everything
             </Text>
+
+            <Text className="text-gray-200 text-center">
+              Please do not reply to this email. For any support, please reach
+              us through
+              <Link
+                className="font-bold text-[#b459d5]"
+                href={"https://www.natureme.com.cy/contact"}
+              >
+                our contact page
+              </Link>
+            </Text>
           </Row>
         </Container>
       </Html>
