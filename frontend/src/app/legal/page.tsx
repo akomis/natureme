@@ -9,7 +9,7 @@ export default async function Legal() {
   const privacy = globalAssets.privacy;
 
   return (
-    <Screen className="min-w-[80vw]">
+    <Screen className="">
       <div className="flex flex-col h-full justify-center items-center">
         <PageHeader title={"Legal"} />
 
