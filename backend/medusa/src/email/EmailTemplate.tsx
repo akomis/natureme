@@ -106,7 +106,7 @@ export function EmailTemplate({ message, order }: EmailTemplateProps) {
               - We trust nature for everything
             </Text>
 
-            <Text className="text-md text-gray-800 text-center">
+            <Text className="text-sm text-gray-800 text-center">
               Please do not reply to this email.{"\n"}
               Instead, comunnicate with us through{" "}
               <Link
