@@ -10,7 +10,7 @@ export default async function Legal() {
 
   return (
     <Screen className="min-w-[80vw]">
-      <div className="flex flex-col justify-center items-start gap-4">
+      <div className="flex flex-col h-full justify-center items-center">
         <PageHeader title={"Legal"} />
 
         <div
@@ -27,7 +27,7 @@ export default async function Legal() {
           />
           <div
             role="tabpanel"
-            className="tab-content  rounded-box p-6 overflow-y-auto h-[80vh]"
+            className="tab-content rounded-box p-6 overflow-y-auto h-[80vh]"
           >
             <PortableText value={terms} />
           </div>

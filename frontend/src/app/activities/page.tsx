@@ -19,18 +19,18 @@ export default async function Activities() {
               {activity.title}
             </h2>
 
-            <ImageCarousel
-              images={
-                activity.gallery.map((item: any) => ({
+            {activity?.gallery && activity?.gallery?.length > 0 && (
+              <ImageCarousel
+                images={activity.gallery.map((item: any) => ({
                   id: item._key,
                   url: item,
-                })) ?? []
-              }
-              isSanity
-            />
+                }))}
+                isSanity
+              />
+            )}
 
             <div className="text-xl font-sans">
-              <PortableText value={activity.text as any} />
+              <PortableText value={activity.text} />
             </div>
 
             <p className="italic self-end">{activity.date}</p>
@@ -38,16 +38,6 @@ export default async function Activities() {
           </div>
         ))}
       </div>
-
-      {/* <div className="h-[200px] flex gap-2">
-        {activity.gallery.map((item: any) => (
-          <ImageWithLoading
-            key={item._key}
-            image={{ id: item._key, url: item }}
-            isSanity={true}
-          />
-        ))}
-      </div> */}
     </Screen>
   );
 }

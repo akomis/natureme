@@ -77,9 +77,9 @@ const ProductItem = ({
             />
           )}
 
-          <p className="py-4 text-justify text-xl m-0 font-sans">
+          <pre className="w-auto text-wrap text-xl m-0 px-0 py-4 font-sans bg-transparent">
             {description}
-          </p>
+          </pre>
 
           {item.material && (
             <>
@@ -100,7 +100,9 @@ const ProductItem = ({
             <div className="flex justify-end">
               <p className="font-sans text-sm text-center md:text-left">
                 For details regarding ordering and products refer to the{" "}
-                <Link href="/faq">FAQ</Link>
+                <Link href="/faq" target="_blank">
+                  FAQ
+                </Link>
               </p>
             </div>
             <QuantityPicker variant={item} size={24} />

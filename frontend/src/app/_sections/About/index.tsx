@@ -20,9 +20,9 @@ const About = async () => {
           <Image
             src="/about_2.webp"
             alt="nature me besswsax"
-            width={500}
-            height={500}
-            className="rounded-xl max-h-[500px]"
+            width={400}
+            height={300}
+            className="rounded-xl max-h-[300px] mt-10"
           />
           <div className="w-[70vw]">
             <h2 className="text-4xl font-bold">About Us</h2>
