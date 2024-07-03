@@ -10,6 +10,7 @@ import {
   Head,
   Column,
   Link,
+  Section,
 } from "@react-email/components";
 
 export const printPrice = (amount?: number | null) => {
@@ -56,69 +57,70 @@ export function EmailTemplate({ message, order }: EmailTemplateProps) {
         <Head>
           <title>{message}</title>
         </Head>
+        <Section className="bg-nescafeBoi">
+          <Container className="bg-jasmine p-4 rounded-xl">
+            <Row>
+              <Heading className="font-serif" as="h1">
+                {message}
+              </Heading>
+            </Row>
 
-        <Container className="bg-jasmine p-4 rounded-xl">
-          <Row>
-            <Heading className="font-serif" as="h1">
-              {message}
-            </Heading>
-          </Row>
+            <Row>
+              <Heading as="h5">
+                Below you can find the details of your order
+              </Heading>
 
-          <Row>
-            <Heading as="h5">
-              Below you can find the details of your order
-            </Heading>
+              <Text>Order Number: {orderId}</Text>
+              <Text>
+                Address: {order.shipping_address?.address_1},{" "}
+                {order.shipping_address?.postal_code},{" "}
+                {order.shipping_address?.city},{" "}
+                {order.shipping_address?.country_code.toUpperCase()}
+              </Text>
 
-            <Text>Order Number: {orderId}</Text>
-            <Text>
-              Address: {order.shipping_address?.address_1},{" "}
-              {order.shipping_address?.postal_code},{" "}
-              {order.shipping_address?.city},{" "}
-              {order.shipping_address?.country_code.toUpperCase()}
-            </Text>
+              <Hr />
 
-            <Hr />
+              {order.items.map((item) => (
+                <Row key={item.id}>
+                  <Column>
+                    <Text>
+                      {item.quantity} x {item.title}
+                    </Text>
+                  </Column>
+                  <Column>
+                    <Text>{printPrice(item.unit_price * item.quantity)}</Text>
+                  </Column>
+                </Row>
+              ))}
 
-            {order.items.map((item) => (
-              <Row key={item.id}>
-                <Column>
-                  <Text>
-                    {item.quantity} x {item.title}
-                  </Text>
-                </Column>
-                <Column>
-                  <Text>{printPrice(item.unit_price * item.quantity)}</Text>
-                </Column>
-              </Row>
-            ))}
+              <Text>Total: {printPrice(total)}</Text>
 
-            <Text>Total: {printPrice(total)}</Text>
+              <Hr />
 
-            <Hr />
+              <Text className="font-serif text-xl text-black text-center">
+                <Link
+                  className="font-bold text-[#b459d5]"
+                  href={"https://www.natureme.com.cy"}
+                >
+                  NatureMe
+                </Link>{" "}
+                - We trust nature for everything
+              </Text>
 
-            <Text className="font-serif text-xl text-black text-center">
-              <Link
-                className="font-bold text-[#b459d5]"
-                href={"https://www.natureme.com.cy"}
-              >
-                NatureMe
-              </Link>{" "}
-              - We trust nature for everything
-            </Text>
-
-            <Text className="text-sm text-gray-800 text-center">
-              Please do not reply to this email.{"\n"}
-              Instead, comunnicate with us through{" "}
-              <Link
-                className="font-bold text-gray-700 hover:text-white"
-                href={"https://www.natureme.com.cy/contact"}
-              >
-                our contact page
-              </Link>
-              .
-            </Text>
-          </Row>
-        </Container>
+              <Text className="text-sm text-gray-800 text-center">
+                Please do not reply to this email.{"\n"}
+                Instead, comunnicate with us through{" "}
+                <Link
+                  className="font-bold text-gray-700 hover:text-white"
+                  href={"https://www.natureme.com.cy/contact"}
+                >
+                  our contact page
+                </Link>
+                .
+              </Text>
+            </Row>
+          </Container>
+        </Section>
       </Html>
     </Tailwind>
   );
