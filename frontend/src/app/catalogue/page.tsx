@@ -87,7 +87,9 @@ export default function Catalogue() {
   if (!products) {
     return (
       <Screen>
-        <p>{"Couldn't load catalogue. Please retry later."}</p>
+        <p className="text-lg">
+          {"Couldn't load catalogue. Please retry later."}
+        </p>
       </Screen>
     );
   }
