@@ -135,7 +135,7 @@ export default class EmailSenderService extends AbstractNotificationService {
     data: Record<string, unknown>;
   }> {
     const order = await this.orderService_.retrieve(data.id, {
-      relations: ["items", "customer", "shipping_address", "total"],
+      relations: ["items", "customer", "shipping_address", "totals"],
     });
 
     switch (event) {
