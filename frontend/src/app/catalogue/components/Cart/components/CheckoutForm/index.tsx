@@ -49,8 +49,9 @@ const CheckoutForm = () => {
           },
           onError: () => {
             toast.error(
-              "There was a problem. Please try again later. (Couldn't update shipping methrod)"
+              "There was a problem. Please try again later. (Couldn't update shipping method)"
             );
+            setSelectedShippingOptionId(undefined);
           },
         }
       );
