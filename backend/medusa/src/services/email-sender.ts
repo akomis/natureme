@@ -144,7 +144,7 @@ export default class EmailSenderService extends AbstractNotificationService {
     switch (event) {
       case "order.placed":
         return await this.orderPlacedHandler(order);
-      case "order.fullfillment_created":
+      case "order.fulfillment_created":
         return await this.orderFullfillmentCreatedHandler(order);
       case "order.shipment_created":
         return await this.orderShipmentCreatedHandler(order);
