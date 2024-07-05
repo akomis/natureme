@@ -43,7 +43,9 @@ const CustomerDetailsForm = () => {
       {
         onSuccess: () => {
           createPaymentSession.mutate(void 0, {
-            onSettled: refetchCart,
+            onSettled: () => {
+              refetchCart();
+            },
             onError: () => {
               toast.error(
                 "There was a problem. Please try again later. (Couldn't create payment session)"
