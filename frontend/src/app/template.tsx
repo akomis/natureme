@@ -1,9 +1,11 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
+import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
 import { Bounce, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import BackgroundFlowers from "../components/BackgroundFlowers";
 
 const variants = {
   out: {
@@ -36,7 +38,9 @@ export default function Template({ children }: { children: React.ReactNode }) {
         exit="out"
         transition={{ ease: "easeInOut", duration: 1 }}
       >
-        {children}
+        <BackgroundFlowers />
+        <div>{children}</div>
+
         <ToastContainer
           position="bottom-center"
           autoClose={5000}

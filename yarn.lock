@@ -468,6 +468,19 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
+"@lottiefiles/dotlottie-react@^0.7.2":
+  version "0.7.2"
+  resolved "https://registry.npmjs.org/@lottiefiles/dotlottie-react/-/dotlottie-react-0.7.2.tgz#933078234062ab449a0a03e198d29660f7d612d6"
+  integrity sha512-gYVFCzl2fD15/OHWv4dB+PolNH0VKJlPqP1ty3DHGxkSr7bzBDNHXGzw8hHD0a4+zoc2s0p1fofWaCaiJc7IFg==
+  dependencies:
+    "@lottiefiles/dotlottie-web" "0.28.0"
+    debounce "^2.0.0"
+
+"@lottiefiles/dotlottie-web@0.28.0":
+  version "0.28.0"
+  resolved "https://registry.npmjs.org/@lottiefiles/dotlottie-web/-/dotlottie-web-0.28.0.tgz#c4e32f8fc83e7ec39f1a050abd08ff2ad3d6e77e"
+  integrity sha512-erAHr4VJl/Mbsur/ydOXEc0jSOkGpwM2WsprMGRlUsvyZvtv/URefj/CsovoKc9rsbUafEt2fjYkENs9IC332w==
+
 "@medusajs/medusa-js@*":
   version "6.1.8"
   resolved "https://registry.npmjs.org/@medusajs/medusa-js/-/medusa-js-6.1.8.tgz#2c8c5aa30757a3a0f5e6aec1bdbe74d2080eaa4f"
@@ -2070,6 +2083,11 @@ debounce@2.0.0:
   version "2.0.0"
   resolved "https://registry.npmjs.org/debounce/-/debounce-2.0.0.tgz#b2f914518a1481466f4edaee0b063e4d473ad549"
   integrity sha512-xRetU6gL1VJbs85Mc4FoEGSjQxzpdxRyFhe3lmWFyy2EzydIcD4xzUvRJMD+NPDfMwKNhxa3PvsIOU32luIWeA==
+
+debounce@^2.0.0:
+  version "2.1.0"
+  resolved "https://registry.npmjs.org/debounce/-/debounce-2.1.0.tgz#eab25eaf254b848fcfccffbde75bdaa44842caa3"
+  integrity sha512-OkL3+0pPWCqoBc/nhO9u6TIQNTK44fnBnzuVtJAbp13Naxw9R6u21x+8tVTka87AhDZ3htqZ2pSSsZl9fqL2Wg==
 
 debug@^3.2.7:
   version "3.2.7"

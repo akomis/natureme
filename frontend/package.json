@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@formkit/auto-animate": "^0.8.2",
+    "@lottiefiles/dotlottie-react": "^0.7.2",
     "@portabletext/react": "^3.0.15",
     "@radix-ui/react-form": "^0.0.3",
     "@stripe/react-stripe-js": "^2.7.1",

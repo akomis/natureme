@@ -86,7 +86,7 @@ const Header = () => {
             </div>
           </div>
         </div>
-        <div className="mt-5 h-[300px]">
+        <div className="mt-5 h-[400px]">
           <AnimatedImageSwitch index={slideIndex} />
         </div>
       </div>
