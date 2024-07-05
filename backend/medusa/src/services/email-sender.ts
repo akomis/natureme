@@ -4,10 +4,10 @@ import {
   Logger,
   Order,
   OrderService,
+  ShippingMethod,
 } from "@medusajs/medusa";
 import { Resend } from "resend";
 import EmailTemplate from "../email/EmailTemplate";
-import { isDelivery } from "src/utils";
 
 export default class EmailSenderService extends AbstractNotificationService {
   static identifier = "email-sender";
@@ -26,6 +26,10 @@ export default class EmailSenderService extends AbstractNotificationService {
     this.logger_ = container.logger;
     this.emailClient_ = new Resend(process.env.RESEND_API_KEY);
   }
+
+  private isDelivery = (shippingMethod: ShippingMethod) =>
+    shippingMethod.shipping_option_id ===
+    process.env.DELIVERY_SHIPPING_OPTION_ID;
 
   private orderPlacedHandler = async (order: Order) => {
     // Notify customer
@@ -58,7 +62,7 @@ export default class EmailSenderService extends AbstractNotificationService {
   };
 
   private orderFullfillmentCreatedHandler = async (order: Order) => {
-    if (isDelivery(order.shipping_methods[0]))
+    if (this.isDelivery(order.shipping_methods[0]))
       return Promise.resolve({
         to: "",
         status: "done",
@@ -83,7 +87,7 @@ export default class EmailSenderService extends AbstractNotificationService {
   };
 
   private orderShipmentCreatedHandler = async (order: Order) => {
-    if (!isDelivery(order.shipping_methods[0]))
+    if (!this.isDelivery(order.shipping_methods[0]))
       return Promise.resolve({
         to: "",
         status: "done",

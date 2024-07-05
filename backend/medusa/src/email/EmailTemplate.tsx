@@ -1,4 +1,4 @@
-import { Order } from "@medusajs/medusa";
+import { Order, ShippingMethod } from "@medusajs/medusa";
 import {
   Html,
   Container,
@@ -12,7 +12,6 @@ import {
   Link,
   Section,
 } from "@react-email/components";
-import { isDelivery } from "src/utils";
 
 export const printPrice = (amount?: number | null) => {
   const formattedPrice = (amount ?? 0) / 100;
@@ -31,6 +30,10 @@ type EmailTemplateProps = {
 };
 
 export function EmailTemplate({ message, order }: EmailTemplateProps) {
+  const isDelivery = (shippingMethod: ShippingMethod) =>
+    shippingMethod.shipping_option_id ===
+    process.env.DELIVERY_SHIPPING_OPTION_ID;
+
   const orderId = order.id.replace("order_", "#");
 
   const shippingMethod = order.shipping_methods[0];
