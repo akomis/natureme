@@ -12,6 +12,7 @@ import {
   Link,
   Section,
 } from "@react-email/components";
+import { isDelivery } from "src/utils";
 
 export const printPrice = (amount?: number | null) => {
   const formattedPrice = (amount ?? 0) / 100;
@@ -32,15 +33,13 @@ type EmailTemplateProps = {
 export function EmailTemplate({ message, order }: EmailTemplateProps) {
   const orderId = order.id.replace("order_", "#");
 
-  const shippingOption = order.shipping_methods[0];
-  const isDelivery =
-    shippingOption.shipping_option_id === "so_01HYG0KJ1Q7X51C2A4CZWZDEBC";
+  const shippingMethod = order.shipping_methods[0];
 
   const total =
     order.items.reduce(
       (total, item) => total + item.quantity * item.unit_price,
       0
-    ) + shippingOption.price;
+    ) + shippingMethod.price;
 
   return (
     <Tailwind
@@ -76,7 +75,7 @@ export function EmailTemplate({ message, order }: EmailTemplateProps) {
 
               <Text>Order Number: {orderId}</Text>
 
-              {isDelivery ? (
+              {isDelivery(shippingMethod) ? (
                 <Text>
                   Address: {order.shipping_address?.address_1},{" "}
                   {order.shipping_address?.postal_code},{" "}
@@ -115,7 +114,7 @@ export function EmailTemplate({ message, order }: EmailTemplateProps) {
                   <Text>Shipping</Text>
                 </Column>
                 <Column>
-                  <Text>{printPrice(shippingOption.price)}</Text>
+                  <Text>{printPrice(shippingMethod.price)}</Text>
                 </Column>
               </Row>
 
