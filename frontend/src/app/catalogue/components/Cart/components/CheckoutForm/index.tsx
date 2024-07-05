@@ -84,7 +84,7 @@ const CheckoutForm = () => {
     };
 
     updateCart.mutate({
-      shipping_address: isDelivery ? address : undefined,
+      shipping_address: isDelivery ? address : {},
       billing_address: address,
     });
 
@@ -166,7 +166,7 @@ const CheckoutForm = () => {
             <button
               className="btn btn-primary text-lg flex flex-1"
               onClick={handlePayment}
-              disabled={!stripe || !items.length}
+              disabled={!stripe || !items.length || !selectedShippingOptionId}
             >
               Checkout
             </button>

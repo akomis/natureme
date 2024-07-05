@@ -17,7 +17,7 @@ export const fetchFromSanity = async (
 };
 
 export const sendEmail = async (subject: string, content: string) => {
-  const data = JSON.stringify({ to: "akomis@pm.me", subject, content });
+  const data = JSON.stringify({ subject, content });
 
   const response = await fetch("/api/sendmail", {
     method: "POST",

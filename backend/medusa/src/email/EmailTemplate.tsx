@@ -31,10 +31,6 @@ type EmailTemplateProps = {
 
 export function EmailTemplate({ message, order }: EmailTemplateProps) {
   const orderId = order.id.replace("order_", "#");
-  const total = order.items.reduce(
-    (total, item) => total + item.quantity * item.unit_price,
-    0
-  );
 
   return (
     <Tailwind
@@ -66,17 +62,28 @@ export function EmailTemplate({ message, order }: EmailTemplateProps) {
             </Row>
 
             <Row>
-              <Heading as="h5">
-                Below you can find the details of your order
-              </Heading>
+              <Heading as="h5">Order Details</Heading>
 
               <Text>Order Number: {orderId}</Text>
-              <Text>
-                Address: {order.shipping_address?.address_1},{" "}
-                {order.shipping_address?.postal_code},{" "}
-                {order.shipping_address?.city},{" "}
-                {order.shipping_address?.country_code.toUpperCase()}
-              </Text>
+
+              {order.shipping_address?.address_1 ? (
+                <Text>
+                  Address: {order.shipping_address?.address_1},{" "}
+                  {order.shipping_address?.postal_code},{" "}
+                  {order.shipping_address?.city},{" "}
+                  {order.shipping_address?.country_code.toUpperCase()}
+                </Text>
+              ) : (
+                <Text>
+                  Pickup from{" "}
+                  <Link
+                    className="font-bold"
+                    href={"https://maps.app.goo.gl/pzgSZoSXP2TUvjdH6"}
+                  >
+                    our store at Apollonos 4, Lympia, 2566.
+                  </Link>
+                </Text>
+              )}
 
               <Hr />
 
@@ -93,7 +100,7 @@ export function EmailTemplate({ message, order }: EmailTemplateProps) {
                 </Row>
               ))}
 
-              <Text>Total: {printPrice(total)}</Text>
+              <Text>Total: {printPrice(order.cart.total)}</Text>
 
               <Hr />
 

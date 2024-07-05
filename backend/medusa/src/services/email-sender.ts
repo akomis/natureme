@@ -14,9 +14,9 @@ export default class EmailSenderService extends AbstractNotificationService {
   protected cartService_: CartService;
   protected emailClient_: Resend;
   protected logger_: Logger;
-  private fromEmail = `noreply${
-    process.env.ENV !== "development" ? "+test" : ""
-  }@natureme.life`;
+
+  private subaddressing = process.env.NODE_ENV === "production" ? "" : "+test";
+  private fromEmail = `noreply${this.subaddressing}@natureme.life`;
 
   constructor(container, options) {
     super(container);
@@ -27,11 +27,23 @@ export default class EmailSenderService extends AbstractNotificationService {
   }
 
   private orderPlacedHandler = async (order: Order) => {
+    // Notify customer
     await this.emailClient_.emails.send({
       from: this.fromEmail,
       to: order.email,
       subject: "NatureMe - Order Confirmation",
       react: EmailTemplate({ message: "Thank you for your order!", order }),
+    });
+
+    // Notify admin
+    await this.emailClient_.emails.send({
+      from: this.fromEmail,
+      to: process.env.ADMIN_EMAIL,
+      subject: "You have a new order!",
+      react: EmailTemplate({
+        message: `New Order from ${order.email}!`,
+        order,
+      }),
     });
 
     return Promise.resolve({
@@ -44,7 +56,31 @@ export default class EmailSenderService extends AbstractNotificationService {
     });
   };
 
+  private orderFullfillmentCreatedHandler = async (order: Order) => {
+    if (order.shipping_methods[0].shipping_option.name === "Delivery")
+      return Promise.resolve({});
+
+    await this.emailClient_.emails.send({
+      from: this.fromEmail,
+      to: order.email,
+      subject: "NatureMe - Order Ready for Pickup",
+      react: EmailTemplate({ message: "Your order is ready!", order }),
+    });
+
+    return Promise.resolve({
+      to: order.email,
+      status: "done",
+      data: {
+        subject: "NatureMe - Order Ready for Pickup",
+        items: order.items,
+      },
+    });
+  };
+
   private orderShipmentCreatedHandler = async (order: Order) => {
+    if (order.shipping_methods[0].shipping_option.name === "Pickup")
+      return Promise.resolve({});
+
     await this.emailClient_.emails.send({
       from: this.fromEmail,
       to: order.email,
@@ -95,6 +131,8 @@ export default class EmailSenderService extends AbstractNotificationService {
     switch (event) {
       case "order.placed":
         return await this.orderPlacedHandler(order);
+      case "order.fullfillment_created":
+        return await this.orderFullfillmentCreatedHandler(order);
       case "order.shipment_created":
         return await this.orderShipmentCreatedHandler(order);
       case "order.refund_created":
