@@ -9,7 +9,7 @@ export default async (container: MedusaContainer): Promise<void> => {
   );
 
   notificationService.subscribe("order.placed", "email-sender");
-  notificationService.subscribe("order.fullfillment_created", "email-sender");
+  notificationService.subscribe("order.fulfillment_created", "email-sender");
   notificationService.subscribe("order.shipment_created", "email-sender");
   notificationService.subscribe("order.refund_created", "email-sender");
 };
