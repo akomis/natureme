@@ -118,7 +118,7 @@ const CheckoutForm = () => {
                 : "Please pick a shipping option"}
             </option>
             {shipping_options?.map((shippingOption) => {
-              if (shippingOption.adminOnly) return null;
+              if (shippingOption.admin_only) return null;
 
               return (
                 <option key={shippingOption.id} value={shippingOption.id}>
