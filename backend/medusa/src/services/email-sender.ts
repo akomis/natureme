@@ -36,15 +36,15 @@ export default class EmailSenderService extends AbstractNotificationService {
     });
 
     // Notify admin
-    await this.emailClient_.emails.send({
-      from: this.fromEmail,
-      to: process.env.ADMIN_EMAIL,
-      subject: "You have a new order!",
-      react: EmailTemplate({
-        message: `New Order from ${order.email}!`,
-        order,
-      }),
-    });
+    // await this.emailClient_.emails.send({
+    //   from: this.fromEmail,
+    //   to: process.env.ADMIN_EMAIL,
+    //   subject: "You have a new order!",
+    //   react: EmailTemplate({
+    //     message: `New Order from ${order.email}!`,
+    //     order,
+    //   }),
+    // });
 
     return Promise.resolve({
       to: order.email,
@@ -59,7 +59,7 @@ export default class EmailSenderService extends AbstractNotificationService {
   private orderFullfillmentCreatedHandler = async (order: Order) => {
     if (order.shipping_methods[0].shipping_option.name === "Delivery")
       return Promise.resolve({
-        to: order.email,
+        to: "",
         status: "done",
         data: {},
       });
@@ -84,7 +84,7 @@ export default class EmailSenderService extends AbstractNotificationService {
   private orderShipmentCreatedHandler = async (order: Order) => {
     if (order.shipping_methods[0].shipping_option.name === "Pickup")
       return Promise.resolve({
-        to: order.email,
+        to: "",
         status: "done",
         data: {},
       });

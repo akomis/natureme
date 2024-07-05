@@ -5,6 +5,7 @@ import { isPhoneValid, printPrice } from "@/utils";
 import * as Form from "@radix-ui/react-form";
 import {
   useCreatePaymentSession,
+  useGetCart,
   useSessionCart,
   useUpdateCart,
 } from "medusa-react";
@@ -20,6 +21,7 @@ const CustomerDetailsForm = () => {
 
   const { total } = useSessionCart();
 
+  const { refetch: refetchCart } = useGetCart(cartId);
   const createPaymentSession = useCreatePaymentSession(cartId);
   const updateCart = useUpdateCart(cartId);
 
@@ -41,6 +43,7 @@ const CustomerDetailsForm = () => {
       {
         onSuccess: () => {
           createPaymentSession.mutate(void 0, {
+            onSettled: refetchCart,
             onError: () => {
               toast.error(
                 "There was a problem. Please try again later. (Couldn't create payment session)"
