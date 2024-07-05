@@ -146,12 +146,11 @@ const CheckoutForm = () => {
             }}
             options={{ mode: "billing" }}
           />
+          <div className="divider"></div>
+
+          <PaymentElement />
         </>
       )}
-
-      <div className="divider"></div>
-
-      <PaymentElement options={{ defaultValues: { billingDetails: {} } }} />
 
       <div className="h-20 flex items-center">
         {isLoading ? (
