@@ -32,14 +32,15 @@ type EmailTemplateProps = {
 export function EmailTemplate({ message, order }: EmailTemplateProps) {
   const orderId = order.id.replace("order_", "#");
 
-  const shippingOption = order.shipping_methods[0].shipping_option;
-  const isDelivery = shippingOption.name === "Delivery";
+  const shippingOption = order.shipping_methods[0];
+  const isDelivery =
+    shippingOption.shipping_option_id === "so_01HYG0KJ1Q7X51C2A4CZWZDEBC";
 
   const total =
     order.items.reduce(
       (total, item) => total + item.quantity * item.unit_price,
       0
-    ) + shippingOption.amount;
+    ) + shippingOption.price;
 
   return (
     <Tailwind
@@ -114,7 +115,7 @@ export function EmailTemplate({ message, order }: EmailTemplateProps) {
                   <Text>Shipping</Text>
                 </Column>
                 <Column>
-                  <Text>{printPrice(shippingOption.amount)}</Text>
+                  <Text>{printPrice(shippingOption.price)}</Text>
                 </Column>
               </Row>
 
