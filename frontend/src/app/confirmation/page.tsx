@@ -44,7 +44,7 @@ const Confirmation = () => {
             if (type !== "order") {
               setStatus("Payment succeeded, but order not placed succesfully.");
             } else {
-              setStatus("Payment and order placed!");
+              setStatus("Order placed!");
               setOrderNo(data.id.replace("order_", "#"));
             }
 

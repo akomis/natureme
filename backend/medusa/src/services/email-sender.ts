@@ -27,6 +27,8 @@ export default class EmailSenderService extends AbstractNotificationService {
   }
 
   private orderPlacedHandler = async (order: Order) => {
+    console.log(order);
+
     // Notify customer
     await this.emailClient_.emails.send({
       from: this.fromEmail,
@@ -36,15 +38,15 @@ export default class EmailSenderService extends AbstractNotificationService {
     });
 
     // Notify admin
-    // await this.emailClient_.emails.send({
-    //   from: this.fromEmail,
-    //   to: process.env.ADMIN_EMAIL,
-    //   subject: "You have a new order!",
-    //   react: EmailTemplate({
-    //     message: `New Order from ${order.email}!`,
-    //     order,
-    //   }),
-    // });
+    await this.emailClient_.emails.send({
+      from: this.fromEmail,
+      to: process.env.ADMIN_EMAIL,
+      subject: "You have a new order!",
+      react: EmailTemplate({
+        message: `New Order from ${order.email}!`,
+        order,
+      }),
+    });
 
     return Promise.resolve({
       to: order.email,

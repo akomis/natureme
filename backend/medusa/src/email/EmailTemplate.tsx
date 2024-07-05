@@ -100,7 +100,7 @@ export function EmailTemplate({ message, order }: EmailTemplateProps) {
                 </Row>
               ))}
 
-              <Text>Total: {printPrice(order.cart.total)}</Text>
+              <Text>Total: {printPrice(order.total)}</Text>
 
               <Hr />
 

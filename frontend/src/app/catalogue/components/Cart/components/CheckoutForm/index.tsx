@@ -23,8 +23,7 @@ const CheckoutForm = () => {
   const [shippingAddress, setShippingAddress] = useState<
     StripeAddressElementChangeEvent["value"] | null
   >(null);
-  const [selectedShippingOptionId, setSelectedShippingOptionId] =
-    useState(undefined);
+  const [selectedShippingOptionId, setSelectedShippingOptionId] = useState("");
 
   const cartId = localStorage.getItem("cart_id") ?? "";
   const { refetch: refetchCart } = useGetCart(cartId);
@@ -51,7 +50,7 @@ const CheckoutForm = () => {
             toast.error(
               "There was a problem. Please try again later. (Couldn't update shipping method)"
             );
-            setSelectedShippingOptionId(undefined);
+            setSelectedShippingOptionId("");
           },
         }
       );
@@ -113,7 +112,7 @@ const CheckoutForm = () => {
               setSelectedShippingOptionId(e.target.value as any);
             }}
           >
-            <option selected disabled>
+            <option value="" disabled>
               {areShippingOptionsLoading
                 ? "Loading shipping options..."
                 : "Please pick a shipping option"}
@@ -133,7 +132,7 @@ const CheckoutForm = () => {
         </label>
       </div>
 
-      {selectedShippingOptionId !== undefined && (
+      {!!selectedShippingOptionId && (
         <>
           <div className="divider"></div>
           <p className="text-xl font-sans">
