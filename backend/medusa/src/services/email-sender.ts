@@ -58,7 +58,11 @@ export default class EmailSenderService extends AbstractNotificationService {
 
   private orderFullfillmentCreatedHandler = async (order: Order) => {
     if (order.shipping_methods[0].shipping_option.name === "Delivery")
-      return Promise.resolve({});
+      return Promise.resolve({
+        to: order.email,
+        status: "done",
+        data: {},
+      });
 
     await this.emailClient_.emails.send({
       from: this.fromEmail,
@@ -79,7 +83,11 @@ export default class EmailSenderService extends AbstractNotificationService {
 
   private orderShipmentCreatedHandler = async (order: Order) => {
     if (order.shipping_methods[0].shipping_option.name === "Pickup")
-      return Promise.resolve({});
+      return Promise.resolve({
+        to: order.email,
+        status: "done",
+        data: {},
+      });
 
     await this.emailClient_.emails.send({
       from: this.fromEmail,
