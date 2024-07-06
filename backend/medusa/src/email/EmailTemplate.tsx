@@ -35,14 +35,13 @@ export function EmailTemplate({ message, order }: EmailTemplateProps) {
     process.env.DELIVERY_SHIPPING_OPTION_ID;
 
   const orderId = order.id.replace("order_", "#");
-
   const shippingMethod = order.shipping_methods[0];
 
   const total =
     order.items.reduce(
       (total, item) => total + item.quantity * item.unit_price,
       0
-    ) + shippingMethod.price;
+    ) + shippingMethod?.price ?? 0;
 
   return (
     <Tailwind
@@ -117,7 +116,7 @@ export function EmailTemplate({ message, order }: EmailTemplateProps) {
                   <Text>Shipping</Text>
                 </Column>
                 <Column>
-                  <Text>{printPrice(shippingMethod.price)}</Text>
+                  <Text>{printPrice(shippingMethod?.price)}</Text>
                 </Column>
               </Row>
 
