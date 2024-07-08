@@ -1,36 +1,46 @@
 "use client";
 
-import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+import { DotLottieReact as Lottie } from "@lottiefiles/dotlottie-react";
+
+const FLOWER_PATH = "/lottie/flower.json";
 
 const BackgroundFlowers = () => {
   return (
     <>
-      <DotLottieReact
-        className="fixed top-2 left-4 pointer-events-none"
-        src="/bganimation.json"
+      <Lottie
+        className="fixed top-10 left-10 opacity-70 w-[200px] h-[200px] pointer-events-none"
+        src={FLOWER_PATH}
         loop
         autoplay
+        speed={0.8}
       />
-      <DotLottieReact
-        className="fixed top-56 left-96 pointer-events-none"
-        src="/bganimation.json"
+      <Lottie
+        className="fixed top-56 left-96 w-[100px] h-[100px] pointer-events-none"
+        src={FLOWER_PATH}
         loop
         autoplay
-        speed={2.5}
+        speed={2}
       />
-      <DotLottieReact
-        className="fixed bottom-96 right-20 opacity-40 w-[400px] h-[400px] pointer-events-none"
-        src="/bganimation.json"
+      <Lottie
+        className="fixed bottom-10 left-24 opacity-50 w-[150px] h-[150px] pointer-events-none"
+        src={FLOWER_PATH}
         loop
         autoplay
         speed={1.5}
       />
-      <DotLottieReact
-        className="fixed bottom-10 right-64 pointer-events-none"
-        src="/bganimation.json"
+      <Lottie
+        className="fixed top-14 right-4 opacity-40 w-[400px] h-[400px] pointer-events-none"
+        src={FLOWER_PATH}
         loop
         autoplay
-        speed={2}
+        speed={1.2}
+      />
+      <Lottie
+        className="fixed bottom-10 right-1/4 w-[200px] h-[200px] pointer-events-none"
+        src={FLOWER_PATH}
+        loop
+        autoplay
+        speed={0.6}
       />
     </>
   );

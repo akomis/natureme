@@ -77,7 +77,7 @@ const Header = () => {
             <Logo height={LOGO_SIZE} width={LOGO_SIZE} priority />
           </div>
           <div className="flex flex-col flex-grow items-start justify-center  whitespace-nowrap ml-4">
-            <div>
+            <div className="z-10">
               <p className="text-3xl flex">We trust nature for</p>
               <AnimatedText
                 key={slideIndex}
