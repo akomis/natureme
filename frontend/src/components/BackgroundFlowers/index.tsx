@@ -12,7 +12,7 @@ const BackgroundFlowers = () => {
         src={FLOWER_PATH}
         loop
         autoplay
-        speed={0.8}
+        speed={1.4}
       />
       <Lottie
         className="fixed top-56 left-96 w-[100px] h-[100px] pointer-events-none"
@@ -26,21 +26,21 @@ const BackgroundFlowers = () => {
         src={FLOWER_PATH}
         loop
         autoplay
-        speed={1.5}
+        speed={2.6}
       />
       <Lottie
         className="fixed top-14 right-4 opacity-40 w-[400px] h-[400px] pointer-events-none"
         src={FLOWER_PATH}
         loop
         autoplay
-        speed={1.2}
+        speed={1.5}
       />
       <Lottie
         className="fixed bottom-10 right-1/4 w-[200px] h-[200px] pointer-events-none"
         src={FLOWER_PATH}
         loop
         autoplay
-        speed={0.6}
+        speed={1}
       />
     </>
   );

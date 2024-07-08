@@ -38,14 +38,18 @@ export const cn = function cn(...inputs: ClassValue[]) {
 
 export const isProd = () => process.env.NODE_ENV === "production";
 
-export const getRandomPastelColor = () =>
-  "hsl(" +
-  360 * Math.random() +
-  "," +
-  (25 + 70 * Math.random()) +
-  "%," +
-  (85 + 10 * Math.random()) +
-  "%)";
+export const pastelColors = [
+  "#F8E1E4", // Light pink
+  "#E1E4F8", // Light blue
+  "#E1F8E4", // Light green
+  "#F8F1E1", // Light yellow
+  "#E4E1F8", // Light lavender
+  "#F1E1F8", // Light violet
+  "#E1F8F4", // Light teal
+  "#F8E1EC", // Light rose
+  "#E1F4F8", // Light sky blue
+  "#F8E1E8", // Light coral
+];
 
 export const printPrice = (amount?: number | null) => {
   const formattedPrice = (amount ?? 0) / 100;

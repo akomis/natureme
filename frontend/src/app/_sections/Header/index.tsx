@@ -82,6 +82,7 @@ const Header = () => {
               <AnimatedText
                 key={slideIndex}
                 words={SLIDESHOW[slideIndex].slogan}
+                index={slideIndex}
               />
             </div>
           </div>

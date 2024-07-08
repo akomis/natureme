@@ -1,13 +1,19 @@
 "use client";
 import { useEffect } from "react";
 import { motion, stagger, useAnimate } from "framer-motion";
-import { cn, getRandomPastelColor } from "@/utils";
+import { cn, pastelColors } from "@/utils";
+
+const mapToRange = (X: number) => {
+  return ((X - 1) % pastelColors.length) + 1;
+};
 
 export const AnimatedText = ({
   words,
   className,
+  index,
 }: {
   words: string;
+  index: number;
   className?: string;
 }) => {
   const [scope, animate] = useAnimate();
@@ -32,13 +38,13 @@ export const AnimatedText = ({
           return (
             <motion.span
               style={{
-                backgroundColor: getRandomPastelColor(),
+                backgroundColor: pastelColors[mapToRange(index + idx)],
                 marginRight: 5,
                 padding: 4,
                 borderRadius: 10,
               }}
               key={word + idx}
-              className="text-black opacity-0"
+              className="text-black opacity-0 bg-secondary"
             >
               {word}
             </motion.span>
