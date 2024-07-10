@@ -11,6 +11,7 @@ import { toast } from "react-toastify";
 const ContactForm = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [isSent, setIsSent] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const formRef = useRef<HTMLFormElement | null>(null);
@@ -25,6 +26,7 @@ const ContactForm = () => {
         setIsLoading(true);
         await sendEmail(`Message from ${email}`, message);
         toast.success(`Thank you for your message!`);
+        setIsSent(true);
         setTimeout(() => router.push("/"), 2000);
       } catch (error) {
         toast.error("Failed to send email. Please try again later.");
@@ -101,7 +103,7 @@ const ContactForm = () => {
           ) : (
             <button
               className="btn btn-lg btn-primary font-bold"
-              disabled={!email || !message}
+              disabled={!email || !message || isSent}
             >
               <Send size={20} />
             </button>

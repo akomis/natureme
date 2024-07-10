@@ -166,13 +166,21 @@ const QuantityPicker = ({ variant, size }: Props) => {
         </button>
       </div>
       <div className="join join-horizontal">
-        <button className="btn join-item" onClick={decreaseItemQuantity}>
+        <button
+          className="btn join-item"
+          onClick={decreaseItemQuantity}
+          disabled={quantity === MIN}
+        >
           <Minus size={size} />
         </button>
         <div className="btn join-item pointer-events-none text-lg w-6">
           {quantity}
         </div>
-        <button className="btn join-item" onClick={increaseItemQuantity}>
+        <button
+          className="btn join-item"
+          onClick={increaseItemQuantity}
+          disabled={quantity === MAX}
+        >
           <Plus size={size} />
         </button>
       </div>

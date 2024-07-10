@@ -19,7 +19,7 @@ const CustomerDetailsForm = () => {
   const [phone, setPhone] = useState<string>("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const { total } = useSessionCart();
+  const { total, items } = useSessionCart();
 
   const { refetch: refetchCart } = useGetCart(cartId);
   const createPaymentSession = useCreatePaymentSession(cartId);
@@ -136,7 +136,7 @@ const CustomerDetailsForm = () => {
               </div>
               <button
                 className="btn btn-primary btn-lg"
-                disabled={!email || !phone}
+                disabled={!email || !phone || !items.length}
               >
                 Proceed
               </button>

@@ -2,6 +2,7 @@ import { fetchFromSanity } from "@/utils";
 import AccordionItem from "./components/AccordionItem";
 import PageHeader from "@/components/PageHeader";
 import Screen from "@/components/Screen";
+import Link from "next/link";
 
 export default async function Faq() {
   const faq = await fetchFromSanity("faq");
@@ -25,6 +26,12 @@ export default async function Faq() {
             )
           )}
         </div>
+        <p className="font-sans text-lg text-center md:text-left">
+          If you have any more questions do not hesitate to{" "}
+          <Link href="/contact" target="_blank">
+            contact us
+          </Link>
+        </p>
       </div>
     </Screen>
   );
