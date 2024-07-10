@@ -1,8 +1,7 @@
 import ImageCarousel from "@/components/ImageCarousel";
-import ImageWithLoading from "@/components/ImageWithLoading";
 import PageHeader from "@/components/PageHeader";
 import Screen from "@/components/Screen";
-import { fetchFromSanity, getRandomPastelColor } from "@/utils";
+import { fetchFromSanity } from "@/utils";
 import { PortableText } from "next-sanity";
 
 export default async function Activities() {
