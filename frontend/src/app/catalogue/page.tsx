@@ -79,7 +79,9 @@ export default function Catalogue() {
   if (isLoading) {
     return (
       <Screen>
-        <LoadingIndicator />
+        <div>
+          <LoadingIndicator />
+        </div>
       </Screen>
     );
   }

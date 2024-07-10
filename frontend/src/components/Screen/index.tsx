@@ -10,7 +10,7 @@ const Screen = ({ children, className }: Props) => {
   return (
     <div
       className={cn(
-        "prose min-w-[60vw] flex flex-col font-serif h-screen min-h-full justify-center items-center mx-auto p-10",
+        "prose min-w-[60vw] flex flex-col font-serif h-full min-h-screen justify-center items-center mx-auto p-10",
         className
       )}
     >
