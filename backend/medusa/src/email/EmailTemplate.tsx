@@ -106,7 +106,9 @@ export function EmailTemplate({ message, order }: EmailTemplateProps) {
                     </Text>
                   </Column>
                   <Column>
-                    <Text>{printPrice(item.unit_price * item.quantity)}</Text>
+                    <Text className="text-right">
+                      {printPrice(item.unit_price * item.quantity)}
+                    </Text>
                   </Column>
                 </Row>
               ))}
