@@ -103,7 +103,7 @@ const CheckoutForm = () => {
 
   return (
     <form>
-      <div className="mb-5">
+      <div>
         <label className="form-control w-full">
           <select
             className="select select-bordered text-lg font-sans"
@@ -134,19 +134,18 @@ const CheckoutForm = () => {
 
       {!!selectedShippingOptionId && (
         <>
-          <div className="divider"></div>
-          <p className="text-xl font-sans">
+          <p className="text-xl font-sans mb-2">
             {isDelivery
               ? "Shipping & Billing Information"
               : "Billing Information"}
           </p>
+
           <AddressElement
             onChange={(event) => {
               setShippingAddress(event.value);
             }}
             options={{ mode: "billing" }}
           />
-          <div className="divider"></div>
 
           <PaymentElement />
         </>

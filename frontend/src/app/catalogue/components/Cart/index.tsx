@@ -59,7 +59,10 @@ export const Cart = () => {
 
           <div className="flex flex-1 flex-col justify-between">
             {hasItems ? (
-              <CartItemList />
+              <div>
+                <CartItemList />
+                <div className="divider"></div>
+              </div>
             ) : (
               <p className="text-xl self-center">Your cart is empty.</p>
             )}
