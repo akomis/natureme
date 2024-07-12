@@ -43,7 +43,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
 
         <ToastContainer
           position="bottom-center"
-          autoClose={5000}
+          autoClose={3500}
           hideProgressBar={true}
           newestOnTop={false}
           closeOnClick={false}
@@ -53,6 +53,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
           pauseOnHover
           theme="colored"
           transition={Bounce}
+          limit={1}
         />
       </motion.div>
     </AnimatePresence>
