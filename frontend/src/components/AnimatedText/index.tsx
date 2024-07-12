@@ -1,11 +1,7 @@
 "use client";
 import { useEffect } from "react";
 import { motion, stagger, useAnimate } from "framer-motion";
-import { cn, pastelColors } from "@/utils";
-
-const mapToRange = (X: number) => {
-  return ((X - 1) % pastelColors.length) + 1;
-};
+import { cn, getPastelColor, pastelColors } from "@/utils";
 
 export const AnimatedText = ({
   words,
@@ -38,7 +34,7 @@ export const AnimatedText = ({
           return (
             <motion.span
               style={{
-                backgroundColor: pastelColors[mapToRange(index + idx)],
+                backgroundColor: getPastelColor(index + idx),
                 marginRight: 5,
                 padding: 4,
                 borderRadius: 10,

@@ -106,7 +106,7 @@ const CheckoutForm = () => {
       <div className="mb-5">
         <label className="form-control w-full">
           <select
-            className="select select-bordered text-lg"
+            className="select select-bordered text-lg font-sans"
             value={selectedShippingOptionId}
             onChange={(e) => {
               setSelectedShippingOptionId(e.target.value as any);
@@ -152,14 +152,14 @@ const CheckoutForm = () => {
         </>
       )}
 
-      <div className="h-20 flex items-center">
+      <div className="h-20 flex items-center mt-6">
         {isLoading ? (
           <div className="flex justify-center h-20 w-full">
             <LoadingIndicator />
           </div>
         ) : (
           <div className="flex flex-1 gap-4 justify-end">
-            <div className="badge badge-outline h-fit min-w-24 text-lg px-4 py-2">
+            <div className="badge badge-outline h-fit min-w-24 text-lg px-4 py-2 font-sans">
               {printPrice(total + (selectedShippingOptionObject?.amount ?? 0))}
             </div>
             <button
@@ -178,6 +178,7 @@ const CheckoutForm = () => {
         <Link href="/legal" target="_blank">
           Terms & Conditions
         </Link>
+        .
       </p>
     </form>
   );

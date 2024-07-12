@@ -131,7 +131,7 @@ const CustomerDetailsForm = () => {
             </div>
           ) : (
             <div className="flex gap-4 items-end">
-              <div className="badge badge-outline text-lg h-auto min-w-24 px-4 py-2">
+              <div className="badge badge-outline text-lg h-auto min-w-24 px-4 py-2 font-sans">
                 {printPrice(total)}
               </div>
               <button

@@ -51,6 +51,12 @@ export const pastelColors = [
   "#F8E1E8", // coral
 ];
 
+export const getPastelColor = (index: number) => {
+  const pastelIndex = Math.abs((index - 1) % pastelColors.length);
+
+  return pastelColors[pastelIndex];
+};
+
 export const printPrice = (amount?: number | null) => {
   const formattedPrice = (amount ?? 0) / 100;
   const priceString = formattedPrice.toFixed(2);

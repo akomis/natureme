@@ -31,6 +31,7 @@ export default async function Faq() {
           <Link href="/contact" target="_blank">
             contact us
           </Link>
+          .
         </p>
       </div>
     </Screen>

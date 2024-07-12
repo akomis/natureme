@@ -1,6 +1,6 @@
 "use client";
 import QuantityPicker from "@/components/QuantityPicker";
-import { printPrice } from "@/utils";
+import { getPastelColor, printPrice } from "@/utils";
 import { useProduct, useSessionCart } from "medusa-react";
 
 type Props = {
@@ -13,7 +13,7 @@ const CartItem = ({ item }: Props) => {
   if (!product) return null;
 
   return (
-    <div className="flex h-fit bg-primary shadow-xl rounded-xl">
+    <div className="flex h-fit shadow-xl rounded-xl bg-secondary">
       <div className="flex flex-1 flex-col justify-between px-4 py-2">
         <div className="flex justify-between gap-10 mt-2">
           <div className="">
@@ -27,7 +27,7 @@ const CartItem = ({ item }: Props) => {
           </div>
 
           <div className="flex flex-col justify-between items-end">
-            <div className="text-xl">
+            <div className="text-xl font-sans">
               {
                 //need to investigate why item.total doesnt update on quantity change
                 printPrice(item.quantity * item.variant.prices[0].amount)
