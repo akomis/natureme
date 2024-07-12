@@ -8,6 +8,7 @@ import {
   useUpdateLineItem,
 } from "medusa-react";
 import { toast } from "react-toastify";
+import LoadingIndicator from "../LoadingIndicator";
 
 type Props = {
   variant: any;
@@ -44,6 +45,8 @@ const QuantityPicker = ({ variant, size }: Props) => {
   const lineItem = cart?.items.find(
     (item: any) => item.variant.id === variant.id
   );
+
+  const isCartUnavailable = (cartItem && !lineItem) || isCartRefetching;
 
   const incrementItemQuantity = () => {
     setItems(
@@ -145,15 +148,22 @@ const QuantityPicker = ({ variant, size }: Props) => {
   if (!cartItem || !lineItem) {
     return (
       <button
-        className={cn("btn text-lg", {
-          "bg-gray-200 pointer-events-none cursor-not-allowed":
-            (cartItem && !lineItem) || isCartRefetching,
+        className={cn("btn text-lg w-44", {
+          "pointer-events-none cursor-not-allowed": isCartUnavailable,
           "bg-gray-100 hover:bg-pink-200 hover:border-white": !cartItem,
         })}
         onClick={initializeLineItem}
       >
-        <ShoppingBag size={size} />
-        {" Add to cart"}
+        {isCartUnavailable ? (
+          <div className="flex justify-center h-20 self-center align-middle items-center max-h-12">
+            <LoadingIndicator />
+          </div>
+        ) : (
+          <>
+            <ShoppingBag size={size} />
+            {" Add to cart"}
+          </>
+        )}
       </button>
     );
   }
