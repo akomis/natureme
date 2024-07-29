@@ -104,24 +104,19 @@ export default function Catalogue() {
       </div>
       <div className="flex flex-col gap-10 w-full overflow-y-auto mt-10 rounded-lg">
         <div className="flex flex-wrap gap-20 pb-10">
-          {products
-            .sort((a, b) => b.variants.length - a.variants.length)
-            .map(
-              (
-                { title, variants, description, images, options }: any,
-                index
-              ) => (
-                <ProductList
-                  index={index}
-                  key={title}
-                  header={title}
-                  variants={variants}
-                  description={description}
-                  images={images}
-                  optionTitles={options.map((option: any) => option.title)}
-                />
-              )
-            )}
+          {products.map(
+            ({ title, variants, description, images, options }: any, index) => (
+              <ProductList
+                index={index}
+                key={title}
+                header={title}
+                variants={variants}
+                description={description}
+                images={images}
+                optionTitles={options.map((option: any) => option.title)}
+              />
+            )
+          )}
         </div>
       </div>
     </Screen>

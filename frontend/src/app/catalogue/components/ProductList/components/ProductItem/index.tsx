@@ -1,7 +1,7 @@
 "use client";
 import ImageCarousel from "@/components/ImageCarousel";
 import QuantityPicker from "@/components/QuantityPicker";
-import { printPrice } from "@/utils";
+import { cn, printPrice } from "@/utils";
 import { ArrowLeft } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -28,12 +28,23 @@ const ProductItem = ({
 }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const elementId = "productDetailsModal_" + item.id;
+  const isAvailable = item.inventory_quantity > 0 || item.allow_backorder;
+
+  const handleClick = () => {
+    if (isAvailable) setIsOpen(true);
+  };
 
   return (
     <>
       <div
-        className="h-fit transition-all duration-500 group hover:cursor-pointer hover:scale-105 overflow-hidden card card-compact w-[200px] shadow-md bg-nescafeBoi"
-        onClick={() => setIsOpen(true)}
+        className={cn(
+          "h-fit card card-compact w-[200px] bg-nescafeBoi transition-all duration-500 group",
+          {
+            "hover:cursor-pointer hover:scale-105 shadow-md": isAvailable,
+            "grayscale opacity-90": !isAvailable,
+          }
+        )}
+        onClick={handleClick}
       >
         <figure className="h-fit scale-100 group-hover:scale-105 m-0 duration-500 rounded-lg">
           {!!item.thumbnail && (
@@ -43,7 +54,15 @@ const ProductItem = ({
         <div className="flex justify-center items-center">
           <div className="text-center flex flex-col p-4">
             <div className="text-xl font-bold">{thumbnailTitle}</div>
-            <p className="text-xl m-0">{printPrice(item?.prices[0]?.amount)}</p>
+            {isAvailable ? (
+              <p className="text-xl m-0">
+                {printPrice(item?.prices[0]?.amount)}
+              </p>
+            ) : (
+              <div className="badge text-lg right-2 bottom-2 mx-auto mt-2 p-4">
+                Out of stock
+              </div>
+            )}
           </div>
         </div>
       </div>
