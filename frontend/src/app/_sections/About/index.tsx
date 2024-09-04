@@ -3,7 +3,7 @@ import { PortableText } from "next-sanity";
 import Image from "next/image";
 
 const About = async () => {
-  const globalAssets = (await fetchFromSanity("global"))[0];
+  const globalAssets = (await fetchFromSanity("global"))?.[0];
   const { about } = globalAssets;
 
   return (
@@ -27,7 +27,7 @@ const About = async () => {
           <div className="w-[70vw]">
             <h2 className="text-4xl font-bold">About Us</h2>
             <div className="flex flex-col gap-4 text-xl font-sans">
-              <PortableText value={about} />
+              <PortableText value={globalAssets?.about} />
             </div>
           </div>
         </div>

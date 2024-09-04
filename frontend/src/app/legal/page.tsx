@@ -4,9 +4,9 @@ import Screen from "@/components/Screen";
 import { PortableText } from "next-sanity";
 
 export default async function Legal() {
-  const globalAssets = (await fetchFromSanity("global"))[0];
-  const terms = globalAssets.terms;
-  const privacy = globalAssets.privacy;
+  const globalAssets = (await fetchFromSanity("global"))?.[0];
+  const terms = globalAssets?.terms;
+  const privacy = globalAssets?.privacy;
 
   return (
     <Screen className="">
