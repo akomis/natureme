@@ -6,7 +6,7 @@ import ProductList from "./components/ProductList";
 import { useCart, useMedusa, useProducts, useSessionCart } from "medusa-react";
 import Screen from "@/components/Screen";
 import LoadingIndicator from "@/components/LoadingIndicator";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { toast } from "react-toastify";
 
 export default function Catalogue() {
@@ -31,7 +31,6 @@ export default function Catalogue() {
             }
           }
         }
-
         return null;
       };
 
@@ -57,7 +56,6 @@ export default function Catalogue() {
         client.carts.retrieve(cartId).then(({ cart }) => {
           if (cart) {
             setRegion(cart.region);
-
             setItems(
               cart.items.map(({ variant, quantity }: any) => ({
                 variant: getProductItemVariant(variant.id),
@@ -74,6 +72,12 @@ export default function Catalogue() {
         fetchCart();
       }
     }
+  }, [products]);
+
+  const sortedProducts = useMemo(() => {
+    return products
+      ? products.sort((a, b) => b.variants.length - a.variants.length)
+      : [];
   }, [products]);
 
   if (isLoading) {
@@ -104,24 +108,19 @@ export default function Catalogue() {
       </div>
       <div className="flex flex-col gap-10 w-full overflow-y-auto mt-10 rounded-lg">
         <div className="flex flex-wrap gap-20 pb-10">
-          {products
-            .sort((a, b) => b.variants.length - a.variants.length)
-            .map(
-              (
-                { title, variants, description, images, options }: any,
-                index
-              ) => (
-                <ProductList
-                  index={index}
-                  key={title}
-                  header={title}
-                  variants={variants}
-                  description={description}
-                  images={images}
-                  optionTitles={options.map((option: any) => option.title)}
-                />
-              )
-            )}
+          {sortedProducts.map(
+            ({ title, variants, description, images, options }: any, index) => (
+              <ProductList
+                index={index}
+                key={title}
+                header={title}
+                variants={variants}
+                description={description}
+                images={images}
+                optionTitles={options.map((option: any) => option.title)}
+              />
+            )
+          )}
         </div>
       </div>
     </Screen>
