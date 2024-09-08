@@ -37,7 +37,7 @@ const ImageCarousel = ({ images, isSanity }: Props) => {
       autoPlaySpeed={3000}
       transitionDuration={500}
       centerMode
-      containerClass="rounded-lg h-[150px]"
+      containerClass="rounded-lg"
       removeArrowOnDeviceType={["tablet", "mobile"]}
       itemClass="mr-1"
     >

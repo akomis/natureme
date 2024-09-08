@@ -25,19 +25,24 @@ const ImageWithLoading = ({ isSanity, image, className }: Props) => {
       >
         {isSanity ? (
           <SanityImage
-            className="image m-0"
+            className="image rounded-lg m-0"
             image={image.url as object}
             alt={image.id}
+            height={undefined}
+            width={undefined}
+            layout="fill"
+            objectFit="cover"
             onLoad={() => {
               setIsLoading(false);
             }}
           />
         ) : (
           <Image
-            className="image m-0"
+            className="image rounded-lg m-0"
             src={image.url as string}
             alt={image.id}
-            fill
+            layout="fill"
+            objectFit="cover"
             onLoad={() => {
               setIsLoading(false);
             }}

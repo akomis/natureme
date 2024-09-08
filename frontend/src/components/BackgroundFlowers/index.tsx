@@ -29,7 +29,7 @@ const BackgroundFlowers = () => {
         speed={2.6}
       />
       <Lottie
-        className="fixed top-14 right-4 opacity-40 w-[400px] h-[400px] pointer-events-none"
+        className="fixed top-14 right-4 opacity-20 w-[400px] h-[400px] pointer-events-none"
         src={FLOWER_PATH}
         loop
         autoplay
