@@ -107,7 +107,7 @@ export default function Catalogue() {
         <Cart />
       </div>
       <div className="flex flex-col gap-10 w-full overflow-y-auto mt-10 rounded-lg">
-        <div className="flex flex-wrap gap-20 pb-10">
+        <div className="flex flex-wrap gap-20 pb-10 items-center justify-center md:justify-start md:items-start">
           {sortedProducts.map(
             ({ title, variants, description, images, options }: any, index) => (
               <ProductList

@@ -38,9 +38,9 @@ const ProductItem = ({
     <>
       <div
         className={cn(
-          "h-fit card card-compact w-[200px] bg-nescafeBoi transition-all duration-500 group",
+          "h-fit card card-compact w-[200px] bg-nescafeBoi transition-all duration-500 ",
           {
-            "hover:cursor-pointer hover:scale-105 shadow-md": isAvailable,
+            "group hover:cursor-pointer hover:scale-105 shadow-md": isAvailable,
             "grayscale opacity-90": !isAvailable,
           }
         )}
