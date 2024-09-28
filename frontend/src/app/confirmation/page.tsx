@@ -1,10 +1,10 @@
 "use client";
 
+import HomeButton from "@/components/HomeButton";
 import LoadingIndicator from "@/components/LoadingIndicator";
 import Screen from "@/components/Screen";
 import { cn } from "@/utils";
 import { useStripe } from "@stripe/react-stripe-js";
-import { Home } from "lucide-react";
 import { useMedusa } from "medusa-react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
@@ -126,11 +126,7 @@ const Confirmation = () => {
             </div>
           </button>
 
-          <Link href="/">
-            <button className="btn btn-lg w-full">
-              <Home />
-            </button>
-          </Link>
+          <HomeButton />
         </div>
       )}
 

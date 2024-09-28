@@ -8,6 +8,9 @@ import Screen from "@/components/Screen";
 import LoadingIndicator from "@/components/LoadingIndicator";
 import { useEffect, useMemo } from "react";
 import { toast } from "react-toastify";
+import Link from "next/link";
+import HomeButton from "@/components/HomeButton";
+import { Boxes } from "lucide-react";
 
 export default function Catalogue() {
   const { createCart } = useCart();
@@ -96,12 +99,13 @@ export default function Catalogue() {
         <p className="text-lg">
           {"Couldn't load catalogue. Please retry later."}
         </p>
+        <HomeButton />
       </Screen>
     );
   }
 
   return (
-    <Screen className="items-start max-w-[90vw] pb-0">
+    <Screen className="items-start max-w-[90vw] pb-10">
       <div className="flex w-full justify-between items-center mt-20 z-10">
         <PageHeader title={"Catalogue"} />
         <Cart />
@@ -121,6 +125,37 @@ export default function Catalogue() {
               />
             )
           )}
+        </div>
+        <div className="card bg-primary text-primary-content w-full">
+          <div className="card-body">
+            <div className="flex justify-start gap-5 mb-2">
+              <Boxes size={50} />
+              <h2 className="card-title text-2xl m-0 whitespace-nowrap">
+                Bulk Orders
+              </h2>
+            </div>
+            <div className="flex flex-col font-sans">
+              <p className="text-xl m-0">
+                Presents for special occasions like wedding or christening gifts
+                varied.{" "}
+                <div>
+                  Soaps or solid perfumes in paper box, decorated in your
+                  preference or beeswax creams in small jars (35ml, €5 each).
+                </div>
+                <div>
+                  For more info on this{" "}
+                  <span>
+                    <Link
+                      href="/contact"
+                      className="font-bold und text-purple-500 m-0 hover:text-pink-400 hover:cursor-pointer transition-all duration-700"
+                    >
+                      send us a message
+                    </Link>
+                  </span>
+                </div>
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </Screen>
