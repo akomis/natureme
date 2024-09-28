@@ -12,7 +12,7 @@ type Attribute = { key: string; value: string };
 type Props = {
   title: string;
   thumbnailTitle: string;
-  media?: string[];
+  images?: string[];
   description: string;
   attributes?: Attribute[];
   item: any;
@@ -21,7 +21,7 @@ type Props = {
 const ProductItem = ({
   title,
   thumbnailTitle,
-  media,
+  images: media,
   description,
   attributes,
   item,

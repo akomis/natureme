@@ -173,7 +173,8 @@ const CheckoutForm = () => {
       </div>
 
       <p className="font-sans my-0 text-start">
-        By proceeding with the order you agree to the{" "}
+        All prices include 19% VAT. By proceeding with the order you agree to
+        the{" "}
         <Link href="/legal" target="_blank">
           Terms & Conditions
         </Link>

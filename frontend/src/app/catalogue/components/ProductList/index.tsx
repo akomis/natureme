@@ -5,7 +5,6 @@ type Props = {
   header: string;
   variants: any[];
   description: string;
-  images: string[];
   optionTitles: string[];
   index: number;
 };
@@ -14,7 +13,6 @@ const ProductList = ({
   header,
   variants,
   description,
-  images,
   optionTitles,
   index,
 }: Props) => {
@@ -45,7 +43,7 @@ const ProductList = ({
             thumbnailTitle={isSingleVariant ? undefined : item.title}
             description={description}
             attributes={getAttributes(item)}
-            media={images}
+            images={item.images}
             item={item}
           />
         ))}

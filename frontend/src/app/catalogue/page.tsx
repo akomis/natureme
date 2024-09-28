@@ -120,7 +120,6 @@ export default function Catalogue() {
                 header={title}
                 variants={variants}
                 description={description}
-                images={images}
                 optionTitles={options.map((option: any) => option.title)}
               />
             )
@@ -128,7 +127,7 @@ export default function Catalogue() {
         </div>
         <div className="card bg-primary text-primary-content w-full">
           <div className="card-body">
-            <div className="flex justify-start gap-5 mb-2">
+            <div className="flex flex-col sm:flex-row justify-start gap-5 mb-2">
               <Boxes size={50} />
               <h2 className="card-title text-2xl m-0 whitespace-nowrap">
                 Bulk Orders
@@ -137,16 +136,14 @@ export default function Catalogue() {
             <div className="flex flex-col font-sans">
               <p className="text-xl m-0">
                 Presents for special occasions like wedding or christening gifts
-                varied.{" "}
-                <div>
-                  Soaps or solid perfumes in paper box, decorated in your
-                  preference or beeswax creams in small jars (35ml, €5 each).
-                </div>
+                varied. Soaps or solid perfumes in paper box, decorated in your
+                preference or beeswax creams in small jars.
                 <div>
                   For more info on this{" "}
                   <span>
                     <Link
                       href="/contact"
+                      target="_blank"
                       className="font-bold und text-purple-500 m-0 hover:text-pink-400 hover:cursor-pointer transition-all duration-700"
                     >
                       send us a message
