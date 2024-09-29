@@ -3,9 +3,14 @@ import AccordionItem from "./components/AccordionItem";
 import PageHeader from "@/components/PageHeader";
 import Screen from "@/components/Screen";
 import Link from "next/link";
+import ErrorScreen from "@/components/ErrorScreen";
 
 export default async function Faq() {
   const faq = await fetchFromSanity("faq");
+
+  if (!faq || !faq.length) {
+    return <ErrorScreen message="Couldn't load the FAQ. Please retry later." />;
+  }
 
   return (
     <Screen>

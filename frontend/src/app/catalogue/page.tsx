@@ -9,8 +9,8 @@ import LoadingIndicator from "@/components/LoadingIndicator";
 import { useEffect, useMemo } from "react";
 import { toast } from "react-toastify";
 import Link from "next/link";
-import HomeButton from "@/components/HomeButton";
 import { Boxes } from "lucide-react";
+import ErrorScreen from "@/components/ErrorScreen";
 
 export default function Catalogue() {
   const { createCart } = useCart();
@@ -93,14 +93,9 @@ export default function Catalogue() {
     );
   }
 
-  if (!products) {
+  if (!products || !products.length) {
     return (
-      <Screen>
-        <p className="text-lg">
-          {"Couldn't load catalogue. Please retry later."}
-        </p>
-        <HomeButton />
-      </Screen>
+      <ErrorScreen message="Couldn't load catalogue. Please retry later." />
     );
   }
 

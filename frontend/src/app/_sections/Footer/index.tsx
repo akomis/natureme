@@ -22,14 +22,14 @@ const Extras = () => {
         />
         <h2 className="font-bold">FAQ</h2>
       </Link>
-      <a href="/activities" className={pageLinkStyle}>
+      <a href="/blog" className={pageLinkStyle}>
         <Image
-          src={"/Activities.png"}
+          src={"/Blog.png"}
           width={ICON_SIZE}
           height={ICON_SIZE}
           alt="Δραστηριότητες"
         />
-        <h2 className="font-bold">Activities</h2>
+        <h2 className="font-bold">Blog</h2>
       </a>
       <Link href="/contact" className={pageLinkStyle}>
         <Image
