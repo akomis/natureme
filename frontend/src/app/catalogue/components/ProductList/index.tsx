@@ -5,7 +5,7 @@ type Props = {
   header: string;
   variants: any[];
   description: string;
-  optionTitles: string[];
+  defaultOptionId: string;
   index: number;
 };
 
@@ -13,19 +13,13 @@ const ProductList = ({
   header,
   variants,
   description,
-  optionTitles,
+  defaultOptionId,
   index,
 }: Props) => {
   const isSingleVariant = variants[0].title.toLowerCase() === "default";
 
   const getAttributes = (item: any) =>
-    optionTitles
-      .filter((title: string) => {
-        return title !== "Type";
-      })
-      .map((title: string, index: number) => {
-        return { key: title, value: item.options[index + 1].value };
-      });
+    item.options.filter((option: any) => option.id !== defaultOptionId);
 
   return (
     <div className="flex flex-col gap-6 px-2 items-center justify-center md:justify-start md:items-start">
