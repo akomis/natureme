@@ -38,7 +38,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
         exit="out"
         transition={{ ease: "easeInOut", duration: 1 }}
       >
-        <BackgroundFlowers />
+        {/* <BackgroundFlowers /> */}
         <div>{children}</div>
 
         <ToastContainer
