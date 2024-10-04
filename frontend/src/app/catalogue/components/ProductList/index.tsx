@@ -28,9 +28,9 @@ const ProductList = ({
       });
 
   return (
-    <div className="flex flex-col gap-4 px-2 items-center justify-center md:justify-start md:items-start">
+    <div className="flex flex-col gap-6 px-2 items-center justify-center md:justify-start md:items-start">
       <div
-        className="badge p-5 text-xl sm:text-2xl border-0 shadow-lg"
+        className="badge px-4 py-2 text-xl sm:text-2xl border-0 shadow-lg h-fit text-center"
         style={{ backgroundColor: getPastelColor(index) }}
       >
         {header}

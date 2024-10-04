@@ -115,7 +115,7 @@ const CheckoutForm = () => {
             <option value="" disabled>
               {areShippingOptionsLoading
                 ? "Loading shipping options..."
-                : "Please pick a shipping option"}
+                : "Pick a shipping option"}
             </option>
             {shipping_options?.map((shippingOption) => {
               if (shippingOption.admin_only) return null;

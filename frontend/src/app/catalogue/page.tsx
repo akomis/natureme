@@ -9,7 +9,7 @@ import LoadingIndicator from "@/components/LoadingIndicator";
 import { useEffect, useMemo } from "react";
 import { toast } from "react-toastify";
 import Link from "next/link";
-import { Boxes } from "lucide-react";
+import { Flower2 } from "lucide-react";
 import ErrorScreen from "@/components/ErrorScreen";
 
 export default function Catalogue() {
@@ -122,29 +122,27 @@ export default function Catalogue() {
         </div>
         <div className="card bg-primary text-primary-content w-full">
           <div className="card-body">
-            <div className="flex flex-col sm:flex-row justify-start gap-5 mb-2">
-              <Boxes size={50} />
+            <div className="flex flex-col sm:flex-row justify-start items-center gap-2 mb-2">
+              <Flower2 size={40} strokeWidth={1.4} />
               <h2 className="card-title text-2xl m-0 whitespace-nowrap">
                 Bulk Orders
               </h2>
             </div>
             <div className="flex flex-col font-sans">
               <p className="text-xl m-0">
-                Presents for special occasions like wedding or christening gifts
-                varied. Soaps or solid perfumes in paper box, decorated in your
-                preference or beeswax creams in small jars.
-                <div>
-                  For more info on this{" "}
-                  <span>
-                    <Link
-                      href="/contact"
-                      target="_blank"
-                      className="font-bold und text-purple-500 m-0 hover:text-pink-400 hover:cursor-pointer transition-all duration-700"
-                    >
-                      send us a message
-                    </Link>
-                  </span>
-                </div>
+                Presents for special occasions like wedding or christening
+                gifts. Soaps or solid perfumes in paper box, decorated in your
+                preference or beeswax creams in small jars. For more info on
+                this feel free to{" "}
+                <span>
+                  <Link
+                    href="/contact"
+                    target="_blank"
+                    className="font-bold no-underline text-purple-500 m-0 hover:text-pink-400 hover:cursor-pointer transition-all duration-700"
+                  >
+                    contact us.
+                  </Link>
+                </span>
               </p>
             </div>
           </div>

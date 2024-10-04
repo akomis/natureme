@@ -3,9 +3,7 @@
 import { AnimatedText } from "@/components/AnimatedText";
 import Logo from "@/components/Logo";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowRightCircle } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const LOGO_SIZE = 300;
@@ -70,7 +68,7 @@ const Header = () => {
   }, [slideIndex]);
 
   return (
-    <section className="flex justify-center items-center min-h-[750px] h-screen p-10">
+    <section className="flex justify-center items-center min-h-[750px] max-h-screen p-40">
       <div className="w-[670px]">
         <div className="flex flex-col sm:flex-row  items-center justify-center">
           <div>
@@ -90,14 +88,6 @@ const Header = () => {
         <div className="mt-5 h-[400px]">
           <AnimatedImageSwitch index={slideIndex} />
         </div>
-      </div>
-      <div className="fixed bottom-10 left-1/2 transform -translate-x-1/2">
-        <Link href="/catalogue">
-          <button className="group hover:text-[#8D39AD] transition-all hover:cursor-pointer flex items-center gap-2 bg-primary hover:bg-secondary duration-300 px-4 py-2 rounded-2xl hover:z-10 hover:shadow-lg hover:scale-110">
-            <p className="font-bold text-2xl">Catalogue</p>
-            <ArrowRightCircle className="font-bold text-2xl group-hover:scale-125 transition-all duration-700" />
-          </button>
-        </Link>
       </div>
     </section>
   );
