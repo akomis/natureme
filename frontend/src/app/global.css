@@ -4,13 +4,13 @@
 @tailwind components;
 @tailwind utilities;
 
-html,
 body {
   padding: 0;
   margin: 0;
   scrollbar-color: #fff0e7 white;
   scrollbar-width: thin;
 }
+
 .image-container {
   width: 100%;
   height: 100%;

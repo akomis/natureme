@@ -34,8 +34,6 @@ const ProductItem = ({
     if (isAvailable) setIsOpen(true);
   };
 
-  console.log(attributes);
-
   return (
     <>
       <div
