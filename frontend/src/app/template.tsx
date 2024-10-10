@@ -10,17 +10,10 @@ const variants = {
   out: {
     opacity: 0,
     y: 40,
-    transition: {
-      duration: 0.75,
-    },
   },
   in: {
     opacity: 1,
     y: 0,
-    transition: {
-      duration: 0.75,
-      delay: 0.5,
-    },
   },
 };
 
@@ -33,9 +26,8 @@ export default function Template({ children }: { children: React.ReactNode }) {
       variants={variants}
       animate="in"
       initial="out"
-      exit="out"
       transition={{ ease: "easeInOut", duration: 1 }}
-      className="bg-jasmine will-change-auto"
+      className="bg-jasmine"
     >
       <BackgroundFlowers />
       <div>{children}</div>
