@@ -35,7 +35,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
       initial="out"
       exit="out"
       transition={{ ease: "easeInOut", duration: 1 }}
-      className="bg-jasmine"
+      className="bg-jasmine will-change-auto"
     >
       <BackgroundFlowers />
       <div>{children}</div>
