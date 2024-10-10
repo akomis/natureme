@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export default function Index() {
   return (
-    <div className="font-serif flex flex-col gap-80">
+    <div className="font-serif flex flex-col gap-80 relative">
       <Header />
       <About />
       <Footer />
