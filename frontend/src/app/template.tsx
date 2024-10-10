@@ -21,14 +21,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
 
   return (
-    <motion.div
-      key={pathname}
-      variants={variants}
-      animate="in"
-      initial="out"
-      transition={{ ease: "easeInOut", duration: 1 }}
-      className="bg-jasmine"
-    >
+    <div className="bg-jasmine">
       <BackgroundFlowers />
       <div>{children}</div>
 
@@ -46,6 +39,6 @@ export default function Template({ children }: { children: React.ReactNode }) {
         transition={Bounce}
         limit={1}
       />
-    </motion.div>
+    </div>
   );
 }
