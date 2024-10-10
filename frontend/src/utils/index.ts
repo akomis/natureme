@@ -5,6 +5,7 @@ import { createClient } from "next-sanity";
 export const sanity = createClient({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
   dataset: process.env.NEXT_PUBLIC_ENV,
+  apiVersion: "2024-10-01",
   useCdn: true,
 });
 
