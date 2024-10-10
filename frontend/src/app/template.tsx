@@ -1,25 +1,10 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { usePathname } from "next/navigation";
 import { Bounce, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import BackgroundFlowers from "../components/BackgroundFlowers";
 
-const variants = {
-  out: {
-    opacity: 0,
-    y: 40,
-  },
-  in: {
-    opacity: 1,
-    y: 0,
-  },
-};
-
 export default function Template({ children }: { children: React.ReactNode }) {
-  const pathname = usePathname();
-
   return (
     <div className="bg-jasmine">
       <BackgroundFlowers />

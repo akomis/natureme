@@ -1,7 +1,7 @@
 "use client";
 import { useEffect } from "react";
 import { motion, stagger, useAnimate } from "framer-motion";
-import { cn, getPastelColor, pastelColors } from "@/utils";
+import { cn, getPastelColor } from "@/utils";
 
 export const AnimatedText = ({
   words,
