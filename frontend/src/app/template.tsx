@@ -1,7 +1,6 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
 import { Bounce, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";

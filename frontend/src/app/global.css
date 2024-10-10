@@ -4,6 +4,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  overflow: auto;
+}
+
 /* For WebKit browsers (Chrome, Safari, Edge) */
 ::-webkit-scrollbar {
   width: 12px;
