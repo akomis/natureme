@@ -6,7 +6,7 @@ import { fetchFromSanity } from "@/utils";
 import { PortableText } from "next-sanity";
 
 export default async function Blog() {
-  const posts = await fetchFromSanity("posts");
+  const posts = await fetchFromSanity("post");
 
   if (!posts || !posts.length) {
     return <ErrorScreen message="Couldn't load posts. Please retry later." />;
