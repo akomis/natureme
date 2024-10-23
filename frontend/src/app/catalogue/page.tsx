@@ -74,6 +74,7 @@ export default function Catalogue() {
         fetchCart();
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [products]);
 
   const sortedProducts = useMemo(() => {

@@ -68,7 +68,7 @@ const Header = () => {
   }, [slideIndex]);
 
   return (
-    <section className="flex justify-center items-center min-h-[750px] max-h-screen p-40">
+    <section className="flex justify-center items-center min-h-[750px] max-h-screen p-40 animate-fade-in">
       <div className="w-[670px]">
         <div className="flex flex-col sm:flex-row  items-center justify-center">
           <div>

@@ -1,13 +1,12 @@
 "use client";
 
-import { ArrowLeft, ShoppingBasket } from "lucide-react";
+import { ArrowLeft, BadgePlus, ShoppingBasket } from "lucide-react";
 import { useGetCart, useSessionCart } from "medusa-react";
 import CheckoutForm from "./components/CheckoutForm";
 import CartItemList from "./components/CartItemList";
 import CustomerDetailsForm from "./components/CustomerDetailsForm";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-import PageHeader from "@/components/PageHeader";
 import { useRef } from "react";
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_KEY ?? "pk_");
@@ -57,26 +56,37 @@ export const Cart = () => {
             <ArrowLeft />
           </button>
 
-          <div className="flex flex-1 flex-col justify-between">
+          <div className="flex flex-1">
             {hasItems ? (
-              <div>
-                <CartItemList />
-                <div className="divider"></div>
+              <div className="flex flex-1 flex-col justify-between">
+                <div>
+                  <CartItemList />
+                  <div className="divider"></div>
+                </div>
+
+                {!clientSecret ? (
+                  <CustomerDetailsForm />
+                ) : (
+                  <Elements
+                    stripe={stripePromise}
+                    // @ts-ignore
+                    options={{ clientSecret, loader }}
+                  >
+                    <CheckoutForm />
+                  </Elements>
+                )}
               </div>
             ) : (
-              <p className="text-xl self-center">Your cart is empty.</p>
-            )}
-
-            {!clientSecret ? (
-              <CustomerDetailsForm />
-            ) : (
-              <Elements
-                stripe={stripePromise}
-                // @ts-ignore
-                options={{ clientSecret, loader }}
-              >
-                <CheckoutForm />
-              </Elements>
+              <div className="flex flex-1 flex-col justify-between">
+                <p className="text-xl self-center">Your cart is empty.</p>
+                <button
+                  className="btn btn-primary btn-lg w-fit self-center"
+                  onClick={toggleDrawer}
+                >
+                  <BadgePlus />
+                  Add Items
+                </button>
+              </div>
             )}
           </div>
         </div>
