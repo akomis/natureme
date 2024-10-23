@@ -14,9 +14,9 @@ export default async function Faq() {
 
   return (
     <Screen>
-      <div className="flex flex-col justify-center items-start gap-4">
+      <div className="flex flex-1 flex-col justify-center items-start gap-4">
         <PageHeader title={"FAQ"} />
-        <div className="flex flex-col gap-10 w-full overflow-y-auto pr-4 rounded-lg">
+        <div className="flex flex-1 flex-col gap-10 w-full overflow-y-auto pr-4 rounded-lg">
           {faq.map(
             (
               { question, answer }: { question: string; answer: object },

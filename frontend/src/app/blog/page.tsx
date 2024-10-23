@@ -14,9 +14,9 @@ export default async function Blog() {
 
   return (
     <Screen>
-      <PageHeader title={"Blog Posts"} />
+      <PageHeader title={"Blog"} />
 
-      <div className="flex flex-col gap-10 w-full overflow-y-auto pr-4 rounded-lg">
+      <div className="flex flex-1 flex-col gap-10 w-full overflow-y-auto pr-4 rounded-lg">
         {posts.map((post: any, index: number) => (
           <div key={post.title} className="flex flex-col w-full ">
             <h2 className="p-4 rounded-xl bg-nescafeBoi w-fit">{post.title}</h2>
