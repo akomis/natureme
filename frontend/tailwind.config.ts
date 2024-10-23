@@ -18,6 +18,15 @@ const config: Config = {
         serif: ["Mynerve", "cursive"],
         sans: ["LXGW WenKai TC", "sans-serif"],
       },
+      animation: {
+        "fade-in": "fade-in 1s ease-in-out",
+      },
+      keyframes: {
+        "fade-in": {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
+      },
     },
   },
   plugins: [require("@tailwindcss/typography"), require("daisyui")],
