@@ -14,7 +14,7 @@ const PageHeader = ({ title }: Props) => {
           <ArrowLeft />
         </button>
       </Link>
-      <h1 className="m-0 my-auto">{title}</h1>
+      <h1 className="m-0 my-auto text-2xl sm:text-3xl">{title}</h1>
     </div>
   );
 };

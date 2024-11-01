@@ -13,7 +13,7 @@ export default function Index() {
 
       <Link
         href="/catalogue"
-        className="fixed bottom-10 left-1/2 -translate-x-1/2"
+        className="fixed bottom-5 sm:bottom-10 left-1/2 -translate-x-1/2"
       >
         <button className="animate-fade-in group hover:text-[#8D39AD] transition-all hover:cursor-pointer flex items-center gap-2 bg-primary hover:bg-secondary duration-300 px-4 py-2 rounded-2xl hover:z-10 hover:shadow-lg hover:scale-110">
           <p className="font-bold text-2xl">Catalogue</p>

@@ -52,10 +52,8 @@ export const AnimatedText = ({
 
   return (
     <div className={cn("font-bold", className)}>
-      <div className="mt-4">
-        <div className="text-black text-4xl leading-snug tracking-wide">
-          {renderWords()}
-        </div>
+      <div className="text-black text-3xl sm:text-4xl leading-snug tracking-wide">
+        {renderWords()}
       </div>
     </div>
   );

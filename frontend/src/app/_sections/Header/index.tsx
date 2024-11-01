@@ -6,14 +6,14 @@ import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
-const LOGO_SIZE = 300;
+const LOGO_SIZE = 250;
 
 const SLIDESHOW = [
   { slogan: "our body", imageUrl: "/header/soaps.png" },
   { slogan: "our clothes", imageUrl: "/header/detergent.png" },
   { slogan: "our gifts", imageUrl: "/header/giftboxes.png" },
   { slogan: "our skin", imageUrl: "/header/beeswax.png" },
-  { slogan: "our special occasion", imageUrl: "/header/occasiongifts.png" },
+  { slogan: "our celebrations", imageUrl: "/header/celebrations.png" },
 ];
 
 const AnimatedImageSwitch = ({ index }: { index: number }) => {
@@ -42,12 +42,12 @@ const AnimatedImageSwitch = ({ index }: { index: number }) => {
         initial="out"
         exit="out"
         transition={{ ease: "easeInOut", duration: 1 }}
-        className="mx-auto w-max"
+        className="mx-auto image-container"
       >
         <Image
           src={SLIDESHOW[index].imageUrl}
-          width={400}
-          height={400}
+          objectFit="contain"
+          layout="fill"
           alt="Product"
           priority={index === 0}
         />
@@ -68,24 +68,23 @@ const Header = () => {
   }, [slideIndex]);
 
   return (
-    <section className="flex justify-center items-center min-h-[750px] max-h-screen p-40 animate-fade-in">
-      <div className="w-[670px]">
-        <div className="flex flex-col sm:flex-row  items-center justify-center">
-          <div>
-            <Logo height={LOGO_SIZE} width={LOGO_SIZE} priority />
-          </div>
-          <div className="flex flex-col flex-grow items-start justify-center  whitespace-nowrap ml-4">
-            <div className="z-10">
-              <p className="text-3xl flex">We trust nature for</p>
-              <AnimatedText
-                key={slideIndex}
-                words={SLIDESHOW[slideIndex].slogan}
-                index={slideIndex}
-              />
-            </div>
+    <section className="flex flex-1 justify-center items-center min-h-fit max-h-screen p-4 sm:p-40 animate-fade-in">
+      <div className="w-auto sm:w-[600px]">
+        <div className="flex flex-col sm:flex-row items-center justify-center">
+          <Logo height={LOGO_SIZE} width={LOGO_SIZE} priority />
+
+          <div className="flex flex-col flex-1 items-center sm:items-start justify-center text-center whitespace-nowrap ml-4 gap-4">
+            <p className="text-2xl sm:text-3xl text-center">
+              We trust nature for
+            </p>
+            <AnimatedText
+              key={slideIndex}
+              words={SLIDESHOW[slideIndex].slogan}
+              index={slideIndex}
+            />
           </div>
         </div>
-        <div className="mt-5 h-[400px]">
+        <div className="mt-4 h-[200px] sm:h-[250px]">
           <AnimatedImageSwitch index={slideIndex} />
         </div>
       </div>

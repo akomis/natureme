@@ -8,7 +8,7 @@ type Props = {
 export default function ErrorScreen({ message }: Props) {
   return (
     <Screen>
-      <p className="text-lg">{message}</p>
+      <p className="text-lg text-center">{message}</p>
       <HomeButton />
     </Screen>
   );

@@ -100,8 +100,8 @@ export default function Catalogue() {
   }
 
   return (
-    <Screen className="items-start max-w-[80vw]">
-      <div className="flex w-[80vw] justify-between items-center z-10 fixed top-20">
+    <Screen className="p-2 sm:p-10 items-start max-w-[80vw]">
+      <div className="flex w-[80vw] justify-between items-start z-10 fixed top-10 sm:top-16">
         <PageHeader title={"Catalogue"} />
         <Cart />
       </div>
