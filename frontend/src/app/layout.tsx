@@ -1,3 +1,5 @@
+import LoadingIndicator from "@/components/LoadingIndicator";
+import { Suspense } from "react";
 import "./global.css";
 
 export const metadata = {
@@ -13,7 +15,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-jasmine">{children}</body>
+      <body className="bg-jasmine">
+        {" "}
+        <Suspense fallback={<LoadingIndicator />}>{children}</Suspense>
+      </body>
     </html>
   );
 }

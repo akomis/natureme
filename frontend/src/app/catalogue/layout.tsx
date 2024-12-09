@@ -1,8 +1,13 @@
 "use client";
 
-import { SessionCartProvider } from "medusa-react";
+import LoadingIndicator from "@/components/LoadingIndicator";
 import { QueryClient } from "@tanstack/react-query";
-import { CartProvider, MedusaProvider } from "medusa-react";
+import {
+  CartProvider,
+  MedusaProvider,
+  SessionCartProvider,
+} from "medusa-react";
+import { Suspense } from "react";
 
 const queryClient = new QueryClient();
 
@@ -17,7 +22,9 @@ export default function CatalogueLayout({
       baseUrl={process.env.NEXT_PUBLIC_MEDUSA_URL ?? "http://localhost:8000"}
     >
       <CartProvider>
-        <SessionCartProvider>{children}</SessionCartProvider>
+        <SessionCartProvider>
+          <Suspense fallback={<LoadingIndicator />}>{children}</Suspense>
+        </SessionCartProvider>
       </CartProvider>
     </MedusaProvider>
   );
