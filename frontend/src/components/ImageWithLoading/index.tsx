@@ -1,11 +1,10 @@
 "use client";
 
+import { cn } from "@/utils";
 import Image from "next/image";
-import SanityImage from "../SanityImage";
 import { useState } from "react";
 import { ImageType } from "../models";
-import { cn } from "@/utils";
-import LoadingIndicator from "../LoadingIndicator";
+import SanityImage from "../SanityImage";
 
 type Props = {
   isSanity?: boolean;
@@ -30,8 +29,8 @@ const ImageWithLoading = ({ isSanity, image, className }: Props) => {
             alt={image.id}
             height={undefined}
             width={undefined}
-            layout="fill"
-            objectFit="cover"
+            style={{ objectFit: "cover" }}
+            fill
             onLoad={() => {
               setIsLoading(false);
             }}
@@ -41,8 +40,8 @@ const ImageWithLoading = ({ isSanity, image, className }: Props) => {
             className="image rounded-lg m-0"
             src={image.url as string}
             alt={image.id}
-            layout="fill"
-            objectFit="cover"
+            style={{ objectFit: "cover" }}
+            fill
             onLoad={() => {
               setIsLoading(false);
             }}

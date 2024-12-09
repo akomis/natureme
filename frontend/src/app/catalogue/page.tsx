@@ -1,15 +1,15 @@
 "use client";
 
-import PageHeader from "@/components/PageHeader";
-import Cart from "./components/Cart";
-import ProductList from "./components/ProductList";
-import { useCart, useMedusa, useProducts, useSessionCart } from "medusa-react";
-import Screen from "@/components/Screen";
+import ErrorScreen from "@/components/ErrorScreen";
 import LoadingIndicator from "@/components/LoadingIndicator";
+import PageHeader from "@/components/PageHeader";
+import Screen from "@/components/Screen";
+import { useCart, useMedusa, useProducts, useSessionCart } from "medusa-react";
 import { useEffect, useMemo } from "react";
 import { toast } from "react-toastify";
-import ErrorScreen from "@/components/ErrorScreen";
+import Cart from "./components/Cart";
 import CustomOrdersCard from "./components/CustomOrdersCard";
+import ProductList from "./components/ProductList";
 
 export default function Catalogue() {
   const { createCart } = useCart();
@@ -36,8 +36,8 @@ export default function Catalogue() {
         return null;
       };
 
-      const handleCreateCart = () => {
-        createCart.mutate(
+      const handleCreateCart = async () => {
+        await createCart.mutate(
           {},
           {
             onSuccess: ({ cart }: any) => {
@@ -55,17 +55,22 @@ export default function Catalogue() {
       };
 
       const fetchCart = () => {
-        client.carts.retrieve(cartId).then(({ cart }) => {
-          if (cart) {
-            setRegion(cart.region);
-            setItems(
-              cart.items.map(({ variant, quantity }: any) => ({
-                variant: getProductItemVariant(variant.id),
-                quantity,
-              })) as any
-            );
-          }
-        });
+        client.carts
+          .retrieve(cartId)
+          .then(({ cart }) => {
+            if (cart) {
+              setRegion(cart.region);
+              setItems(
+                cart.items.map(({ variant, quantity }: any) => ({
+                  variant: getProductItemVariant(variant.id),
+                  quantity,
+                })) as any
+              );
+            }
+          })
+          .catch(() => {
+            handleCreateCart();
+          });
       };
 
       if (!cartId) {

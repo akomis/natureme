@@ -46,8 +46,8 @@ const AnimatedImageSwitch = ({ index }: { index: number }) => {
       >
         <Image
           src={SLIDESHOW[index].imageUrl}
-          objectFit="contain"
-          layout="fill"
+          style={{ objectFit: "contain" }}
+          fill
           alt="Product"
           priority={index === 0}
         />

@@ -1,5 +1,5 @@
-import Link from "next/link";
 import { Flower2 } from "lucide-react";
+import Link from "next/link";
 
 const CustomOrdersCard = () => {
   return (
@@ -15,7 +15,7 @@ const CustomOrdersCard = () => {
       <div className="card bg-nescafeBoi text-primary-content w-full max-w-[500px]">
         <div className="card-body">
           <div className="flex flex-col font-sans">
-            <p className="text-xl m-0 text-justify">
+            <p className="text-xl m-0 text-left">
               For customized adaptations or decorative packaging for special
               occasions like weddings or christenings, we offer tailored
               options. Choose from beautifully presented soaps or solid perfumes
