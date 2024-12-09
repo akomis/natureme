@@ -2,7 +2,7 @@ import { fetchFromSanity } from "@/utils";
 import { PortableText } from "next-sanity";
 import Image from "next/image";
 
-const About = async () => {
+export default async function About() {
   const globalAssets = (await fetchFromSanity("global"))?.[0];
   const { about } = globalAssets;
 
@@ -42,6 +42,4 @@ const About = async () => {
       </div>
     </section>
   );
-};
-
-export default About;
+}

@@ -1,10 +1,10 @@
 import { ArrowRightCircle } from "lucide-react";
+import Link from "next/link";
 import About from "./_sections/About";
 import Footer from "./_sections/Footer";
 import Header from "./_sections/Header";
-import Link from "next/link";
 
-export default function Index() {
+export default async function Index() {
   return (
     <div className="font-serif flex flex-col gap-80">
       <Header />
