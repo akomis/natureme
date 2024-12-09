@@ -1,9 +1,9 @@
 "use client";
 
-import { DotLottieReact as Lottie } from "@lottiefiles/dotlottie-react";
-
 const LoadingIndicator = () => {
-  return <Lottie src={"./lottie/bubbles.json"} autoplay loop={true} />;
+  return (
+    <span className="loading loading-ring loading-lg border-primary"></span>
+  );
 };
 
 export default LoadingIndicator;
