@@ -8,8 +8,8 @@ export default async function Index() {
   return (
     <div className="font-serif flex flex-col gap-80">
       <Header />
-      <About />
-      <Footer />
+      {await About()}
+      {await Footer()}
 
       <Link
         href="/catalogue"
