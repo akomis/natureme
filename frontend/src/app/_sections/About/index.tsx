@@ -27,7 +27,7 @@ const About = async () => {
           <div className="w-[70vw]">
             <h2 className="text-4xl font-bold">About Us</h2>
             <div className="flex flex-col gap-4 text-xl font-sans">
-              <PortableText value={globalAssets?.about} />
+              <PortableText value={about} />
             </div>
           </div>
         </div>
