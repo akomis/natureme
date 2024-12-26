@@ -1,4 +1,5 @@
 /** @type {import('next').NextConfig} */
+
 import { withHighlightConfig } from "@highlight-run/next/config";
 
 const nextConfig = {
@@ -10,8 +11,6 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "cdn.sanity.io",
-        port: "",
-        pathname: "/**",
       },
       {
         protocol: "https",

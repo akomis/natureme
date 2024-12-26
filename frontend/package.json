@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "load-env": "railway link 9fa94285-7296-4f3f-ba39-77865b42c8af frontend && railway shell"
   },
   "dependencies": {
     "@formkit/auto-animate": "^0.8.2",
