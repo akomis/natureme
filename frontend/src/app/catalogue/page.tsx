@@ -105,12 +105,12 @@ export default function Catalogue() {
   }
 
   return (
-    <Screen className="w-full max-w-[1350px]">
-      <div className="flex w-full max-w-[1280px] justify-between items-center z-10 fixed top-4 px-2 sm:top-10">
-        <div className="p-2 bg-jasmine/70 border-2 border-jasmine/75 rounded-md">
+    <Screen className="w-full max-w-[1250px]">
+      <div className="flex w-full max-w-[1180px] justify-between items-center z-10 fixed top-4 px-2 sm:top-10">
+        <div className="p-1 bg-jasmine/80 rounded-2xl">
           <PageHeader title={"Catalogue"} />
         </div>
-        <div className="p-2 bg-jasmine/70 border-2 border-jasmine/75 rounded-md">
+        <div className="p-1 bg-jasmine/80 rounded-2xl">
           <Cart />
         </div>
       </div>

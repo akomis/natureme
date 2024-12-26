@@ -1,3 +1,4 @@
+import { HighlightInit } from "@highlight-run/next/client";
 import "./global.css";
 
 export const metadata = {
@@ -11,9 +12,28 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const highlightProjectId = process.env.NEXT_PUBLIC_HIGHLIGHT_PROJECT_ID;
+
+  if (!highlightProjectId?.length) {
+    throw new Error("Missing Highlight project ID");
+  }
+
   return (
-    <html lang="en">
-      <body className="bg-jasmine">{children}</body>
-    </html>
+    <>
+      <HighlightInit
+        projectId={highlightProjectId}
+        serviceName="natureme"
+        tracingOrigins
+        networkRecording={{
+          enabled: true,
+          recordHeadersAndBody: true,
+          urlBlocklist: [],
+        }}
+      />
+
+      <html lang="en">
+        <body className="bg-jasmine">{children}</body>
+      </html>
+    </>
   );
 }

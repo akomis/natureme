@@ -1,6 +1,10 @@
 /** @type {import('next').NextConfig} */
+import { withHighlightConfig } from "@highlight-run/next/config";
 
 const nextConfig = {
+  experimental: {
+    instrumentationHook: true,
+  },
   images: {
     remotePatterns: [
       {
@@ -17,4 +21,4 @@ const nextConfig = {
   },
 };
 
-export default nextConfig;
+export default withHighlightConfig(nextConfig);
