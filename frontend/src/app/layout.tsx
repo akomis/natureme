@@ -28,6 +28,7 @@ export default function RootLayout({
         projectId={highlightProjectId}
         serviceName="natureme"
         tracingOrigins
+        disableSessionRecording // respect user's privacy
         networkRecording={{
           enabled: true,
           recordHeadersAndBody: true,
