@@ -1,4 +1,7 @@
-import { HighlightInit } from "@highlight-run/next/client";
+import {
+  ErrorBoundary as HighlightErrorBoundary,
+  HighlightInit,
+} from "@highlight-run/next/client";
 import "./global.css";
 
 export const metadata = {
@@ -19,7 +22,7 @@ export default function RootLayout({
   }
 
   return (
-    <>
+    <HighlightErrorBoundary showDialog>
       <HighlightInit
         excludedHostnames={["localhost"]}
         projectId={highlightProjectId}
@@ -35,6 +38,6 @@ export default function RootLayout({
       <html lang="en">
         <body className="bg-jasmine">{children}</body>
       </html>
-    </>
+    </HighlightErrorBoundary>
   );
 }
