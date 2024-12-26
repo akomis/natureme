@@ -105,13 +105,17 @@ export default function Catalogue() {
   }
 
   return (
-    <Screen className="p-2 sm:p-10 items-start max-w-[80vw]">
-      <div className="flex w-[80vw] justify-between items-start z-10 fixed top-10 sm:top-16">
-        <PageHeader title={"Catalogue"} />
-        <Cart />
+    <Screen className="w-full max-w-[1350px]">
+      <div className="flex w-full max-w-[1280px] justify-between items-center z-10 fixed top-4 px-2 sm:top-10">
+        <div className="p-2 bg-jasmine/70 border-2 border-jasmine/75 rounded-md">
+          <PageHeader title={"Catalogue"} />
+        </div>
+        <div className="p-2 bg-jasmine/70 border-2 border-jasmine/75 rounded-md">
+          <Cart />
+        </div>
       </div>
-      <div className="flex flex-col gap-10 w-full overflow-y-auto rounded-lg mt-24">
-        <div className="flex flex-wrap gap-20 pb-10 items-center justify-center md:justify-start md:items-start">
+      <div className="flex w-full flex-col gap-10 overflow-y-auto rounded-lg mt-20">
+        <div className="flex flex-wrap w-full px-4 gap-20 items-center justify-center md:justify-start md:items-start">
           {sortedProducts.map(
             ({ title, variants, description, options }: any, index) => (
               <ProductList

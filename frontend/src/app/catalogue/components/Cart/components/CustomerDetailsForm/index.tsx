@@ -124,11 +124,9 @@ const CustomerDetailsForm = () => {
         </Form.Control>
       </Form.Field>
       <Form.Submit asChild className="self-end mt-4">
-        <div className="flex justify-center h-20">
+        <div className="flex items-center justify-center h-20 w-full">
           {isLoading ? (
-            <div className="w-40 self-center">
-              <LoadingIndicator />
-            </div>
+            <LoadingIndicator />
           ) : (
             <div className="flex gap-4 items-end">
               <div className="badge badge-outline text-lg h-auto min-w-24 px-4 py-2 font-sans">
