@@ -11,10 +11,14 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "cdn.sanity.io",
+        port: "",
+        pathname: "/**",
       },
       {
         protocol: "https",
         hostname: process.env.MEDUSA_HOSTNAME,
+        port: "",
+        pathname: "/**",
       },
     ],
   },

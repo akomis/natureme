@@ -22,7 +22,7 @@ export default function RootLayout({
   }
 
   return (
-    <HighlightErrorBoundary showDialog>
+    <>
       <HighlightInit
         excludedHostnames={["localhost"]}
         projectId={highlightProjectId}
@@ -36,8 +36,10 @@ export default function RootLayout({
       />
 
       <html lang="en">
-        <body className="bg-jasmine">{children}</body>
+        <body className="bg-jasmine">
+          <HighlightErrorBoundary showDialog>{children}</HighlightErrorBoundary>
+        </body>
       </html>
-    </HighlightErrorBoundary>
+    </>
   );
 }

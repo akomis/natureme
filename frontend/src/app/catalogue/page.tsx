@@ -91,9 +91,7 @@ export default function Catalogue() {
   if (isLoading) {
     return (
       <Screen>
-        <div>
-          <LoadingIndicator />
-        </div>
+        <LoadingIndicator />
       </Screen>
     );
   }
@@ -105,8 +103,8 @@ export default function Catalogue() {
   }
 
   return (
-    <Screen className="w-full max-w-[1250px]">
-      <div className="flex w-full max-w-[1180px] justify-between items-center z-10 fixed top-4 px-2 sm:top-10">
+    <Screen className="w-full max-w-[1710px]">
+      <div className="flex w-full max-w-[1670px] justify-between items-center z-10 fixed top-4 px-2 sm:top-10">
         <div className="p-1 bg-jasmine/80 rounded-2xl">
           <PageHeader title={"Catalogue"} />
         </div>
