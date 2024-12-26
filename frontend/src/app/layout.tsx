@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <>
       <HighlightInit
-        excludedHostnames={['localhost']}
+        excludedHostnames={["localhost"]}
         projectId={highlightProjectId}
         serviceName="natureme"
         tracingOrigins

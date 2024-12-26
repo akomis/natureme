@@ -720,7 +720,7 @@
   dependencies:
     "@opentelemetry/api" "^1.0.0"
 
-"@opentelemetry/api-logs@0.57.0", "@opentelemetry/api-logs@^0.57.0":
+"@opentelemetry/api-logs@0.57.0":
   version "0.57.0"
   resolved "https://registry.npmjs.org/@opentelemetry/api-logs/-/api-logs-0.57.0.tgz#794f9ff6343671f68e228eeb606d416c4ab29653"
   integrity sha512-l1aJ30CXeauVYaI+btiynHpw341LthkMTv3omi1VJDX14werY2Wmv9n1yudMsq9HuY0m8PvXEVX4d8zxEb+WRg==
@@ -746,7 +746,7 @@
   dependencies:
     "@opentelemetry/semantic-conventions" "1.28.0"
 
-"@opentelemetry/instrumentation@>=0.49.1", "@opentelemetry/instrumentation@^0.57.0":
+"@opentelemetry/instrumentation@>=0.49.1":
   version "0.57.0"
   resolved "https://registry.npmjs.org/@opentelemetry/instrumentation/-/instrumentation-0.57.0.tgz#397d68587abd4d46d2d0ac6b4f2438af49706ff8"
   integrity sha512-qIKp+tSCLqofneUWRc5XHtr9jHIq0N0BJfaJamM9gjEFO8sthV4SDXDGNOSAx16PxkbrQJ5/AxMPAGCXl8W/Hg==
@@ -829,7 +829,7 @@
     "@opentelemetry/core" "1.26.0"
     "@opentelemetry/resources" "1.26.0"
 
-"@opentelemetry/sdk-logs@0.57.0", "@opentelemetry/sdk-logs@^0.57.0":
+"@opentelemetry/sdk-logs@0.57.0":
   version "0.57.0"
   resolved "https://registry.npmjs.org/@opentelemetry/sdk-logs/-/sdk-logs-0.57.0.tgz#cf47ce698326e3d37084ef1aa97e0a0d45cba567"
   integrity sha512-6Kbxdu/QE9LWH7+WSLmYo3DjAq+c55TiCLXiXu6b/2m2muy5SyOG2m0MrGqetyRpfYSSbIqHmJoqNVTN3+2a9g==
@@ -1737,11 +1737,6 @@
   version "1.2.1"
   resolved "https://registry.npmjs.org/@ungap/structured-clone/-/structured-clone-1.2.1.tgz#28fa185f67daaf7b7a1a8c1d445132c5d979f8bd"
   integrity sha512-fEzPV3hSkSMltkw152tJKNARhOupqbH96MZWyRjNaYZOMIzbrTeQDG+MTc6Mr2pgzFQzFxAfmhGDNP5QK++2ZA==
-
-"@vercel/otel@^1.10.0":
-  version "1.10.0"
-  resolved "https://registry.npmjs.org/@vercel/otel/-/otel-1.10.0.tgz#b5e46c1a902b9cc06f3ba677b9a71729d6a6184d"
-  integrity sha512-bv1FXbFZlFbB89vyA2P9/kr6eZ42bMtXgqBJpgi+8yOrZU8rkg9wMi0TL//AgAf/qKtaryDm1sbCnkLHgCI3PQ==
 
 "@vercel/stega@0.1.0":
   version "0.1.0"
