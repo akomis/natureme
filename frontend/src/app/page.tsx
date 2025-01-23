@@ -4,6 +4,8 @@ import About from "./_sections/About";
 import Footer from "./_sections/Footer";
 import Header from "./_sections/Header";
 
+export const revalidate = 3600;
+
 export default async function Index() {
   return (
     <div className="font-serif flex flex-col gap-80">

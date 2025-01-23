@@ -1,9 +1,11 @@
-import { fetchFromSanity } from "@/utils";
-import AccordionItem from "./components/AccordionItem";
+import ErrorScreen from "@/components/ErrorScreen";
 import PageHeader from "@/components/PageHeader";
 import Screen from "@/components/Screen";
+import { fetchFromSanity } from "@/utils";
 import Link from "next/link";
-import ErrorScreen from "@/components/ErrorScreen";
+import AccordionItem from "./components/AccordionItem";
+
+export const revalidate = 3600;
 
 export default async function Faq() {
   const faq = await fetchFromSanity("faq");

@@ -27,6 +27,7 @@ export default function RootLayout({
         excludedHostnames={["localhost"]}
         projectId={highlightProjectId}
         serviceName="natureme"
+        inlineImages={false}
         tracingOrigins
         disableSessionRecording // respect user's privacy
         networkRecording={{

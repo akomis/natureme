@@ -5,6 +5,8 @@ import Screen from "@/components/Screen";
 import { fetchFromSanity } from "@/utils";
 import { PortableText } from "next-sanity";
 
+export const revalidate = 3600;
+
 export default async function Blog() {
   const posts = await fetchFromSanity("post");
 
