@@ -2,12 +2,11 @@
 
 import { Bounce, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import BackgroundFlowers from "../components/BackgroundFlowers";
 
 export default function Template({ children }: { children: React.ReactNode }) {
   return (
     <div className="bg-jasmine">
-      <BackgroundFlowers />
+      {/* <BackgroundFlowers /> */}
       <div>{children}</div>
 
       <ToastContainer
