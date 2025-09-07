@@ -1,16 +1,16 @@
 import { Order, ShippingMethod } from "@medusajs/medusa";
 import {
-  Html,
-  Container,
-  Text,
-  Tailwind,
-  Heading,
-  Row,
-  Hr,
-  Head,
   Column,
+  Container,
+  Head,
+  Heading,
+  Hr,
+  Html,
   Link,
+  Row,
   Section,
+  Tailwind,
+  Text,
 } from "@react-email/components";
 
 export const printPrice = (amount?: number | null) => {
@@ -129,7 +129,7 @@ export function EmailTemplate({ message, order }: EmailTemplateProps) {
               <Text className="font-serif text-xl text-black text-center">
                 <Link
                   className="font-bold text-[#b459d5]"
-                  href={"https://www.natureme.com.cy"}
+                  href={"https://www.natureme.life"}
                 >
                   NatureMe
                 </Link>{" "}
@@ -141,7 +141,7 @@ export function EmailTemplate({ message, order }: EmailTemplateProps) {
                 Instead, comunnicate with us through{" "}
                 <Link
                   className="font-bold text-gray-700 hover:text-white"
-                  href={"https://www.natureme.com.cy/contact"}
+                  href={"https://www.natureme.life/contact"}
                 >
                   our contact page
                 </Link>
